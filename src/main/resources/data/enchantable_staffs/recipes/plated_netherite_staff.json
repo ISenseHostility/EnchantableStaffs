@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "Y#Y",
+    "#X#",
+    "Y#Y"
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:gold_ingot"
+    },
+    "X": {
+      "item": "enchantable_staffs:netherite_staff"
+    },
+    "Y": {
+      "item": "minecraft:gold_nugget"
+    }
+  },
+  "result": {
+    "item": "enchantable_staffs:plated_netherite_staff"
+  }
+}

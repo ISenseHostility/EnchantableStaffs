@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:smithing",
+  "base": {
+    "item": "enchantable_staffs:iron_staff"
+  },
+  "addition": {
+    "item": "minecraft:gold_block"
+  },
+  "result": {
+    "item": "enchantable_staffs:gold_staff"
+  }
+}

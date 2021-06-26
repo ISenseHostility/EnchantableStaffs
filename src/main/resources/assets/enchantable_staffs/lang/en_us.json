@@ -1,0 +1,21 @@
+{
+  "item.enchantable_staffs.gold_staff": "Gold Staff",
+  "item.enchantable_staffs.iron_staff": "Iron Staff",
+  "item.enchantable_staffs.reinforced_gold_staff": "Reinforced Gold Staff",
+  "item.enchantable_staffs.reinforced_iron_staff": "Reinforced Iron Staff",
+  "item.enchantable_staffs.netherite_staff": "Netherite Staff",
+  "item.enchantable_staffs.plated_netherite_staff": "Plated Netherite Staff",
+
+  "tooltip.enchantable_staffs.explosion": "§cExplosion!",
+
+  "enchantment.enchantable_staffs.lightning_bolt": "Lightning Bolt",
+  "enchantment.enchantable_staffs.lightning_circle": "Lightning Circle",
+  "enchantment.enchantable_staffs.fireball": "Fireball",
+  "enchantment.enchantable_staffs.explosion": "Explosion",
+  "enchantment.enchantable_staffs.create_water": "Create Water",
+  "enchantment.enchantable_staffs.necromancy": "Necromancy",
+  "enchantment.enchantable_staffs.warp": "Warp",
+  "enchantment.enchantable_staffs.teleport": "Teleport",
+  "enchantment.enchantable_staffs.weather_alteration": "Weather Alteration",
+  "enchantment.enchantable_staffs.ring_of_fire": "Ring of Fire"
+}
