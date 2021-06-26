@@ -8,8 +8,8 @@ issueTrackerURL=""
     modId="enchantable_staffs" #mandatory
     version="1.16.5-1.0.0" #mandatory
     displayName="Enchantable Staffs" #mandatory
-    displayURL=""
-    logoFile="" #optional
+    displayURL="https://www.curseforge.com/minecraft/mc-mods/enchantable-staffs"
+    logoFile="enchantable_staffs_logo.png" #optional
     authors="ISenseHostility" #optional
     description='''
     Enchantable Staffs adds a new weapon/tool, the staff. A staff has to be enchanted to give it a function.
