@@ -2,7 +2,7 @@
   "parent": "enchantable_staffs:all_normal_staffs",
   "display": {
     "title": {
-      "text": "All Staffs",
+      "text": "Staff Master",
       "color": "white",
       "bold": false,
       "italic": false,

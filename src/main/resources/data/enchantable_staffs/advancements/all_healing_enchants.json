@@ -2,7 +2,7 @@
   "parent": "enchantable_staffs:enchant_first_staff",
   "display": {
     "title": {
-      "text": "All Healing Enchantments",
+      "text": "Healing Master",
       "color": "white",
       "bold": false,
       "italic": false,

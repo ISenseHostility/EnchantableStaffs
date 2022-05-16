@@ -2,7 +2,7 @@
   "parent": "enchantable_staffs:first_staff",
   "display": {
     "title": {
-      "text": "All Regular Staffs",
+      "text": "Staff Expert",
       "color": "white",
       "bold": false,
       "italic": false,
