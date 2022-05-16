@@ -1,0 +1,109 @@
+{
+  "parent": "enchantable_staffs:root",
+  "display": {
+    "title": {
+      "text": "First Staff",
+      "color": "white",
+      "bold": false,
+      "italic": false,
+      "underlined": false,
+      "strikethrough": false,
+      "obfuscated": false
+    },
+    "description": {
+      "text": "Obtain your first staff.",
+      "color": "green"
+    },
+    "icon": {
+      "item": "enchantable_staffs:iron_staff"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "getIronStaff": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "enchantable_staffs:iron_staff"
+            ]
+          }
+        ]
+      }
+    },
+    "getGoldStaff": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "enchantable_staffs:gold_staff"
+            ]
+          }
+        ]
+      }
+    },
+    "getNetheriteStaff": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "enchantable_staffs:netherite_staff"
+            ]
+          }
+        ]
+      }
+    },
+    "getReinforcedIronStaff": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "enchantable_staffs:reinforced_iron_staff"
+            ]
+          }
+        ]
+      }
+    },
+    "getReinforcedGoldStaff": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "enchantable_staffs:reinforced_gold_staff"
+            ]
+          }
+        ]
+      }
+    },
+    "getPlatedNetheriteStaff": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "enchantable_staffs:plated_netherite_staff"
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "getIronStaff",
+      "getGoldStaff",
+      "getNetheriteStaff",
+      "getReinforcedIronStaff",
+      "getReinforcedGoldStaff",
+      "getPlatedNetheriteStaff"
+    ]
+  ]
+}

@@ -1,0 +1,83 @@
+{
+  "parent": "enchantable_staffs:enchant_first_staff",
+  "display": {
+    "title": {
+      "text": "All Healing Enchantments",
+      "color": "white",
+      "bold": false,
+      "italic": false,
+      "underlined": false,
+      "strikethrough": false,
+      "obfuscated": false
+    },
+    "description": {
+      "text": "Obtain all healing enchantments.",
+      "color": "dark_purple"
+    },
+    "icon": {
+      "item": "enchantable_staffs:reinforced_gold_staff"
+    },
+    "frame": "challenge",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "enchantHeal": {
+      "trigger": "minecraft:enchanted_item",
+      "conditions": {
+        "items": [
+          {
+            "enchantments": [
+              {
+                "enchantment": "enchantable_staffs:heal"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "enchantGreaterHeal": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "enchantments": [
+              {
+                "enchantment": "enchantable_staffs:greater_heal"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "enchantAreaHeal": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "enchantments": [
+              {
+                "enchantment": "enchantable_staffs:area_heal"
+              }
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "enchantHeal"
+    ],
+    [
+      "enchantGreaterHeal"
+    ],
+    [
+      "enchantAreaHeal"
+    ]
+  ],
+  "rewards": {
+    "experience": 50
+  }
+}

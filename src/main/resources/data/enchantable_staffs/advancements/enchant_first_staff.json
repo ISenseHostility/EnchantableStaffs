@@ -1,0 +1,109 @@
+{
+  "parent": "enchantable_staffs:first_staff",
+  "display": {
+    "title": {
+      "text": "First Spell",
+      "color": "white",
+      "bold": false,
+      "italic": false,
+      "underlined": false,
+      "strikethrough": false,
+      "obfuscated": false
+    },
+    "description": {
+      "text": "Enchant your first staff.",
+      "color": "green"
+    },
+    "icon": {
+      "item": "enchantable_staffs:reinforced_iron_staff"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "enchantIronStaff": {
+      "trigger": "minecraft:enchanted_item",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "enchantable_staffs:iron_staff"
+            ]
+          }
+        ]
+      }
+    },
+    "enchantGoldStaff": {
+      "trigger": "minecraft:enchanted_item",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "enchantable_staffs:gold_staff"
+            ]
+          }
+        ]
+      }
+    },
+    "enchantNetheriteStaff": {
+      "trigger": "minecraft:enchanted_item",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "enchantable_staffs:netherite_staff"
+            ]
+          }
+        ]
+      }
+    },
+    "enchantReinforcedIronStaff": {
+      "trigger": "minecraft:enchanted_item",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "enchantable_staffs:reinforced_iron_staff"
+            ]
+          }
+        ]
+      }
+    },
+    "enchantReinforcedGoldStaff": {
+      "trigger": "minecraft:enchanted_item",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "enchantable_staffs:reinforced_gold_staff"
+            ]
+          }
+        ]
+      }
+    },
+    "enchantPlatedNetheriteStaff": {
+      "trigger": "minecraft:enchanted_item",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "enchantable_staffs:plated_netherite_staff"
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "enchantIronStaff",
+      "enchantGoldStaff",
+      "enchantNetheriteStaff",
+      "enchantReinforcedIronStaff",
+      "enchantReinforcedGoldStaff",
+      "enchantPlatedNetheriteStaff"
+    ]
+  ]
+}

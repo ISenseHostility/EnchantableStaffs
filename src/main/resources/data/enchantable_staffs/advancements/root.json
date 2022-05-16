@@ -1,0 +1,35 @@
+{
+    "display": {
+        "title": {
+            "text": "Enchantable Staffs",
+            "color": "white",
+            "bold": false,
+            "italic": false
+        },
+        "description": {
+            "text": "Your staff awaits you!",
+            "color": "green"
+        },
+        "icon": {
+            "item": "minecraft:enchanted_book"
+        },
+        "frame": "task",
+        "show_toast": false,
+        "announce_to_chat": false,
+        "hidden": false,
+        "background": "minecraft:textures/block/quartz_block_bottom.png"
+    },
+    "criteria": {
+        "on_load": {
+            "trigger": "minecraft:tick",
+            "conditions": {
+
+            }
+        }
+    },
+    "requirements": [
+        [
+            "on_load"
+        ]
+    ]
+}

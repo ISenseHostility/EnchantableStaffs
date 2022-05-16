@@ -1,0 +1,29 @@
+modLoader="javafml" #mandatory
+loaderVersion="[40,)" #mandatory This is typically bumped every Minecraft version by Forge. See our download page for lists of versions.
+license="All Rights Reserved"
+issueTrackerURL=""
+
+[[mods]] #mandatory
+modId="enchantable_staffs" #mandatory
+version="1.18.2-2.0.0" #mandatory
+displayName="Enchantable Staffs" #mandatory
+displayURL="https://www.curseforge.com/minecraft/mc-mods/enchantable-staffs"
+logoFile="enchantable_staffs.png" #optional
+authors="ISenseHostility" #optional
+description='''
+    Enchantable Staffs adds a new weapon/tool, the staff. A staff has to be enchanted to give it a function.
+    '''
+
+[[dependencies.enchantable_staffs]]
+modId="forge"
+mandatory=true
+versionRange="[40,)"
+ordering="NONE"
+side="BOTH"
+
+[[dependencies.enchantable_staffs]]
+modId="minecraft"
+mandatory=true
+versionRange="[1.18.2, 1.19]"
+ordering="NONE"
+side="BOTH"

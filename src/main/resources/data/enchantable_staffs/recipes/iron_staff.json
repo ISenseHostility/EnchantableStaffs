@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " xy",
+    " xx",
+    "x  "
+  ],
+  "key": {
+    "x": {
+      "item": "minecraft:iron_ingot"
+    },
+    "y": {
+      "item": "minecraft:redstone"
+    }
+  },
+  "result": {
+    "item": "enchantable_staffs:iron_staff"
+  }
+}

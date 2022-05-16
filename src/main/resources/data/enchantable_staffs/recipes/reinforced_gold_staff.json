@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " zz",
+    " xz",
+    "y  "
+  ],
+  "key": {
+    "z": {
+      "item": "minecraft:gold_ingot"
+    },
+    "x": {
+      "item": "enchantable_staffs:gold_staff"
+    },
+    "y": {
+      "item": "minecraft:diamond"
+    }
+  },
+  "result": {
+    "item": "enchantable_staffs:reinforced_gold_staff"
+  }
+}

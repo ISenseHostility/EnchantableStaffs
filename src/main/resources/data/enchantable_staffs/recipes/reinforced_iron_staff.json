@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " zz",
+    " xz",
+    "y  "
+  ],
+  "key": {
+    "z": {
+      "item": "minecraft:iron_ingot"
+    },
+    "x": {
+      "item": "enchantable_staffs:iron_staff"
+    },
+    "y": {
+      "item": "minecraft:emerald"
+    }
+  },
+  "result": {
+    "item": "enchantable_staffs:reinforced_iron_staff"
+  }
+}

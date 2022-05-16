@@ -1,0 +1,122 @@
+{
+  "parent": "enchantable_staffs:all_normal_staffs",
+  "display": {
+    "title": {
+      "text": "All Staffs",
+      "color": "white",
+      "bold": false,
+      "italic": false,
+      "underlined": false,
+      "strikethrough": false,
+      "obfuscated": false
+    },
+    "description": {
+      "text": "Obtain all staffs.",
+      "color": "dark_purple"
+    },
+    "icon": {
+      "item": "enchantable_staffs:netherite_staff"
+    },
+    "frame": "challenge",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "getIronStaffAll": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "enchantable_staffs:iron_staff"
+            ]
+          }
+        ]
+      }
+    },
+    "getGoldStaffAll": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "enchantable_staffs:gold_staff"
+            ]
+          }
+        ]
+      }
+    },
+    "getNetheriteStaffAll": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "enchantable_staffs:netherite_staff"
+            ]
+          }
+        ]
+      }
+    },
+    "getReinforcedIronStaffAll": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "enchantable_staffs:reinforced_iron_staff"
+            ]
+          }
+        ]
+      }
+    },
+    "getReinforcedGoldStaffAll": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "enchantable_staffs:reinforced_gold_staff"
+            ]
+          }
+        ]
+      }
+    },
+    "getPlatedNetheriteStaffAll": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "enchantable_staffs:plated_netherite_staff"
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "getIronStaffAll"
+    ],
+    [
+      "getGoldStaffAll"
+    ],
+    [
+      "getNetheriteStaffAll"
+    ],
+    [
+      "getReinforcedIronStaffAll"
+    ],
+    [
+      "getReinforcedGoldStaffAll"
+    ],
+    [
+      "getPlatedNetheriteStaffAll"
+    ]
+  ],
+  "rewards": {
+    "experience": 100
+  }
+}

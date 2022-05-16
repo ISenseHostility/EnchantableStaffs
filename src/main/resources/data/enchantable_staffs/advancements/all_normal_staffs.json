@@ -1,0 +1,74 @@
+{
+  "parent": "enchantable_staffs:first_staff",
+  "display": {
+    "title": {
+      "text": "All Regular Staffs",
+      "color": "white",
+      "bold": false,
+      "italic": false,
+      "underlined": false,
+      "strikethrough": false,
+      "obfuscated": false
+    },
+    "description": {
+      "text": "Obtain all normal staffs.",
+      "color": "green"
+    },
+    "icon": {
+      "item": "enchantable_staffs:gold_staff"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "getIronStaff": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "enchantable_staffs:iron_staff"
+            ]
+          }
+        ]
+      }
+    },
+    "getGoldStaff": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "enchantable_staffs:gold_staff"
+            ]
+          }
+        ]
+      }
+    },
+    "getNetheriteStaff": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "enchantable_staffs:netherite_staff"
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "getIronStaff"
+    ],
+    [
+      "getGoldStaff"
+    ],
+    [
+      "getNetheriteStaff"
+    ]
+  ]
+}
