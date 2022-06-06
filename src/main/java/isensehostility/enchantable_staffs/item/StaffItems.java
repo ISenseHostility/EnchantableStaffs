@@ -1,10 +1,7 @@
 package isensehostility.enchantable_staffs.item;
 
 import isensehostility.enchantable_staffs.EnchantableStaffs;
-import isensehostility.enchantable_staffs.effect.StaffEffects;
-import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.item.alchemy.Potion;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;

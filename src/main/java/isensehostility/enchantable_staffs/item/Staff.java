@@ -4,7 +4,6 @@ import isensehostility.enchantable_staffs.StaffUtils;
 import isensehostility.enchantable_staffs.config.StaffConfig;
 import isensehostility.enchantable_staffs.enchantment.Explosion;
 import isensehostility.enchantable_staffs.enchantment.IStaffEnchantment;
-import isensehostility.enchantable_staffs.enchantment.Teleport;
 import isensehostility.enchantable_staffs.enchantment.WeatherAlteration;
 import isensehostility.enchantable_staffs.enums.EElement;
 import isensehostility.enchantable_staffs.enums.EStaffModifiers;

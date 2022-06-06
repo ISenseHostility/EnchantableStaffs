@@ -5,7 +5,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.EnchantmentCategory;
 
-import static isensehostility.enchantable_staffs.StaffUtils.*;
+import static isensehostility.enchantable_staffs.StaffUtils.isMeleeWeapon;
 
 public class MagicalStrengtheningWeapon extends Enchantment {
     public MagicalStrengtheningWeapon() {

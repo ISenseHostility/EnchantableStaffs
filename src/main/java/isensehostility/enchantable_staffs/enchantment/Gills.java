@@ -18,7 +18,8 @@ import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.Level;
 
-import static isensehostility.enchantable_staffs.StaffUtils.*;
+import static isensehostility.enchantable_staffs.StaffUtils.invokeStaffCosts;
+import static isensehostility.enchantable_staffs.StaffUtils.spawnParticleCloud;
 
 public class Gills extends Enchantment implements IStaffEnchantment {
     public Gills() {

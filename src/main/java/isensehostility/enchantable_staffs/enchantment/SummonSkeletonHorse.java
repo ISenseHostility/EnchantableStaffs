@@ -4,8 +4,6 @@ import isensehostility.enchantable_staffs.config.StaffConfig;
 import isensehostility.enchantable_staffs.enchantment.category.StaffCategory;
 import isensehostility.enchantable_staffs.enums.EElement;
 import isensehostility.enchantable_staffs.item.Staff;
-import net.minecraft.core.BlockPos;
-import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
@@ -13,21 +11,18 @@ import net.minecraft.world.InteractionResult;
 import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.EquipmentSlot;
-import net.minecraft.world.entity.LightningBolt;
 import net.minecraft.world.entity.animal.horse.SkeletonHorse;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.Enchantments;
-import net.minecraft.world.level.ClipContext;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.items.CapabilityItemHandler;
 
-import static isensehostility.enchantable_staffs.StaffUtils.*;
-import static isensehostility.enchantable_staffs.StaffUtils.posIsAir;
+import static isensehostility.enchantable_staffs.StaffUtils.invokeStaffCosts;
+import static isensehostility.enchantable_staffs.StaffUtils.spawnParticleCloud;
 
 public class SummonSkeletonHorse extends Enchantment implements IStaffEnchantment {
     public SummonSkeletonHorse() {

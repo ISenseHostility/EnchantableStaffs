@@ -16,7 +16,8 @@ import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.Level;
 
-import static isensehostility.enchantable_staffs.StaffUtils.*;
+import static isensehostility.enchantable_staffs.StaffUtils.invokeCriticalVisuals;
+import static isensehostility.enchantable_staffs.StaffUtils.invokeStaffCosts;
 
 public class Critical extends Enchantment implements IStaffEnchantment {
     public Critical() {

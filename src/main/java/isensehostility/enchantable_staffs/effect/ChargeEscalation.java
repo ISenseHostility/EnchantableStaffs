@@ -5,7 +5,7 @@ import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.world.entity.LivingEntity;
 
-import static isensehostility.enchantable_staffs.StaffUtils.*;
+import static isensehostility.enchantable_staffs.StaffUtils.setMaxCharge;
 
 public class ChargeEscalation extends MobEffect {
 
