@@ -18,7 +18,7 @@ public class ClientEvents {
 
     @SubscribeEvent
     public static void onOverlaysRendered(RenderGameOverlayEvent.Post event) {
-        if (event.getType() == RenderGameOverlayEvent.ElementType.ALL) {
+        if (event.getType() == RenderGameOverlayEvent.ElementType.TEXT) {
             Minecraft minecraft = Minecraft.getInstance();
             Player player = minecraft.player;
             if (player.getItemInHand(InteractionHand.MAIN_HAND).getItem() instanceof Staff || player.getItemInHand(InteractionHand.OFF_HAND).getItem() instanceof Staff) {

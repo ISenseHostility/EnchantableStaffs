@@ -16,6 +16,7 @@ public class StaffEffects {
 
     public static final RegistryObject<MobEffect> GILLS = EFFECTS.register("gills", GillsEffect::new);
     public static final RegistryObject<MobEffect> CRITICAL = EFFECTS.register("critical", CriticalEffect::new);
+    public static final RegistryObject<MobEffect> ELEMENTAL_EFFICIENCY = EFFECTS.register("elemental_efficiency", ElementalEfficiencyEffect::new);
     public static final RegistryObject<MobEffect> CHARGE_ESCALATION = EFFECTS.register("charge_escalation", ChargeEscalation::new);
     public static final RegistryObject<MobEffect> CHARGE_BREAKDOWN = EFFECTS.register("charge_breakdown", ChargeBreakdown::new);
     public static final RegistryObject<MobEffect> CHARGE_SICKNESS = EFFECTS.register("charge_sickness", ChargeSickness::new);

@@ -6,6 +6,7 @@ import isensehostility.enchantable_staffs.effect.StaffEffects;
 import isensehostility.enchantable_staffs.enchantment.StaffEnchantments;
 import isensehostility.enchantable_staffs.item.Staff;
 import isensehostility.enchantable_staffs.network.ChargeUpdatePacket;
+import isensehostility.enchantable_staffs.network.ElementalEfficiencyUpdatePacket;
 import isensehostility.enchantable_staffs.network.MaxChargeUpdatePacket;
 import isensehostility.enchantable_staffs.network.StaffPacketHandler;
 import net.minecraft.core.NonNullList;
@@ -79,6 +80,16 @@ public class CommonEvents {
                                         player.level.getChunkAt(player.blockPosition())
                                 ),
                         new ChargeUpdatePacket(getCharge(player))
+                );
+            }
+
+            if (player.hasEffect(StaffEffects.ELEMENTAL_EFFICIENCY.get())) {
+                StaffPacketHandler.INSTANCE.send(
+                        PacketDistributor.TRACKING_CHUNK
+                                .with(() ->
+                                        player.level.getChunkAt(player.blockPosition())
+                                ),
+                        new ElementalEfficiencyUpdatePacket(getElementalEfficiency(player))
                 );
             }
 

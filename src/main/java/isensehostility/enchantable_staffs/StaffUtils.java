@@ -1,6 +1,9 @@
 package isensehostility.enchantable_staffs;
 
+import isensehostility.enchantable_staffs.effect.StaffEffects;
+import isensehostility.enchantable_staffs.enchantment.IStaffEnchantment;
 import isensehostility.enchantable_staffs.enums.EChargeTextColors;
+import isensehostility.enchantable_staffs.enums.EElement;
 import isensehostility.enchantable_staffs.enums.EWeather;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
@@ -29,6 +32,7 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.Vec3;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
@@ -49,6 +53,12 @@ public class StaffUtils {
     private static final String TAG_SPECTRAL_WINGS_TIME = "enchantable_staffs:spectral_wings_time";
     private static final String TAG_IS_SPECTRAL_WINGS = "enchantable_staffs:is_spectral_wings";
     private static final String TAG_CHESTPLATE_DATA = "enchantable_staffs:chestplate_data";
+
+    public static String getTagElementalEfficiency() {
+        return TAG_ELEMENTAL_EFFICIENCY;
+    }
+
+    private static final String TAG_ELEMENTAL_EFFICIENCY = "enchantable_staffs:elemental_efficiency";
 
     public static void setCharge(LivingEntity entity, int charge) {
         entity.getPersistentData().putInt(TAG_STAFF_CHARGE, charge);
@@ -113,12 +123,27 @@ public class StaffUtils {
     }
 
     public static boolean invokeStaffCosts(Player player, ItemStack stack, int cost, Level level) {
-        if (!level.isClientSide && getCharge(player) >= cost) {
+        if (!level.isClientSide) {
+            if (player.hasEffect(StaffEffects.ELEMENTAL_EFFICIENCY.get())) {
+                int reducedCost = (cost / 100) * (100 - ((player.getEffect(StaffEffects.ELEMENTAL_EFFICIENCY.get()).getAmplifier() + 1) * 15));
+
+                return applyCost(player, stack, reducedCost);
+            } else {
+                return applyCost(player, stack, cost);
+            }
+        }
+
+        return true;
+    }
+
+    public static boolean applyCost(Player player, ItemStack stack, int cost) {
+        if (getCharge(player) >= cost) {
             StaffUtils.reduceCharge(player, cost);
             StaffUtils.reduceDurability(stack);
 
             return false;
         }
+
         return true;
     }
 
@@ -357,5 +382,37 @@ public class StaffUtils {
 
     public static Tag getChestplateData(Player player) {
         return player.getPersistentData().get(TAG_CHESTPLATE_DATA);
+    }
+
+    public static int calculateCharge(IStaffEnchantment staffEnchantment, Player player) {
+        int cost = staffEnchantment.getChargeCost();
+        int efficiencyLevel;
+
+        if (player.hasEffect(StaffEffects.ELEMENTAL_EFFICIENCY.get()) && Arrays.stream(staffEnchantment.getElements()).toList().contains(EElement.getById(getElementalEfficiency(player)))) {
+            efficiencyLevel = player.getEffect(StaffEffects.ELEMENTAL_EFFICIENCY.get()).getAmplifier() + 1;
+            int reducedCost = (cost / 100) * (100 - (efficiencyLevel * 15));
+
+            if (efficiencyLevel != 0) {
+                cost = reducedCost;
+            }
+        }
+
+        return cost;
+    }
+
+    public static void setElementalEfficiency(Player player, EElement element) {
+        player.getPersistentData().putInt(TAG_ELEMENTAL_EFFICIENCY, element.getId());
+    }
+
+    public static void setElementalEfficiencyById(Player player, int id) {
+        player.getPersistentData().putInt(TAG_ELEMENTAL_EFFICIENCY, id);
+    }
+
+    public static int getElementalEfficiency(Player player) {
+        return player.getPersistentData().getInt(TAG_ELEMENTAL_EFFICIENCY);
+    }
+
+    public static Random getRandom() {
+        return random;
     }
 }

@@ -2,9 +2,11 @@ package isensehostility.enchantable_staffs.config;
 
 import com.electronwill.nightconfig.core.file.CommentedFileConfig;
 import com.electronwill.nightconfig.core.io.WritingMode;
+import isensehostility.enchantable_staffs.enums.EElement;
 import net.minecraftforge.common.ForgeConfigSpec;
 
 import java.io.File;
+import java.util.List;
 
 public class StaffConfig {
     public static ForgeConfigSpec.IntValue teleportChargeCost;
@@ -34,6 +36,7 @@ public class StaffConfig {
     public static ForgeConfigSpec.IntValue necromancyChargeCost;
     public static ForgeConfigSpec.IntValue magicalStrengtheningChargeCost;
     public static ForgeConfigSpec.IntValue spectralWingsChargeCost;
+    public static ForgeConfigSpec.IntValue elementalEfficiencyChargeCost;
 
     public static ForgeConfigSpec.BooleanValue teleportExists;
     public static ForgeConfigSpec.BooleanValue createWaterExists;
@@ -62,12 +65,15 @@ public class StaffConfig {
     public static ForgeConfigSpec.BooleanValue necromancyExists;
     public static ForgeConfigSpec.BooleanValue magicalStrengtheningExists;
     public static ForgeConfigSpec.BooleanValue spectralWingsExists;
+    public static ForgeConfigSpec.BooleanValue elementalEfficiencyExists;
 
     public static ForgeConfigSpec.IntValue chargeMaxStarting;
     public static ForgeConfigSpec.BooleanValue chargePotionsExist;
 
     public static ForgeConfigSpec.DoubleValue staffKnockback;
     public static ForgeConfigSpec.IntValue staffCooldown;
+
+    public static ForgeConfigSpec.ConfigValue<List<EElement>> elementsAllowedEfficiency;
 
     private static final ForgeConfigSpec.Builder builder = new ForgeConfigSpec.Builder();
     public static final ForgeConfigSpec config;
@@ -327,6 +333,15 @@ public class StaffConfig {
                         "[default=true]")
                 .define("exists.spectralWings", true);
 
+        elementalEfficiencyChargeCost = builder
+                .comment("Cooldown time in ticks (1 second = 20 ticks) for the Elemental Efficiency enchantment.\n" +
+                        "[default=900]")
+                .defineInRange("chargeCosts.elementalEfficiency", 900, 0, Integer.MAX_VALUE);
+        elementalEfficiencyExists = builder
+                .comment("When set to false the Elemental Efficiency enchantment will not be in the game.\n" +
+                        "[default=true]")
+                .define("exists.elementalEfficiency", true);
+
         chargeMaxStarting = builder
                 .comment("Maximum amount of charge you spawn with.\n" +
                         "[default=200]")
@@ -347,5 +362,11 @@ public class StaffConfig {
                         Setting this to 0 disables cooldowns.
                         [default=30]""")
                 .defineInRange("staff.cooldown", 30, 0, Integer.MAX_VALUE);
+
+        elementsAllowedEfficiency = builder
+                .comment("""
+                        Determines which elements have a chance to cost less charge when under the Elemental Efficiency effect.
+                        [default="NATURE", "FIRE", "ENDER", "WATER", "ICE", "LIGHTNING", "PURE", "UNDEAD", "SUMMON"]""")
+                .define("miscellaneous.elementsAllowedEfficiency", EElement.NONE.getEfficiencyAllowedDefault());
     }
 }

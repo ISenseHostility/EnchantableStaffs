@@ -42,4 +42,5 @@ public class StaffEnchantments {
     public static final RegistryObject<Enchantment> MAGICAL_STRENGTHENING_STAFF = ENCHANTMENTS.register("magical_strengthening_staff", MagicalStrengtheningStaff::new);
     public static final RegistryObject<Enchantment> MAGICAL_STRENGTHENING_WEAPON = ENCHANTMENTS.register("magical_strengthening_weapon", MagicalStrengtheningWeapon::new);
     public static final RegistryObject<Enchantment> SPECTRAL_WINGS = ENCHANTMENTS.register("spectral_wings", SpectralWings::new);
+    public static final RegistryObject<Enchantment> ELEMENTAL_EFFICIENCY = ENCHANTMENTS.register("elemental_efficiency", ElementalEfficiency::new);
 }

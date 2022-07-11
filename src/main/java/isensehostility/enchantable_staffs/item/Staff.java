@@ -8,6 +8,7 @@ import isensehostility.enchantable_staffs.enchantment.WeatherAlteration;
 import isensehostility.enchantable_staffs.enums.EElement;
 import isensehostility.enchantable_staffs.enums.EStaffModifiers;
 import net.minecraft.ChatFormatting;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TranslatableComponent;
@@ -58,7 +59,9 @@ public abstract class Staff extends Item {
             }
             for (Enchantment enchantment : enchantments) {
                 if (enchantment instanceof IStaffEnchantment staffEnchantment) {
-                    tooltip.add(new TranslatableComponent("tooltip.enchantable_staffs.charge_cost").append(": " + staffEnchantment.getChargeCost()).withStyle(ChatFormatting.AQUA));
+                    int cost = StaffUtils.calculateCharge(staffEnchantment, Minecraft.getInstance().player);
+
+                    tooltip.add(new TranslatableComponent("tooltip.enchantable_staffs.charge_cost").append(": " + cost).withStyle(ChatFormatting.AQUA));
                 }
             }
         }
@@ -90,7 +93,7 @@ public abstract class Staff extends Item {
         ItemStack stack = player.getItemInHand(hand);
         if (stack.getItem() instanceof Staff) {
             for (Enchantment enchantment : EnchantmentHelper.getEnchantments(stack).keySet()) {
-                if (enchantment instanceof IStaffEnchantment staffEnchantment && staffEnchantment.getChargeCost() <= StaffUtils.getCharge(player)) {
+                if (enchantment instanceof IStaffEnchantment staffEnchantment && StaffUtils.calculateCharge(staffEnchantment, player) <= StaffUtils.getCharge(player)) {
                     InteractionResultHolder resultHolder = staffEnchantment.onUse(stack, level, player);
 
                     if (resultHolder.getResult() == InteractionResult.SUCCESS) {

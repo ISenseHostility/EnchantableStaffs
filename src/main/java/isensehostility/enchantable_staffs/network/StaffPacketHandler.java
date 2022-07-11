@@ -33,6 +33,11 @@ public class StaffPacketHandler {
                 .decoder(MaxChargeUpdatePacket::new)
                 .consumer(MaxChargeUpdatePacket::handle)
                 .add();
+        INSTANCE.messageBuilder(ElementalEfficiencyUpdatePacket.class, id++, NetworkDirection.PLAY_TO_CLIENT)
+                .encoder(ElementalEfficiencyUpdatePacket::encode)
+                .decoder(ElementalEfficiencyUpdatePacket::new)
+                .consumer(ElementalEfficiencyUpdatePacket::handle)
+                .add();
     }
 
     public static void handleChargeUpdate(ChargeUpdatePacket msg, Supplier<NetworkEvent.Context> ctx) {
@@ -41,5 +46,9 @@ public class StaffPacketHandler {
 
     public static void handleMaxChargeUpdate(MaxChargeUpdatePacket msg, Supplier<NetworkEvent.Context> ctx) {
         StaffUtils.setMaxCharge(Minecraft.getInstance().player, msg.maxCharge);
+    }
+
+    public static void handleElementalEfficiencyUpdate(ElementalEfficiencyUpdatePacket msg, Supplier<NetworkEvent.Context> ctx) {
+        StaffUtils.setElementalEfficiencyById(Minecraft.getInstance().player, msg.elementId);
     }
 }

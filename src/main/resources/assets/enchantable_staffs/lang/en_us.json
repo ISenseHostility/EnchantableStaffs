@@ -15,6 +15,7 @@
   "_comment": "Effects",
   "effect.enchantable_staffs.gills": "Gills",
   "effect.enchantable_staffs.critical": "Critical",
+  "effect.enchantable_staffs.elemental_efficiency": "Elemental Efficiency",
   "effect.enchantable_staffs.charge_escalation": "Charge Escalation",
   "effect.enchantable_staffs.charge_breakdown": "Charge Breakdown",
   "effect.enchantable_staffs.charge_sickness": "Charge Sickness",
@@ -96,9 +97,8 @@
   "enchantment.enchantable_staffs.magical_strengthening_weapon": "Magical Strengthening",
   "enchantment.enchantable_staffs.gills": "Gills",
   "enchantment.enchantable_staffs.critical": "Critical",
-  "enchantment.enchantable_staffs.boost_element": "Boost Element",
   "enchantment.enchantable_staffs.draconic_fireball": "Draconic Fireball",
-  "enchantment.enchantable_staffs.item_box": "Item Box",
+  "enchantment.enchantable_staffs.elemental_efficiency": "Elemental Efficiency",
 
   "_comment": "Elements",
   "element.enchantable_staffs.name.nature": "Nature",
@@ -141,7 +141,9 @@
   "enchantment.enchantable_staffs.magical_strengthening_weapon.desc": "Magical Strengthening boosts the damage of the weapon for 2 minutes, when on a weapon.",
   "enchantment.enchantable_staffs.gills.desc": "Gills gives the user gills temporarily, which allows you to breathe underwater, but not on land.",
   "enchantment.enchantable_staffs.critical.desc": "Critical boosts the critical strike chance of all weapons.",
-  "enchantment.enchantable_staffs.boost_element.desc": "Boost Element boosts the strenth, range, and reduces the durability damage of all spells with the boosted element.",
   "enchantment.enchantable_staffs.draconic_fireball.desc": "Draconic Fireball shoots a draconic fireball that leaves a pool of dragon's breath on impact.",
-  "enchantment.enchantable_staffs.item_box.desc": "Item Box let's the user store large amounts of items in an alternate dimension, but when it is emptied, all items that are stored will be given back at the same time."
+  "enchantment.enchantable_staffs.elemental_efficiency.desc": "Elemental Efficiency reduces the amount of charge necessary to cast a spell of a specific element.",
+
+  "_comment": "messages",
+  "message.efficient_element": "Efficient Element: "
 }
