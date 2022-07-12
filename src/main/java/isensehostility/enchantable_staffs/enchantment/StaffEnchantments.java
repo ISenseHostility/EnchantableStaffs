@@ -46,4 +46,5 @@ public class StaffEnchantments {
     public static final RegistryObject<Enchantment> WITHER_SKULL = ENCHANTMENTS.register("wither_skull", WitherSkull::new);
     public static final RegistryObject<Enchantment> HEALING_RAY = ENCHANTMENTS.register("healing_ray", HealingRay::new);
     public static final RegistryObject<Enchantment> GARDEN_GROWTH = ENCHANTMENTS.register("garden_growth", GardenGrowth::new);
+    public static final RegistryObject<Enchantment> BITE = ENCHANTMENTS.register("bite", Bite::new);
 }

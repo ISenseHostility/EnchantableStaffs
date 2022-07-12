@@ -101,6 +101,7 @@
   "enchantment.enchantable_staffs.wither_skull": "Wither Skull",
   "enchantment.enchantable_staffs.healing_ray": "Healing Ray",
   "enchantment.enchantable_staffs.garden_growth": "Garden Growth",
+  "enchantment.enchantable_staffs.bite": "Bite",
 
   "_comment": "Elements",
   "element.enchantable_staffs.name.nature": "Nature",
@@ -147,6 +148,7 @@
   "enchantment.enchantable_staffs.wither_skull.desc": "Wither Skull shoots out the Wither Skull attack from the Wither boss.",
   "enchantment.enchantable_staffs.healing_ray.desc": "Healing Ray heals all entities in a ray in front of the user.",
   "enchantment.enchantable_staffs.garden_growth.desc": "Garden Growth works as a magic bone meal.",
+  "enchantment.enchantable_staffs.bite.desc": "Bite summons a single Evoker Fang up to 50 blocks away.",
 
   "_comment": "messages",
   "message.efficient_element": "Efficient Element: "

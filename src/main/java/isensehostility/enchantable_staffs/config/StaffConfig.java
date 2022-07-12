@@ -40,6 +40,7 @@ public class StaffConfig {
     public static ForgeConfigSpec.IntValue witherSkullChargeCost;
     public static ForgeConfigSpec.IntValue healingRayChargeCost;
     public static ForgeConfigSpec.IntValue gardenGrowthChargeCost;
+    public static ForgeConfigSpec.IntValue biteChargeCost;
 
     public static ForgeConfigSpec.BooleanValue teleportExists;
     public static ForgeConfigSpec.BooleanValue createWaterExists;
@@ -72,6 +73,7 @@ public class StaffConfig {
     public static ForgeConfigSpec.BooleanValue witherSkullExists;
     public static ForgeConfigSpec.BooleanValue healingRayExists;
     public static ForgeConfigSpec.BooleanValue gardenGrowthExists;
+    public static ForgeConfigSpec.BooleanValue biteExists;
 
     public static ForgeConfigSpec.IntValue chargeMaxStarting;
     public static ForgeConfigSpec.BooleanValue chargePotionsExist;
@@ -374,6 +376,15 @@ public class StaffConfig {
                 .comment("When set to false the Garden Growth enchantment will not be in the game.\n" +
                         "[default=true]")
                 .define("exists.gardenGrowth", true);
+
+        biteChargeCost = builder
+                .comment("Cooldown time in ticks (1 second = 20 ticks) for the Bite enchantment.\n" +
+                        "[default=100]")
+                .defineInRange("chargeCosts.bite", 100, 0, Integer.MAX_VALUE);
+        biteExists = builder
+                .comment("When set to false the Bite enchantment will not be in the game.\n" +
+                        "[default=true]")
+                .define("exists.bite", true);
 
         chargeMaxStarting = builder
                 .comment("Maximum amount of charge you spawn with.\n" +
