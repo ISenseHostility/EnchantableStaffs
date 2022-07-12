@@ -60,6 +60,8 @@ public class GardenGrowth extends Enchantment implements IStaffEnchantment {
                 return new InteractionResultHolder<>(InteractionResult.PASS, stack);
             }
 
+            spawnParticleCloud(ParticleTypes.HAPPY_VILLAGER, ctx.getClickedPos().getX(), ctx.getClickedPos().getY() + 1.0D, ctx.getClickedPos().getZ(), level);
+
             return new InteractionResultHolder<>(InteractionResult.SUCCESS, stack);
         }
 

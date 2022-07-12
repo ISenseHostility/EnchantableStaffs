@@ -6,6 +6,7 @@ import isensehostility.enchantable_staffs.enums.EElement;
 import isensehostility.enchantable_staffs.item.Staff;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.EquipmentSlot;
@@ -57,6 +58,7 @@ public class WitherSkull extends Enchantment implements IStaffEnchantment {
             witherskull.setDangerous(true);
         }
 
+        spawnParticleCloud(ParticleTypes.DAMAGE_INDICATOR, player.getX(), player.getY() + 1.0D, player.getZ(), level);
         level.addFreshEntity(witherskull);
 
         return new InteractionResultHolder<>(InteractionResult.SUCCESS, stack);
