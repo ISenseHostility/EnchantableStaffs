@@ -43,4 +43,6 @@ public class StaffEnchantments {
     public static final RegistryObject<Enchantment> MAGICAL_STRENGTHENING_WEAPON = ENCHANTMENTS.register("magical_strengthening_weapon", MagicalStrengtheningWeapon::new);
     public static final RegistryObject<Enchantment> SPECTRAL_WINGS = ENCHANTMENTS.register("spectral_wings", SpectralWings::new);
     public static final RegistryObject<Enchantment> ELEMENTAL_EFFICIENCY = ENCHANTMENTS.register("elemental_efficiency", ElementalEfficiency::new);
+    public static final RegistryObject<Enchantment> WITHER_SKULL = ENCHANTMENTS.register("wither_skull", WitherSkull::new);
+    public static final RegistryObject<Enchantment> HEALING_RAY = ENCHANTMENTS.register("healing_ray", HealingRay::new);
 }

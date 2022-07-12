@@ -99,6 +99,8 @@
   "enchantment.enchantable_staffs.critical": "Critical",
   "enchantment.enchantable_staffs.draconic_fireball": "Draconic Fireball",
   "enchantment.enchantable_staffs.elemental_efficiency": "Elemental Efficiency",
+  "enchantment.enchantable_staffs.wither_skull": "Wither Skull",
+  "enchantment.enchantable_staffs.healing_ray": "Healing Ray",
 
   "_comment": "Elements",
   "element.enchantable_staffs.name.nature": "Nature",
@@ -143,6 +145,8 @@
   "enchantment.enchantable_staffs.critical.desc": "Critical boosts the critical strike chance of all weapons.",
   "enchantment.enchantable_staffs.draconic_fireball.desc": "Draconic Fireball shoots a draconic fireball that leaves a pool of dragon's breath on impact.",
   "enchantment.enchantable_staffs.elemental_efficiency.desc": "Elemental Efficiency reduces the amount of charge necessary to cast a spell of a specific element.",
+  "enchantment.enchantable_staffs.wither_skull.desc": "Wither Skull shoots out the Wither Skull attack from the Wither boss.",
+  "enchantment.enchantable_staffs.healing_ray.desc": "Healing Ray heals all entities in a ray in front of the user.",
 
   "_comment": "messages",
   "message.efficient_element": "Efficient Element: "
