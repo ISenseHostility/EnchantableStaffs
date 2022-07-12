@@ -20,4 +20,5 @@ public class StaffItems {
     public static final RegistryObject<Item> REINFORCED_GOLD_STAFF = ITEMS.register("reinforced_gold_staff", ReinforcedGoldStaff::new);
     public static final RegistryObject<Item> NETHERITE_STAFF = ITEMS.register("netherite_staff", NetheriteStaff::new);
     public static final RegistryObject<Item> PLATED_NETHERITE_STAFF = ITEMS.register("plated_netherite_staff", PlatedNetheriteStaff::new);
+    public static final RegistryObject<Item> STAFF_BONEMEAL = ITEMS.register("staff_bonemeal", StaffBoneMeal::new);
 }

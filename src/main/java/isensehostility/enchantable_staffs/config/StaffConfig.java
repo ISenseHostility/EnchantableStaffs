@@ -39,6 +39,7 @@ public class StaffConfig {
     public static ForgeConfigSpec.IntValue elementalEfficiencyChargeCost;
     public static ForgeConfigSpec.IntValue witherSkullChargeCost;
     public static ForgeConfigSpec.IntValue healingRayChargeCost;
+    public static ForgeConfigSpec.IntValue gardenGrowthChargeCost;
 
     public static ForgeConfigSpec.BooleanValue teleportExists;
     public static ForgeConfigSpec.BooleanValue createWaterExists;
@@ -70,6 +71,7 @@ public class StaffConfig {
     public static ForgeConfigSpec.BooleanValue elementalEfficiencyExists;
     public static ForgeConfigSpec.BooleanValue witherSkullExists;
     public static ForgeConfigSpec.BooleanValue healingRayExists;
+    public static ForgeConfigSpec.BooleanValue gardenGrowthExists;
 
     public static ForgeConfigSpec.IntValue chargeMaxStarting;
     public static ForgeConfigSpec.BooleanValue chargePotionsExist;
@@ -363,6 +365,15 @@ public class StaffConfig {
                 .comment("When set to false the Healing Ray enchantment will not be in the game.\n" +
                         "[default=true]")
                 .define("exists.healingRay", true);
+
+        gardenGrowthChargeCost = builder
+                .comment("Cooldown time in ticks (1 second = 20 ticks) for the Garden Growth enchantment.\n" +
+                        "[default=60]")
+                .defineInRange("chargeCosts.gardenGrowth", 60, 0, Integer.MAX_VALUE);
+        gardenGrowthExists = builder
+                .comment("When set to false the Garden Growth enchantment will not be in the game.\n" +
+                        "[default=true]")
+                .define("exists.gardenGrowth", true);
 
         chargeMaxStarting = builder
                 .comment("Maximum amount of charge you spawn with.\n" +
