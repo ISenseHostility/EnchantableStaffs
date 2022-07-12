@@ -21,7 +21,7 @@ import static isensehostility.enchantable_staffs.StaffUtils.*;
 
 public class GreaterHeal extends Enchantment implements IStaffEnchantment {
     public GreaterHeal() {
-        super(Rarity.UNCOMMON, StaffCategory.get(), new EquipmentSlot[]{EquipmentSlot.MAINHAND, EquipmentSlot.OFFHAND});
+        super(Rarity.UNCOMMON, StaffCategory.getInstance(), new EquipmentSlot[]{EquipmentSlot.MAINHAND, EquipmentSlot.OFFHAND});
     }
 
     @Override

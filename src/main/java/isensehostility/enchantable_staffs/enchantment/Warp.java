@@ -23,7 +23,7 @@ import static isensehostility.enchantable_staffs.StaffUtils.*;
 
 public class Warp extends Enchantment implements IStaffEnchantment {
     public Warp() {
-        super(Rarity.VERY_RARE, StaffCategory.get(), new EquipmentSlot[]{EquipmentSlot.MAINHAND, EquipmentSlot.OFFHAND});
+        super(Rarity.VERY_RARE, StaffCategory.getInstance(), new EquipmentSlot[]{EquipmentSlot.MAINHAND, EquipmentSlot.OFFHAND});
     }
 
     @Override

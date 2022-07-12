@@ -19,7 +19,7 @@ import static isensehostility.enchantable_staffs.StaffUtils.*;
 
 public class LightningCircle extends Enchantment implements IStaffEnchantment {
     public LightningCircle() {
-        super(Rarity.UNCOMMON, StaffCategory.get(), new EquipmentSlot[]{EquipmentSlot.MAINHAND, EquipmentSlot.OFFHAND});
+        super(Rarity.UNCOMMON, StaffCategory.getInstance(), new EquipmentSlot[]{EquipmentSlot.MAINHAND, EquipmentSlot.OFFHAND});
     }
 
     @Override

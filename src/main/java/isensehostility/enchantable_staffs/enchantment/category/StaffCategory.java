@@ -6,7 +6,7 @@ import net.minecraft.world.item.enchantment.EnchantmentCategory;
 public class StaffCategory {
     private static final EnchantmentCategory STAFF = EnchantmentCategory.create("staff", Staff.class::isInstance);
 
-    public static EnchantmentCategory get() {
+    public static EnchantmentCategory getInstance() {
         return STAFF;
     }
 }

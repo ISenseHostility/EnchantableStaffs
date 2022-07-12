@@ -24,7 +24,7 @@ import static isensehostility.enchantable_staffs.StaffUtils.*;
 
 public class AreaHeal extends Enchantment implements IStaffEnchantment {
     public AreaHeal() {
-        super(Rarity.RARE, StaffCategory.get(), new EquipmentSlot[]{EquipmentSlot.MAINHAND, EquipmentSlot.OFFHAND});
+        super(Rarity.RARE, StaffCategory.getInstance(), new EquipmentSlot[]{EquipmentSlot.MAINHAND, EquipmentSlot.OFFHAND});
     }
 
     @Override

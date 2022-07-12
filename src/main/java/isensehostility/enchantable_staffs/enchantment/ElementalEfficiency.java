@@ -27,7 +27,7 @@ import static isensehostility.enchantable_staffs.StaffUtils.*;
 
 public class ElementalEfficiency extends Enchantment implements IStaffEnchantment {
     public ElementalEfficiency() {
-        super(Rarity.RARE, StaffCategory.get(), new EquipmentSlot[]{EquipmentSlot.MAINHAND, EquipmentSlot.OFFHAND});
+        super(Rarity.RARE, StaffCategory.getInstance(), new EquipmentSlot[]{EquipmentSlot.MAINHAND, EquipmentSlot.OFFHAND});
     }
 
     @Override

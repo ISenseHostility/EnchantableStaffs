@@ -27,7 +27,7 @@ import static isensehostility.enchantable_staffs.StaffUtils.spawnParticleCloud;
 
 public class SummonSkeletonHorse extends Enchantment implements IStaffEnchantment {
     public SummonSkeletonHorse() {
-        super(Rarity.COMMON, StaffCategory.get(), new EquipmentSlot[]{EquipmentSlot.MAINHAND, EquipmentSlot.OFFHAND});
+        super(Rarity.COMMON, StaffCategory.getInstance(), new EquipmentSlot[]{EquipmentSlot.MAINHAND, EquipmentSlot.OFFHAND});
     }
 
     @Override

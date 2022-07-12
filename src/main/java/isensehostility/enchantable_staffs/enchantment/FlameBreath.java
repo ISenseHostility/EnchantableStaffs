@@ -25,7 +25,7 @@ import static isensehostility.enchantable_staffs.StaffUtils.invokeStaffCosts;
 
 public class FlameBreath extends Enchantment implements IStaffEnchantment {
     public FlameBreath() {
-        super(Rarity.UNCOMMON, StaffCategory.get(), new EquipmentSlot[]{EquipmentSlot.MAINHAND, EquipmentSlot.OFFHAND});
+        super(Rarity.UNCOMMON, StaffCategory.getInstance(), new EquipmentSlot[]{EquipmentSlot.MAINHAND, EquipmentSlot.OFFHAND});
     }
 
     @Override
