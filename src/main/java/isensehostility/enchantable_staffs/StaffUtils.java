@@ -239,11 +239,11 @@ public class StaffUtils {
     }
 
     public static void setEnchantmentLevel(Entity entity, Enchantment enchantment, int level) {
-        entity.getPersistentData().putInt(TAG_ENCHANTMENT_LEVEL + enchantment.getRegistryName().getPath(), level);
+        entity.getPersistentData().putInt(TAG_ENCHANTMENT_LEVEL + enchantment.toString(), level);
     }
 
     public static int getEnchantmentLevel(Entity entity, Enchantment enchantment) {
-        return entity.getPersistentData().getInt(TAG_ENCHANTMENT_LEVEL + enchantment.getRegistryName().getPath());
+        return entity.getPersistentData().getInt(TAG_ENCHANTMENT_LEVEL + enchantment.toString());
     }
 
     public static void setDirection(DragonFireball dragonFireball, long[] direction) {
@@ -257,7 +257,7 @@ public class StaffUtils {
     public static void invokeCriticalVisuals(Player player) {
         spawnParticleCloud(ParticleTypes.CRIT, player.getX(), player.getEyeY(), player.getZ(), player.getLevel());
         spawnParticleCloud(ParticleTypes.END_ROD, player.getX(), player.getEyeY(), player.getZ(), player.getLevel());
-        player.getLevel().playSound(null, player.eyeBlockPosition(), SoundEvents.PLAYER_ATTACK_CRIT, SoundSource.PLAYERS, 100.0F, 1.0F);
+        player.getLevel().playSound(null, new BlockPos(player.getEyePosition()), SoundEvents.PLAYER_ATTACK_CRIT, SoundSource.PLAYERS, 100.0F, 1.0F);
     }
 
     public static EWeather getWeather(Level level) {
@@ -314,7 +314,7 @@ public class StaffUtils {
     }
 
     public static void setWarpDimension(ItemStack stack, LivingEntity entity) {
-        stack.getTag().putString(TAG_WARP_DIMENSION, entity.level.dimension().getRegistryName().toString());
+        stack.getTag().putString(TAG_WARP_DIMENSION, entity.level.dimension().location().toString());
     }
 
     public static String getWarpDimension(ItemStack stack) {

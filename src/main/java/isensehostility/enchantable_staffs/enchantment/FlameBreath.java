@@ -4,6 +4,7 @@ import isensehostility.enchantable_staffs.config.StaffConfig;
 import isensehostility.enchantable_staffs.enchantment.category.StaffCategory;
 import isensehostility.enchantable_staffs.enums.EElement;
 import isensehostility.enchantable_staffs.item.Staff;
+import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
@@ -56,7 +57,7 @@ public class FlameBreath extends Enchantment implements IStaffEnchantment {
             }
         }
 
-        level.playSound(null, player.eyeBlockPosition(), SoundEvents.FIRECHARGE_USE, SoundSource.PLAYERS, 100.0F, 1.0F);
+        level.playSound(null, new BlockPos(player.getEyePosition()), SoundEvents.FIRECHARGE_USE, SoundSource.PLAYERS, 100.0F, 1.0F);
 
         return new InteractionResultHolder<>(InteractionResult.SUCCESS, stack);
     }

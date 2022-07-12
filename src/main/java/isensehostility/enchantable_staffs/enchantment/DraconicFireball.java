@@ -4,6 +4,7 @@ import isensehostility.enchantable_staffs.config.StaffConfig;
 import isensehostility.enchantable_staffs.enchantment.category.StaffCategory;
 import isensehostility.enchantable_staffs.enums.EElement;
 import isensehostility.enchantable_staffs.item.Staff;
+import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
@@ -58,7 +59,7 @@ public class DraconicFireball extends Enchantment implements IStaffEnchantment {
         setDirection(dragonFireball, new long[]{(long) (pos.x() * 1000000000), (long) (pos.y() * 1000000000), (long) (pos.z() * 1000000000L)});
         level.addFreshEntity(dragonFireball);
 
-        level.playSound(null, player.eyeBlockPosition(), SoundEvents.FIRECHARGE_USE, SoundSource.PLAYERS, 100.0F, 1.0F);
+        level.playSound(null, new BlockPos(player.getEyePosition()), SoundEvents.FIRECHARGE_USE, SoundSource.PLAYERS, 100.0F, 1.0F);
         spawnParticleCloud(ParticleTypes.PORTAL, pos.x() + 0.5D, pos.y() + 1.0D, pos.z() + 0.5D, level);
 
         return new InteractionResultHolder<>(InteractionResult.SUCCESS, stack);

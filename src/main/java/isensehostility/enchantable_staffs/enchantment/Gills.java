@@ -5,6 +5,7 @@ import isensehostility.enchantable_staffs.effect.StaffEffects;
 import isensehostility.enchantable_staffs.enchantment.category.StaffCategory;
 import isensehostility.enchantable_staffs.enums.EElement;
 import isensehostility.enchantable_staffs.item.Staff;
+import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
@@ -53,7 +54,7 @@ public class Gills extends Enchantment implements IStaffEnchantment {
         player.addEffect(new MobEffectInstance(StaffEffects.GILLS.get(), 600));
 
         spawnParticleCloud(ParticleTypes.BUBBLE, player.getX(), player.getEyeY(), player.getZ(), level);
-        level.playSound(null, player.eyeBlockPosition(), SoundEvents.BUBBLE_COLUMN_UPWARDS_INSIDE, SoundSource.PLAYERS, 100.0F, 1.0F);
+        level.playSound(null, new BlockPos(player.getEyePosition()), SoundEvents.BUBBLE_COLUMN_UPWARDS_INSIDE, SoundSource.PLAYERS, 100.0F, 1.0F);
 
         return new InteractionResultHolder<>(InteractionResult.SUCCESS, stack);
     }

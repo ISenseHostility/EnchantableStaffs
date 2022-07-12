@@ -5,6 +5,7 @@ import isensehostility.enchantable_staffs.enchantment.category.StaffCategory;
 import isensehostility.enchantable_staffs.enums.EElement;
 import isensehostility.enchantable_staffs.enums.EWeather;
 import isensehostility.enchantable_staffs.item.Staff;
+import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.InteractionResultHolder;
@@ -52,28 +53,28 @@ public class WeatherAlteration extends Enchantment implements IStaffEnchantment 
                 case CLEAR:
                     if (player.getRandom().nextBoolean()) {
                         setWeatherRaining(server);
-                        invokeWeatherVisuals(EWeather.RAINING, player.eyeBlockPosition(), level);
+                        invokeWeatherVisuals(EWeather.RAINING, new BlockPos(player.getEyePosition()), level);
                     } else {
                         setWeatherThundering(server);
-                        invokeWeatherVisuals(EWeather.THUNDERING, player.eyeBlockPosition(), level);
+                        invokeWeatherVisuals(EWeather.THUNDERING, new BlockPos(player.getEyePosition()), level);
                     }
                     break;
                 case RAINING:
                     if (player.getRandom().nextBoolean()) {
                         setWeatherClear(server);
-                        invokeWeatherVisuals(EWeather.CLEAR, player.eyeBlockPosition(), level);
+                        invokeWeatherVisuals(EWeather.CLEAR, new BlockPos(player.getEyePosition()), level);
                     } else {
                         setWeatherThundering(server);
-                        invokeWeatherVisuals(EWeather.THUNDERING, player.eyeBlockPosition(), level);
+                        invokeWeatherVisuals(EWeather.THUNDERING, new BlockPos(player.getEyePosition()), level);
                     }
                     break;
                 case THUNDERING:
                     if (player.getRandom().nextBoolean()) {
                         setWeatherClear(server);
-                        invokeWeatherVisuals(EWeather.CLEAR, player.eyeBlockPosition(), level);
+                        invokeWeatherVisuals(EWeather.CLEAR, new BlockPos(player.getEyePosition()), level);
                     } else {
                         setWeatherRaining(server);
-                        invokeWeatherVisuals(EWeather.RAINING, player.eyeBlockPosition(), level);
+                        invokeWeatherVisuals(EWeather.RAINING, new BlockPos(player.getEyePosition()), level);
                     }
                     break;
             }

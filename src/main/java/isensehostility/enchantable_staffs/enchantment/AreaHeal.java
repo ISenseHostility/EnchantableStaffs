@@ -4,6 +4,7 @@ import isensehostility.enchantable_staffs.config.StaffConfig;
 import isensehostility.enchantable_staffs.enchantment.category.StaffCategory;
 import isensehostility.enchantable_staffs.enums.EElement;
 import isensehostility.enchantable_staffs.item.Staff;
+import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
@@ -54,7 +55,7 @@ public class AreaHeal extends Enchantment implements IStaffEnchantment {
             if (entity.getHealth() < entity.getMaxHealth()) {
                 entity.heal(4.0F);
                 spawnParticleCloud(ParticleTypes.HAPPY_VILLAGER, entity.getX(), entity.getEyeY(), entity.getZ(), level);
-                level.playSound(null, entity.eyeBlockPosition(), SoundEvents.CAT_AMBIENT, SoundSource.PLAYERS, 100.0F, 1.0F);
+                level.playSound(null, new BlockPos(entity.getEyePosition()), SoundEvents.CAT_AMBIENT, SoundSource.PLAYERS, 100.0F, 1.0F);
                 success = true;
             }
         }

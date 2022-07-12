@@ -4,6 +4,7 @@ import isensehostility.enchantable_staffs.config.StaffConfig;
 import isensehostility.enchantable_staffs.enchantment.category.StaffCategory;
 import isensehostility.enchantable_staffs.enums.EElement;
 import isensehostility.enchantable_staffs.item.Staff;
+import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
@@ -65,7 +66,7 @@ public class Cleansing extends Enchantment implements IStaffEnchantment {
         if (success) {
             EnchantmentHelper.setEnchantments(newEnchantments, item);
             spawnParticleCloud(ParticleTypes.END_ROD, player.getX(), player.getEyeY(), player.getZ(), level);
-            level.playSound(null, player.eyeBlockPosition(), SoundEvents.CAT_AMBIENT, SoundSource.PLAYERS, 100.0F, 1.0F);
+            level.playSound(null, new BlockPos(player.getEyePosition()), SoundEvents.CAT_AMBIENT, SoundSource.PLAYERS, 100.0F, 1.0F);
 
             if (invokeStaffCosts(player, stack, getChargeCost(), level)) {
                 return new InteractionResultHolder<>(InteractionResult.PASS, stack);

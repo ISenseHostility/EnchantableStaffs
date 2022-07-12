@@ -24,11 +24,11 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraftforge.event.TickEvent;
-import net.minecraftforge.event.entity.EntityJoinWorldEvent;
-import net.minecraftforge.event.entity.EntityLeaveWorldEvent;
+import net.minecraftforge.event.entity.EntityJoinLevelEvent;
+import net.minecraftforge.event.entity.EntityLeaveLevelEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.event.entity.living.LivingKnockBackEvent;
-import net.minecraftforge.event.entity.living.PotionEvent;
+import net.minecraftforge.event.entity.living.MobEffectEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.network.PacketDistributor;
@@ -42,7 +42,7 @@ import static isensehostility.enchantable_staffs.StaffUtils.*;
 public class CommonEvents {
 
     @SubscribeEvent
-    public static void onJoin(EntityJoinWorldEvent event) {
+    public static void onJoin(EntityJoinLevelEvent event) {
         Entity entity = event.getEntity();
 
         if (entity instanceof Player player && !hasChargeData(player)) {
@@ -52,15 +52,15 @@ public class CommonEvents {
     }
 
     @SubscribeEvent
-    public static void onLeave(EntityLeaveWorldEvent event) {
+    public static void onLeave(EntityLeaveLevelEvent event) {
         if (event.getEntity() instanceof DragonFireball dragonFireball) {
             if (getFromStaff(dragonFireball)) {
                 long[] direction = getDirection(dragonFireball);
                 int enchantmentLevel = getEnchantmentLevel(dragonFireball, StaffEnchantments.DRACONIC_FIREBALL.get());
 
-                Fireball fireball = new LargeFireball(event.getWorld(), (LivingEntity) dragonFireball.getOwner(), direction[0] / 100000000D, direction[1] / 100000000D, direction[2] / 100000000D, enchantmentLevel);
+                Fireball fireball = new LargeFireball(event.getLevel(), (LivingEntity) dragonFireball.getOwner(), direction[0] / 100000000D, direction[1] / 100000000D, direction[2] / 100000000D, enchantmentLevel);
                 fireball.setPos(dragonFireball.getX(), dragonFireball.getY(), dragonFireball.getZ());
-                event.getWorld().addFreshEntity(fireball);
+                event.getLevel().addFreshEntity(fireball);
             }
         }
     }
@@ -150,7 +150,7 @@ public class CommonEvents {
     public static void onEntityHurt(LivingHurtEvent event) {
         Entity source = event.getSource().getDirectEntity();
         if (source instanceof Player player && player.getItemInHand(InteractionHand.MAIN_HAND).getItem() instanceof Staff) {
-            setHurtByStaff(event.getEntityLiving(), true);
+            setHurtByStaff(event.getEntity(), true);
         }
         if (source instanceof Player player && player.hasEffect(StaffEffects.CRITICAL.get())) {
             int enchantmentLevel = player.getEffect(StaffEffects.CRITICAL.get()).getAmplifier() + 1;
@@ -171,20 +171,20 @@ public class CommonEvents {
 
     @SubscribeEvent
     public static void onKnockbackApplied(LivingKnockBackEvent event) {
-        if (getHurtByStaff(event.getEntityLiving())) {
+        if (getHurtByStaff(event.getEntity())) {
             event.setStrength((event.getOriginalStrength() * StaffConfig.staffKnockback.get().floatValue()));
-            setHurtByStaff(event.getEntityLiving(), false);
+            setHurtByStaff(event.getEntity(), false);
         }
     }
 
     @SubscribeEvent
-    public static void onPotionEffectExpired(PotionEvent.PotionExpiryEvent event) {
-        LivingEntity entity = event.getEntityLiving();
+    public static void onPotionEffectExpired(MobEffectEvent.Expired event) {
+        LivingEntity entity = event.getEntity();
         int maxChargeDefault = StaffConfig.chargeMaxStarting.get();
 
-        if (event.getPotionEffect().getEffect() == StaffEffects.CHARGE_ESCALATION.get()) {
+        if (event.getEffectInstance().getEffect() == StaffEffects.CHARGE_ESCALATION.get()) {
             if (!entity.level.isClientSide) {
-                entity.addEffect(new MobEffectInstance(StaffEffects.CHARGE_BREAKDOWN.get(), 1200, event.getPotionEffect().getAmplifier()));
+                entity.addEffect(new MobEffectInstance(StaffEffects.CHARGE_BREAKDOWN.get(), 1200, event.getEffectInstance().getAmplifier()));
 
                 StaffPacketHandler.INSTANCE.send(
                         PacketDistributor.TRACKING_CHUNK
@@ -200,7 +200,7 @@ public class CommonEvents {
             }
         }
 
-        if (event.getPotionEffect().getEffect() == StaffEffects.CHARGE_BREAKDOWN.get()) {
+        if (event.getEffectInstance().getEffect() == StaffEffects.CHARGE_BREAKDOWN.get()) {
             if (!entity.level.isClientSide) {
                 setMaxCharge(entity, maxChargeDefault);
                 if (getCharge(entity) > maxChargeDefault) {

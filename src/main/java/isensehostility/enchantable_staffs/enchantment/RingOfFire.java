@@ -80,7 +80,7 @@ public class RingOfFire extends Enchantment implements IStaffEnchantment {
             level.setBlock(pos, Blocks.FIRE.defaultBlockState(), 3);
         }
 
-        level.playSound(null, player.eyeBlockPosition(), SoundEvents.FIRECHARGE_USE, SoundSource.PLAYERS, 100.0F, 1.0F);
+        level.playSound(null, new BlockPos(player.getEyePosition()), SoundEvents.FIRECHARGE_USE, SoundSource.PLAYERS, 100.0F, 1.0F);
         spawnParticleCloud(ParticleTypes.FLAME, x + 0.5D, player.getEyeY(), z + 0.5D, level);
 
         return new InteractionResultHolder<>(InteractionResult.SUCCESS, stack);

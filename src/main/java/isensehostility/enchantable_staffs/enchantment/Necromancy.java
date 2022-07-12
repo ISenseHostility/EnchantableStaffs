@@ -74,7 +74,7 @@ public class Necromancy extends Enchantment implements IStaffEnchantment {
         spawnParticleCloud(ParticleTypes.SOUL, pos.getX(), pos.getY() + 1.0D, pos.getZ(), level);
         spawnParticleCloud(ParticleTypes.SOUL, player.getX(), player.getEyeY(), player.getZ(), level);
         level.playSound(null, pos, SoundEvents.SOUL_ESCAPE, SoundSource.PLAYERS, 100.0F, 1.0F);
-        level.playSound(null, player.eyeBlockPosition(), SoundEvents.SOUL_ESCAPE, SoundSource.PLAYERS, 100.0F, 1.0F);
+        level.playSound(null, new BlockPos(player.getEyePosition()), SoundEvents.SOUL_ESCAPE, SoundSource.PLAYERS, 100.0F, 1.0F);
 
         return new InteractionResultHolder<>(InteractionResult.SUCCESS, stack);
     }

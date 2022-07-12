@@ -5,8 +5,9 @@ import isensehostility.enchantable_staffs.effect.StaffEffects;
 import isensehostility.enchantable_staffs.enchantment.category.StaffCategory;
 import isensehostility.enchantable_staffs.enums.EElement;
 import isensehostility.enchantable_staffs.item.Staff;
+import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
-import net.minecraft.network.chat.TranslatableComponent;
+import net.minecraft.network.chat.Component;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionResult;
@@ -59,10 +60,10 @@ public class ElementalEfficiency extends Enchantment implements IStaffEnchantmen
         EElement selectedElement = elementList.get(getRandom().nextInt(elementList.size()));
         setElementalEfficiency(player, selectedElement);
 
-        player.sendMessage(new TranslatableComponent("message.efficient_element").append(selectedElement.getName().withStyle(selectedElement.getColor())), player.getUUID());
+        player.sendSystemMessage(Component.translatable("message.efficient_element").append(selectedElement.getName().withStyle(selectedElement.getColor())));
 
         spawnParticleCloud(ParticleTypes.END_ROD, player.getX(), player.getEyeY(), player.getZ(), level);
-        level.playSound(null, player.eyeBlockPosition(), SoundEvents.AXE_WAX_OFF, SoundSource.PLAYERS, 100.0F, 1.0F);
+        level.playSound(null, new BlockPos(player.getEyePosition()), SoundEvents.AXE_WAX_OFF, SoundSource.PLAYERS, 100.0F, 1.0F);
 
         return new InteractionResultHolder<>(InteractionResult.SUCCESS, stack);
     }

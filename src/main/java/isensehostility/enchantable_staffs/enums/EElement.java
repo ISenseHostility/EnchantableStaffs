@@ -1,33 +1,34 @@
 package isensehostility.enchantable_staffs.enums;
 
 import net.minecraft.ChatFormatting;
-import net.minecraft.network.chat.TranslatableComponent;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.MutableComponent;
 
 import java.util.List;
 
 public enum EElement {
-    NATURE(new TranslatableComponent("element.enchantable_staffs.name.nature"), ChatFormatting.DARK_GREEN, 0),
-    FIRE(new TranslatableComponent("element.enchantable_staffs.name.fire"), ChatFormatting.RED, 1),
-    ENDER(new TranslatableComponent("element.enchantable_staffs.name.ender"), ChatFormatting.DARK_PURPLE, 2),
-    WATER(new TranslatableComponent("element.enchantable_staffs.name.water"), ChatFormatting.BLUE, 3),
-    ICE(new TranslatableComponent("element.enchantable_staffs.name.ice"), ChatFormatting.AQUA, 4),
-    LIGHTNING(new TranslatableComponent("element.enchantable_staffs.name.lightning"), ChatFormatting.GRAY, 5),
-    PURE(new TranslatableComponent("element.enchantable_staffs.name.pure"), ChatFormatting.WHITE, 6),
-    UNDEAD(new TranslatableComponent("element.enchantable_staffs.name.undead"), ChatFormatting.DARK_RED, 7),
-    SUMMON(new TranslatableComponent("element.enchantable_staffs.name.summon"), ChatFormatting.LIGHT_PURPLE, 8),
-    NONE(new TranslatableComponent("element.enchantable_staffs.name.none"), ChatFormatting.DARK_GRAY, 9);
+    NATURE(Component.translatable("element.enchantable_staffs.name.nature"), ChatFormatting.DARK_GREEN, 0),
+    FIRE(Component.translatable("element.enchantable_staffs.name.fire"), ChatFormatting.RED, 1),
+    ENDER(Component.translatable("element.enchantable_staffs.name.ender"), ChatFormatting.DARK_PURPLE, 2),
+    WATER(Component.translatable("element.enchantable_staffs.name.water"), ChatFormatting.BLUE, 3),
+    ICE(Component.translatable("element.enchantable_staffs.name.ice"), ChatFormatting.AQUA, 4),
+    LIGHTNING(Component.translatable("element.enchantable_staffs.name.lightning"), ChatFormatting.GRAY, 5),
+    PURE(Component.translatable("element.enchantable_staffs.name.pure"), ChatFormatting.WHITE, 6),
+    UNDEAD(Component.translatable("element.enchantable_staffs.name.undead"), ChatFormatting.DARK_RED, 7),
+    SUMMON(Component.translatable("element.enchantable_staffs.name.summon"), ChatFormatting.LIGHT_PURPLE, 8),
+    NONE(Component.translatable("element.enchantable_staffs.name.none"), ChatFormatting.DARK_GRAY, 9);
 
-    private final TranslatableComponent name;
+    private final MutableComponent name;
     private final ChatFormatting color;
     private final int id;
 
-    EElement(TranslatableComponent name, ChatFormatting color, int id) {
+    EElement(MutableComponent name, ChatFormatting color, int id) {
         this.name = name;
         this.color = color;
         this.id = id;
     }
 
-    public TranslatableComponent getName() {
+    public MutableComponent getName() {
         return name;
     }
 

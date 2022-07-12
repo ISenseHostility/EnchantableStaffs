@@ -11,7 +11,6 @@ import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.InteractionResultHolder;
@@ -61,7 +60,7 @@ public abstract class Staff extends Item {
                 if (enchantment instanceof IStaffEnchantment staffEnchantment) {
                     int cost = StaffUtils.calculateCharge(staffEnchantment, Minecraft.getInstance().player);
 
-                    tooltip.add(new TranslatableComponent("tooltip.enchantable_staffs.charge_cost").append(": " + cost).withStyle(ChatFormatting.AQUA));
+                    tooltip.add(Component.translatable("tooltip.enchantable_staffs.charge_cost").append(": " + cost).withStyle(ChatFormatting.AQUA));
                 }
             }
         }
@@ -69,9 +68,9 @@ public abstract class Staff extends Item {
         if (Screen.hasControlDown()) {
             for (Enchantment enchantment : enchantments) {
                 if (enchantment instanceof Explosion) {
-                    tooltip.add(new TranslatableComponent("tooltip.enchantable_staffs.explosion").withStyle(ChatFormatting.RED, ChatFormatting.ITALIC));
+                    tooltip.add(Component.translatable("tooltip.enchantable_staffs.explosion").withStyle(ChatFormatting.RED, ChatFormatting.ITALIC));
                 } else if (enchantment instanceof WeatherAlteration) {
-                    tooltip.add(new TranslatableComponent("tooltip.enchantable_staffs.weather_alteration").withStyle(ChatFormatting.GOLD, ChatFormatting.ITALIC));
+                    tooltip.add(Component.translatable("tooltip.enchantable_staffs.weather_alteration").withStyle(ChatFormatting.GOLD, ChatFormatting.ITALIC));
                 }
             }
         }

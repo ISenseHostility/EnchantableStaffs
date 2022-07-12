@@ -4,6 +4,7 @@ import isensehostility.enchantable_staffs.config.StaffConfig;
 import isensehostility.enchantable_staffs.enchantment.category.StaffCategory;
 import isensehostility.enchantable_staffs.enums.EElement;
 import isensehostility.enchantable_staffs.item.Staff;
+import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
@@ -61,7 +62,7 @@ public class SummonSkeletonHorse extends Enchantment implements IStaffEnchantmen
         level.addFreshEntity(horse);
 
         spawnParticleCloud(ParticleTypes.SOUL, player.getX(), player.getY() + 1.0D, player.getZ(), level);
-        level.playSound(null, player.eyeBlockPosition(), SoundEvents.SOUL_ESCAPE, SoundSource.PLAYERS, 100.0F, 1.0F);
+        level.playSound(null, new BlockPos(player.getEyePosition()), SoundEvents.SOUL_ESCAPE, SoundSource.PLAYERS, 100.0F, 1.0F);
 
         return new InteractionResultHolder<>(InteractionResult.SUCCESS, stack);
     }

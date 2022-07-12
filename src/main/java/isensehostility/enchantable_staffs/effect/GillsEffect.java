@@ -16,7 +16,7 @@ public class GillsEffect extends MobEffect {
     @Override
     public void applyEffectTick(LivingEntity entity, int amplifier) {
         if (entity.getLevel().getBlockState(new BlockPos(entity.getX(), entity.getEyeY(), entity.getZ())).getBlock() == Blocks.WATER) {
-            entity.setAirSupply(entity.getAirSupply() + 30);
+            entity.setAirSupply(entity.getMaxAirSupply());
         } else {
             entity.hurt(DamageSource.DRY_OUT, 1.0F);
         }

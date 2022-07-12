@@ -5,6 +5,7 @@ import isensehostility.enchantable_staffs.enchantment.category.StaffCategory;
 import isensehostility.enchantable_staffs.enums.EElement;
 import isensehostility.enchantable_staffs.item.Staff;
 import net.minecraft.client.gui.screens.Screen;
+import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
@@ -53,11 +54,11 @@ public class Warp extends Enchantment implements IStaffEnchantment {
             setWarpOwner(stack, player);
 
             spawnParticleCloud(ParticleTypes.ENCHANTED_HIT, player.getX(), player.getEyeY(), player.getZ(), level);
-            level.playSound(null, player.eyeBlockPosition(), SoundEvents.SHULKER_TELEPORT, SoundSource.PLAYERS, 100.0F, 1.0F);
+            level.playSound(null, new BlockPos(player.getEyePosition()), SoundEvents.SHULKER_TELEPORT, SoundSource.PLAYERS, 100.0F, 1.0F);
 
             return new InteractionResultHolder<>(InteractionResult.PASS, stack);
         } else if (
-                getWarpDimension(stack).equals(player.level.dimension().getRegistryName().toString()) &&
+                getWarpDimension(stack).equals(player.level.dimension().location().toString()) &&
                 getWarpOwner(stack).equals(player.getStringUUID())
         ) {
             long[] positionArray = getWarpPosition(stack);
@@ -68,7 +69,7 @@ public class Warp extends Enchantment implements IStaffEnchantment {
             player.setPos(position);
 
             spawnParticleCloud(ParticleTypes.PORTAL, player.getX(), player.getEyeY(), player.getZ(), level);
-            level.playSound(null, player.eyeBlockPosition(), SoundEvents.ENDERMAN_TELEPORT, SoundSource.PLAYERS, 100.0F, 1.0F);
+            level.playSound(null, new BlockPos(player.getEyePosition()), SoundEvents.ENDERMAN_TELEPORT, SoundSource.PLAYERS, 100.0F, 1.0F);
 
             if (invokeStaffCosts(player, stack, getChargeCost(), level)) {
                 return new InteractionResultHolder<>(InteractionResult.PASS, stack);
