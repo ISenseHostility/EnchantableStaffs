@@ -27,7 +27,7 @@ import static isensehostility.enchantable_staffs.StaffUtils.invokeStaffCosts;
 
 public class FreezeBreath extends Enchantment implements IStaffEnchantment {
     public FreezeBreath() {
-        super(Rarity.UNCOMMON, StaffCategory.get(), new EquipmentSlot[]{EquipmentSlot.MAINHAND, EquipmentSlot.OFFHAND});
+        super(Rarity.UNCOMMON, StaffCategory.getInstance(), new EquipmentSlot[]{EquipmentSlot.MAINHAND, EquipmentSlot.OFFHAND});
     }
 
     @Override

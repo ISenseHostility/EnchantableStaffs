@@ -26,7 +26,7 @@ import static isensehostility.enchantable_staffs.StaffUtils.*;
 
 public class Glow extends Enchantment implements IStaffEnchantment {
     public Glow() {
-        super(Rarity.COMMON, StaffCategory.get(), new EquipmentSlot[]{EquipmentSlot.MAINHAND, EquipmentSlot.OFFHAND});
+        super(Rarity.COMMON, StaffCategory.getInstance(), new EquipmentSlot[]{EquipmentSlot.MAINHAND, EquipmentSlot.OFFHAND});
     }
 
     @Override

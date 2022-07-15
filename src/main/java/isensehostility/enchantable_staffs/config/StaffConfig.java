@@ -37,6 +37,10 @@ public class StaffConfig {
     public static ForgeConfigSpec.IntValue magicalStrengtheningChargeCost;
     public static ForgeConfigSpec.IntValue spectralWingsChargeCost;
     public static ForgeConfigSpec.IntValue elementalEfficiencyChargeCost;
+    public static ForgeConfigSpec.IntValue witherSkullChargeCost;
+    public static ForgeConfigSpec.IntValue healingRayChargeCost;
+    public static ForgeConfigSpec.IntValue gardenGrowthChargeCost;
+    public static ForgeConfigSpec.IntValue biteChargeCost;
 
     public static ForgeConfigSpec.BooleanValue teleportExists;
     public static ForgeConfigSpec.BooleanValue createWaterExists;
@@ -66,6 +70,10 @@ public class StaffConfig {
     public static ForgeConfigSpec.BooleanValue magicalStrengtheningExists;
     public static ForgeConfigSpec.BooleanValue spectralWingsExists;
     public static ForgeConfigSpec.BooleanValue elementalEfficiencyExists;
+    public static ForgeConfigSpec.BooleanValue witherSkullExists;
+    public static ForgeConfigSpec.BooleanValue healingRayExists;
+    public static ForgeConfigSpec.BooleanValue gardenGrowthExists;
+    public static ForgeConfigSpec.BooleanValue biteExists;
 
     public static ForgeConfigSpec.IntValue chargeMaxStarting;
     public static ForgeConfigSpec.BooleanValue chargePotionsExist;
@@ -341,6 +349,42 @@ public class StaffConfig {
                 .comment("When set to false the Elemental Efficiency enchantment will not be in the game.\n" +
                         "[default=true]")
                 .define("exists.elementalEfficiency", true);
+
+        witherSkullChargeCost = builder
+                .comment("Cooldown time in ticks (1 second = 20 ticks) for the Wither Skull enchantment.\n" +
+                        "[default=150]")
+                .defineInRange("chargeCosts.witherSkull", 150, 0, Integer.MAX_VALUE);
+        witherSkullExists = builder
+                .comment("When set to false the Wither Skull enchantment will not be in the game.\n" +
+                        "[default=true]")
+                .define("exists.witherSkull", true);
+
+        healingRayChargeCost = builder
+                .comment("Cooldown time in ticks (1 second = 20 ticks) for the Healing Ray enchantment.\n" +
+                        "[default=120]")
+                .defineInRange("chargeCosts.healingRay", 120, 0, Integer.MAX_VALUE);
+        healingRayExists = builder
+                .comment("When set to false the Healing Ray enchantment will not be in the game.\n" +
+                        "[default=true]")
+                .define("exists.healingRay", true);
+
+        gardenGrowthChargeCost = builder
+                .comment("Cooldown time in ticks (1 second = 20 ticks) for the Garden Growth enchantment.\n" +
+                        "[default=60]")
+                .defineInRange("chargeCosts.gardenGrowth", 60, 0, Integer.MAX_VALUE);
+        gardenGrowthExists = builder
+                .comment("When set to false the Garden Growth enchantment will not be in the game.\n" +
+                        "[default=true]")
+                .define("exists.gardenGrowth", true);
+
+        biteChargeCost = builder
+                .comment("Cooldown time in ticks (1 second = 20 ticks) for the Bite enchantment.\n" +
+                        "[default=100]")
+                .defineInRange("chargeCosts.bite", 100, 0, Integer.MAX_VALUE);
+        biteExists = builder
+                .comment("When set to false the Bite enchantment will not be in the game.\n" +
+                        "[default=true]")
+                .define("exists.bite", true);
 
         chargeMaxStarting = builder
                 .comment("Maximum amount of charge you spawn with.\n" +

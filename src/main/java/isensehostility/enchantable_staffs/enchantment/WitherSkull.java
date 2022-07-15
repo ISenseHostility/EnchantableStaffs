@@ -4,60 +4,62 @@ import isensehostility.enchantable_staffs.config.StaffConfig;
 import isensehostility.enchantable_staffs.enchantment.category.StaffCategory;
 import isensehostility.enchantable_staffs.enums.EElement;
 import isensehostility.enchantable_staffs.item.Staff;
+import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.Direction;
+import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.enchantment.Enchantment;
-import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.item.enchantment.Enchantments;
-import net.minecraft.world.level.ClipContext;
-import net.minecraft.world.level.Explosion.BlockInteraction;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.phys.BlockHitResult;
+import net.minecraft.world.phys.Vec3;
 
 import static isensehostility.enchantable_staffs.StaffUtils.*;
 
-public class Explosion extends Enchantment implements IStaffEnchantment {
-    public Explosion() {
-        super(Rarity.COMMON, StaffCategory.getInstance(), new EquipmentSlot[]{EquipmentSlot.MAINHAND, EquipmentSlot.OFFHAND});
+public class WitherSkull extends Enchantment implements IStaffEnchantment {
+    public WitherSkull() {
+        super(Rarity.RARE, StaffCategory.getInstance(), new EquipmentSlot[]{EquipmentSlot.MAINHAND, EquipmentSlot.OFFHAND});
     }
 
     @Override
     public EElement[] getElements() {
-        return new EElement[]{EElement.NONE};
+        return new EElement[]{EElement.UNDEAD};
     }
 
     @Override
     public boolean doesExist() {
-        return StaffConfig.explosionExists.get();
+        return StaffConfig.witherSkullExists.get();
     }
 
     @Override
     public int getChargeCost() {
-        return StaffConfig.explosionChargeCost.get();
+        return StaffConfig.witherSkullChargeCost.get();
     }
 
     @Override
     public InteractionResultHolder<ItemStack> onUse(ItemStack stack, Level level, Player player) {
-        BlockHitResult rayTrace = rayTrace(level, player, ClipContext.Fluid.NONE, 100);
-        Direction direction = rayTrace.getDirection();
-        BlockPos posCollide = rayTrace.getBlockPos();
-        BlockPos pos = posCollide.relative(direction);
-
-        if (posIsAir(level, posCollide)) {
-            return new InteractionResultHolder<>(InteractionResult.PASS, stack);
-        }
         if (invokeStaffCosts(player, stack, getChargeCost(), level)) {
             return new InteractionResultHolder<>(InteractionResult.PASS, stack);
         }
 
-        if (!level.isClientSide) {
-            level.explode(player, pos.getX(), pos.getY(), pos.getZ(), EnchantmentHelper.getItemEnchantmentLevel(StaffEnchantments.EXPLOSION.get(), stack) + 0.5F, BlockInteraction.BREAK);
+        level.levelEvent(player, 1024, new BlockPos(player.getEyePosition()), 0);
+
+        Vec3 direction = getDirection(player);
+        Vec3 eyePos = player.getEyePosition();
+
+        net.minecraft.world.entity.projectile.WitherSkull witherskull = new net.minecraft.world.entity.projectile.WitherSkull(level, player, direction.x(), direction.y(), direction.z());
+        witherskull.setOwner(player);
+        witherskull.setPosRaw(eyePos.x(), eyePos.y(), eyePos.z());
+
+        if (Screen.hasShiftDown()) {
+            witherskull.setDangerous(true);
         }
+
+        spawnParticleCloud(ParticleTypes.DAMAGE_INDICATOR, player.getX(), player.getY() + 1.0D, player.getZ(), level);
+        level.addFreshEntity(witherskull);
 
         return new InteractionResultHolder<>(InteractionResult.SUCCESS, stack);
     }
@@ -69,17 +71,17 @@ public class Explosion extends Enchantment implements IStaffEnchantment {
 
     @Override
     public int getMaxLevel() {
-        return 5;
+        return 1;
     }
 
     @Override
     public int getMinCost(int level) {
-        return 10 + 20 * (level - 1);
+        return 10;
     }
 
     @Override
     public int getMaxCost(int level) {
-        return getMinCost(level) + 50;
+        return 50;
     }
 
     @Override

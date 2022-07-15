@@ -91,7 +91,6 @@
   "enchantment.enchantable_staffs.spectral_wings": "Spectral Wings",
   "enchantment.enchantable_staffs.summon_skeleton_horse": "Summon Skeleton Horse",
   "enchantment.enchantable_staffs.greater_heal": "Greater Heal",
-  "enchantment.enchantable_staffs.garden_growth": "Garden Growth",
   "enchantment.enchantable_staffs.area_heal": "Area Heal",
   "enchantment.enchantable_staffs.magical_strengthening_staff": "Magical Strengthening",
   "enchantment.enchantable_staffs.magical_strengthening_weapon": "Magical Strengthening",
@@ -99,6 +98,10 @@
   "enchantment.enchantable_staffs.critical": "Critical",
   "enchantment.enchantable_staffs.draconic_fireball": "Draconic Fireball",
   "enchantment.enchantable_staffs.elemental_efficiency": "Elemental Efficiency",
+  "enchantment.enchantable_staffs.wither_skull": "Wither Skull",
+  "enchantment.enchantable_staffs.healing_ray": "Healing Ray",
+  "enchantment.enchantable_staffs.garden_growth": "Garden Growth",
+  "enchantment.enchantable_staffs.bite": "Bite",
 
   "_comment": "Elements",
   "element.enchantable_staffs.name.nature": "Nature",
@@ -135,7 +138,6 @@
   "enchantment.enchantable_staffs.spectral_wings.desc": "Spectral Wings gives the user a temporary elytra, the elytra stays for 1 minute and your chestplate will be returned when it vanishes.",
   "enchantment.enchantable_staffs.summon_skeleton_horse.desc": "Summon Skeleton Horse summons a tamed skeleton horse with a saddle.",
   "enchantment.enchantable_staffs.greater_heal.desc": "Greater Heal heals the user for 3 hearts, but has a longer cooldown than heal.",
-  "enchantment.enchantable_staffs.garden_growth.desc": "Garden Growth works as an unlimited bone meal.",
   "enchantment.enchantable_staffs.area_heal.desc": "Area Heal heals all entities around the user for 2 hearts.",
   "enchantment.enchantable_staffs.magical_strengthening_staff.desc": "Magical Strengthening strengthens the weapon in the off-hand for 2 minutes, when on a staff.",
   "enchantment.enchantable_staffs.magical_strengthening_weapon.desc": "Magical Strengthening boosts the damage of the weapon for 2 minutes, when on a weapon.",
@@ -143,6 +145,10 @@
   "enchantment.enchantable_staffs.critical.desc": "Critical boosts the critical strike chance of all weapons.",
   "enchantment.enchantable_staffs.draconic_fireball.desc": "Draconic Fireball shoots a draconic fireball that leaves a pool of dragon's breath on impact.",
   "enchantment.enchantable_staffs.elemental_efficiency.desc": "Elemental Efficiency reduces the amount of charge necessary to cast a spell of a specific element.",
+  "enchantment.enchantable_staffs.wither_skull.desc": "Wither Skull shoots out the Wither Skull attack from the Wither boss.",
+  "enchantment.enchantable_staffs.healing_ray.desc": "Healing Ray heals all entities in a ray in front of the user.",
+  "enchantment.enchantable_staffs.garden_growth.desc": "Garden Growth works as a magic bone meal.",
+  "enchantment.enchantable_staffs.bite.desc": "Bite summons a single Evoker Fang up to 50 blocks away.",
 
   "_comment": "messages",
   "message.efficient_element": "Efficient Element: "

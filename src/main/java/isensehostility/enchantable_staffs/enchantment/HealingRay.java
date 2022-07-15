@@ -5,59 +5,63 @@ import isensehostility.enchantable_staffs.enchantment.category.StaffCategory;
 import isensehostility.enchantable_staffs.enums.EElement;
 import isensehostility.enchantable_staffs.item.Staff;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.Direction;
+import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.InteractionResultHolder;
+import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.enchantment.Enchantment;
-import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.item.enchantment.Enchantments;
-import net.minecraft.world.level.ClipContext;
-import net.minecraft.world.level.Explosion.BlockInteraction;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.phys.BlockHitResult;
 
-import static isensehostility.enchantable_staffs.StaffUtils.*;
+import java.util.List;
 
-public class Explosion extends Enchantment implements IStaffEnchantment {
-    public Explosion() {
-        super(Rarity.COMMON, StaffCategory.getInstance(), new EquipmentSlot[]{EquipmentSlot.MAINHAND, EquipmentSlot.OFFHAND});
+import static isensehostility.enchantable_staffs.StaffUtils.getEntitiesInBreathLine;
+import static isensehostility.enchantable_staffs.StaffUtils.invokeStaffCosts;
+
+public class HealingRay extends Enchantment implements IStaffEnchantment {
+    public HealingRay() {
+        super(Rarity.UNCOMMON, StaffCategory.getInstance(), new EquipmentSlot[]{EquipmentSlot.MAINHAND, EquipmentSlot.OFFHAND});
     }
 
     @Override
     public EElement[] getElements() {
-        return new EElement[]{EElement.NONE};
+        return new EElement[]{EElement.PURE};
     }
 
     @Override
     public boolean doesExist() {
-        return StaffConfig.explosionExists.get();
+        return StaffConfig.healingRayExists.get();
     }
 
     @Override
     public int getChargeCost() {
-        return StaffConfig.explosionChargeCost.get();
+        return StaffConfig.healingRayChargeCost.get();
     }
 
     @Override
     public InteractionResultHolder<ItemStack> onUse(ItemStack stack, Level level, Player player) {
-        BlockHitResult rayTrace = rayTrace(level, player, ClipContext.Fluid.NONE, 100);
-        Direction direction = rayTrace.getDirection();
-        BlockPos posCollide = rayTrace.getBlockPos();
-        BlockPos pos = posCollide.relative(direction);
-
-        if (posIsAir(level, posCollide)) {
-            return new InteractionResultHolder<>(InteractionResult.PASS, stack);
-        }
         if (invokeStaffCosts(player, stack, getChargeCost(), level)) {
             return new InteractionResultHolder<>(InteractionResult.PASS, stack);
         }
 
-        if (!level.isClientSide) {
-            level.explode(player, pos.getX(), pos.getY(), pos.getZ(), EnchantmentHelper.getItemEnchantmentLevel(StaffEnchantments.EXPLOSION.get(), stack) + 0.5F, BlockInteraction.BREAK);
+        List<LivingEntity> entities = getEntitiesInBreathLine(level, player, 12, ParticleTypes.HAPPY_VILLAGER);
+
+        for (LivingEntity entity : entities) {
+            if (entity != player) {
+                entity.heal(4);
+                entity.addEffect(new MobEffectInstance(MobEffects.ABSORPTION,200));
+            }
         }
+
+        level.playSound(null, new BlockPos(player.getEyePosition()), SoundEvents.CAT_AMBIENT, SoundSource.PLAYERS, 100.0F, 1.0F);
 
         return new InteractionResultHolder<>(InteractionResult.SUCCESS, stack);
     }
@@ -69,17 +73,17 @@ public class Explosion extends Enchantment implements IStaffEnchantment {
 
     @Override
     public int getMaxLevel() {
-        return 5;
+        return 1;
     }
 
     @Override
     public int getMinCost(int level) {
-        return 10 + 20 * (level - 1);
+        return 10;
     }
 
     @Override
     public int getMaxCost(int level) {
-        return getMinCost(level) + 50;
+        return 50;
     }
 
     @Override

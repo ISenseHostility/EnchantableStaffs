@@ -20,7 +20,7 @@ import static isensehostility.enchantable_staffs.StaffUtils.*;
 
 public class WeatherAlteration extends Enchantment implements IStaffEnchantment {
     public WeatherAlteration() {
-        super(Rarity.COMMON, StaffCategory.get(), new EquipmentSlot[]{EquipmentSlot.MAINHAND, EquipmentSlot.OFFHAND});
+        super(Rarity.COMMON, StaffCategory.getInstance(), new EquipmentSlot[]{EquipmentSlot.MAINHAND, EquipmentSlot.OFFHAND});
     }
 
     @Override

@@ -24,7 +24,7 @@ import static isensehostility.enchantable_staffs.StaffUtils.*;
 
 public class Teleport extends Enchantment implements IStaffEnchantment {
     public Teleport() {
-        super(Rarity.VERY_RARE, StaffCategory.get(), new EquipmentSlot[]{EquipmentSlot.MAINHAND, EquipmentSlot.OFFHAND});
+        super(Rarity.VERY_RARE, StaffCategory.getInstance(), new EquipmentSlot[]{EquipmentSlot.MAINHAND, EquipmentSlot.OFFHAND});
     }
 
     @Override

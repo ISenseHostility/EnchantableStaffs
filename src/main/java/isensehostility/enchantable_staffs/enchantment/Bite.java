@@ -5,61 +5,78 @@ import isensehostility.enchantable_staffs.enchantment.category.StaffCategory;
 import isensehostility.enchantable_staffs.enums.EElement;
 import isensehostility.enchantable_staffs.item.Staff;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.Direction;
+import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.InteractionResultHolder;
+import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.entity.projectile.EvokerFangs;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.enchantment.Enchantment;
-import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.ClipContext;
-import net.minecraft.world.level.Explosion.BlockInteraction;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.BlockHitResult;
+import net.minecraft.world.phys.Vec3;
+
+import java.util.List;
 
 import static isensehostility.enchantable_staffs.StaffUtils.*;
+import static isensehostility.enchantable_staffs.StaffUtils.invokeStaffCosts;
 
-public class Explosion extends Enchantment implements IStaffEnchantment {
-    public Explosion() {
-        super(Rarity.COMMON, StaffCategory.getInstance(), new EquipmentSlot[]{EquipmentSlot.MAINHAND, EquipmentSlot.OFFHAND});
+public class Bite extends Enchantment implements IStaffEnchantment {
+    public Bite() {
+        super(Rarity.UNCOMMON, StaffCategory.getInstance(), new EquipmentSlot[]{EquipmentSlot.MAINHAND, EquipmentSlot.OFFHAND});
     }
 
     @Override
     public EElement[] getElements() {
-        return new EElement[]{EElement.NONE};
+        return new EElement[]{EElement.SUMMON};
     }
 
     @Override
     public boolean doesExist() {
-        return StaffConfig.explosionExists.get();
+        return StaffConfig.biteExists.get();
     }
 
     @Override
     public int getChargeCost() {
-        return StaffConfig.explosionChargeCost.get();
+        return StaffConfig.biteChargeCost.get();
     }
 
     @Override
     public InteractionResultHolder<ItemStack> onUse(ItemStack stack, Level level, Player player) {
-        BlockHitResult rayTrace = rayTrace(level, player, ClipContext.Fluid.NONE, 100);
-        Direction direction = rayTrace.getDirection();
-        BlockPos posCollide = rayTrace.getBlockPos();
-        BlockPos pos = posCollide.relative(direction);
-
-        if (posIsAir(level, posCollide)) {
-            return new InteractionResultHolder<>(InteractionResult.PASS, stack);
-        }
-        if (invokeStaffCosts(player, stack, getChargeCost(), level)) {
+        if (getCharge(player) < getChargeCost()) {
             return new InteractionResultHolder<>(InteractionResult.PASS, stack);
         }
 
-        if (!level.isClientSide) {
-            level.explode(player, pos.getX(), pos.getY(), pos.getZ(), EnchantmentHelper.getItemEnchantmentLevel(StaffEnchantments.EXPLOSION.get(), stack) + 0.5F, BlockInteraction.BREAK);
+        BlockHitResult result = rayTrace(level, player, ClipContext.Fluid.NONE, 50);
+
+        if (!posIsAir(level, result.getBlockPos())) {
+            if (invokeStaffCosts(player, stack, getChargeCost(), level)) {
+                return new InteractionResultHolder<>(InteractionResult.PASS, stack);
+            }
+
+            Vec3 pos = result.getLocation();
+
+            EvokerFangs fangs = new EvokerFangs(EntityType.EVOKER_FANGS, level);
+            fangs.setOwner(player);
+            fangs.setYRot(player.getYRot());
+            fangs.setPos(pos.x(), pos.y(), pos.z());
+
+            spawnParticleCloud(ParticleTypes.CAMPFIRE_SIGNAL_SMOKE, player.getX(), player.getY() + 1.0D, player.getZ(), level);
+            level.playSound(null, new BlockPos(player.getEyePosition()), SoundEvents.SOUL_ESCAPE, SoundSource.PLAYERS, 100.0F, 1.0F);
+
+            level.addFreshEntity(fangs);
+
+            return new InteractionResultHolder<>(InteractionResult.SUCCESS, stack);
         }
 
-        return new InteractionResultHolder<>(InteractionResult.SUCCESS, stack);
+        return new InteractionResultHolder<>(InteractionResult.PASS, stack);
     }
 
     @Override
@@ -69,17 +86,17 @@ public class Explosion extends Enchantment implements IStaffEnchantment {
 
     @Override
     public int getMaxLevel() {
-        return 5;
+        return 1;
     }
 
     @Override
     public int getMinCost(int level) {
-        return 10 + 20 * (level - 1);
+        return 10;
     }
 
     @Override
     public int getMaxCost(int level) {
-        return getMinCost(level) + 50;
+        return 50;
     }
 
     @Override
