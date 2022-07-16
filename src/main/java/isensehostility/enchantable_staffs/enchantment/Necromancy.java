@@ -14,6 +14,7 @@ import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.ai.goal.GoalSelector;
 import net.minecraft.world.entity.monster.*;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -68,6 +69,7 @@ public class Necromancy extends Enchantment implements IStaffEnchantment {
             default -> new ZombieVillager(EntityType.ZOMBIE_VILLAGER, level);
         };
 
+        setFriendly(entity, true);
         entity.setPos(Vec3.atCenterOf(pos));
         level.addFreshEntity(entity);
 

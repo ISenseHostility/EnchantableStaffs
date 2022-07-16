@@ -55,6 +55,7 @@ public class StaffUtils {
     private static final String TAG_SPECTRAL_WINGS_TIME = "enchantable_staffs:spectral_wings_time";
     private static final String TAG_IS_SPECTRAL_WINGS = "enchantable_staffs:is_spectral_wings";
     private static final String TAG_CHESTPLATE_DATA = "enchantable_staffs:chestplate_data";
+    private static final String TAG_FRIENDLY = "enchantable_staffs:friendly";
 
     public static String getTagElementalEfficiency() {
         return TAG_ELEMENTAL_EFFICIENCY;
@@ -430,5 +431,13 @@ public class StaffUtils {
         EvokerFangs fangs = new EvokerFangs(level, pos.getX(), pos.getY(), pos.getZ(), 0, offset, summoner);
         fangs.setYRot(summoner.getYRot());
         level.addFreshEntity(fangs);
+    }
+
+    public static void setFriendly(LivingEntity entity, boolean isFriendly) {
+        entity.getPersistentData().putBoolean(TAG_FRIENDLY, isFriendly);
+    }
+
+    public static boolean getFriendly(LivingEntity entity) {
+        return entity.getPersistentData().getBoolean(TAG_FRIENDLY);
     }
 }

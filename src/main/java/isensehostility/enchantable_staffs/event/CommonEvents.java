@@ -1,6 +1,7 @@
 package isensehostility.enchantable_staffs.event;
 
 import isensehostility.enchantable_staffs.EnchantableStaffs;
+import isensehostility.enchantable_staffs.ai.goal.NecromancyTargetGoal;
 import isensehostility.enchantable_staffs.config.StaffConfig;
 import isensehostility.enchantable_staffs.effect.StaffEffects;
 import isensehostility.enchantable_staffs.enchantment.StaffEnchantments;
@@ -16,6 +17,8 @@ import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
+import net.minecraft.world.entity.monster.*;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.DragonFireball;
 import net.minecraft.world.entity.projectile.Fireball;
@@ -48,6 +51,11 @@ public class CommonEvents {
         if (entity instanceof Player player && !hasChargeData(player)) {
             generateChargeData(player);
             setMaxCharge(player, StaffConfig.chargeMaxStarting.get());
+        }
+
+        if ((entity instanceof Monster monster) && getFriendly(monster)) {
+            monster.targetSelector.removeAllGoals();
+            monster.targetSelector.addGoal(0, new NecromancyTargetGoal<>(monster, Monster.class, false));
         }
     }
 
