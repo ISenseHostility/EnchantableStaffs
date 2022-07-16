@@ -102,6 +102,7 @@
   "enchantment.enchantable_staffs.healing_ray": "Healing Ray",
   "enchantment.enchantable_staffs.garden_growth": "Garden Growth",
   "enchantment.enchantable_staffs.bite": "Bite",
+  "enchantment.enchantable_staffs.ring_of_fangs": "Ring of Fangs",
 
   "_comment": "Elements",
   "element.enchantable_staffs.name.nature": "Nature",
@@ -149,6 +150,7 @@
   "enchantment.enchantable_staffs.healing_ray.desc": "Healing Ray heals all entities in a ray in front of the user.",
   "enchantment.enchantable_staffs.garden_growth.desc": "Garden Growth works as a magic bone meal.",
   "enchantment.enchantable_staffs.bite.desc": "Bite summons a single Evoker Fang up to 50 blocks away.",
+  "enchantment.enchantable_staffs.ring_of_fangs.desc": "Ring of Fangs summons a ring of Evoker Fangs around the user.",
 
   "_comment": "messages",
   "message.efficient_element": "Efficient Element: "

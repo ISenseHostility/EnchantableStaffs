@@ -63,15 +63,10 @@ public class Bite extends Enchantment implements IStaffEnchantment {
 
             Vec3 pos = result.getLocation();
 
-            EvokerFangs fangs = new EvokerFangs(EntityType.EVOKER_FANGS, level);
-            fangs.setOwner(player);
-            fangs.setYRot(player.getYRot());
-            fangs.setPos(pos.x(), pos.y(), pos.z());
+            summonFang(player, level, pos);
 
             spawnParticleCloud(ParticleTypes.CAMPFIRE_SIGNAL_SMOKE, player.getX(), player.getY() + 1.0D, player.getZ(), level);
             level.playSound(null, new BlockPos(player.getEyePosition()), SoundEvents.SOUL_ESCAPE, SoundSource.PLAYERS, 100.0F, 1.0F);
-
-            level.addFreshEntity(fangs);
 
             return new InteractionResultHolder<>(InteractionResult.SUCCESS, stack);
         }
