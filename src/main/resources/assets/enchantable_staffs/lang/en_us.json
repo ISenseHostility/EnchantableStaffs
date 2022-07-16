@@ -103,6 +103,7 @@
   "enchantment.enchantable_staffs.garden_growth": "Garden Growth",
   "enchantment.enchantable_staffs.bite": "Bite",
   "enchantment.enchantable_staffs.ring_of_fangs": "Ring of Fangs",
+  "enchantment.enchantable_staffs.summon_vex": "Summon Vex",
 
   "_comment": "Elements",
   "element.enchantable_staffs.name.nature": "Nature",
@@ -122,7 +123,7 @@
   "enchantment.enchantable_staffs.fireball.desc": "Fireball shoots a powerful, or not-so powerful, fireball.",
   "enchantment.enchantable_staffs.explosion.desc": "Explosion casts a powerful explosion magic up to 100 blocks away.",
   "enchantment.enchantable_staffs.create_water.desc": "Create Water creates a water source block at the block you're aiming at up to 100 blocks away.",
-  "enchantment.enchantable_staffs.necromancy.desc": "Necromancy summons an undead monster to fight for you, or more likely, yourself.",
+  "enchantment.enchantable_staffs.necromancy.desc": "Necromancy summons an undead monster to fight for you.",
   "enchantment.enchantable_staffs.warp.desc": "Warp let's you set a warp point when shift right-clicking. If you have set a warp point, right-clicking teleports you back to your warp point, granted you are in the same dimension.",
   "enchantment.enchantable_staffs.teleport.desc": "Teleport let's you teleport to the block you're aiming at, up to 100 blocks away.",
   "enchantment.enchantable_staffs.weather_alteration.desc": "Weather Alteration changes the weather.",
@@ -151,6 +152,7 @@
   "enchantment.enchantable_staffs.garden_growth.desc": "Garden Growth works as a magic bone meal.",
   "enchantment.enchantable_staffs.bite.desc": "Bite summons a single Evoker Fang up to 50 blocks away.",
   "enchantment.enchantable_staffs.ring_of_fangs.desc": "Ring of Fangs summons a ring of Evoker Fangs around the user.",
+  "enchantment.enchantable_staffs.summon_vex.desc": "Summon Vex summons a friendly vex that attacks other monsters with the exception of creepers.",
 
   "_comment": "messages",
   "message.efficient_element": "Efficient Element: "

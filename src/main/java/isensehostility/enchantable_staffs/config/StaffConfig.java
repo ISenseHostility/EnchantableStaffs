@@ -42,6 +42,7 @@ public class StaffConfig {
     public static ForgeConfigSpec.IntValue gardenGrowthChargeCost;
     public static ForgeConfigSpec.IntValue biteChargeCost;
     public static ForgeConfigSpec.IntValue ringOfFangsChargeCost;
+    public static ForgeConfigSpec.IntValue summonVexChargeCost;
 
     public static ForgeConfigSpec.BooleanValue teleportExists;
     public static ForgeConfigSpec.BooleanValue createWaterExists;
@@ -76,6 +77,7 @@ public class StaffConfig {
     public static ForgeConfigSpec.BooleanValue gardenGrowthExists;
     public static ForgeConfigSpec.BooleanValue biteExists;
     public static ForgeConfigSpec.BooleanValue ringOfFangsExists;
+    public static ForgeConfigSpec.BooleanValue summonVexExists;
 
     public static ForgeConfigSpec.IntValue chargeMaxStarting;
     public static ForgeConfigSpec.BooleanValue chargePotionsExist;
@@ -391,11 +393,20 @@ public class StaffConfig {
         ringOfFangsChargeCost = builder
                 .comment("Cooldown time in ticks (1 second = 20 ticks) for the Ring of Fangs enchantment.\n" +
                         "[default=200]")
-                .defineInRange("chargeCosts.bite", 200, 0, Integer.MAX_VALUE);
+                .defineInRange("chargeCosts.ringOfFangs", 200, 0, Integer.MAX_VALUE);
         ringOfFangsExists = builder
                 .comment("When set to false the Ring of Fangs enchantment will not be in the game.\n" +
                         "[default=true]")
                 .define("exists.ringOfFangs", true);
+
+        summonVexChargeCost = builder
+                .comment("Cooldown time in ticks (1 second = 20 ticks) for the Summon Vex enchantment.\n" +
+                        "[default=200]")
+                .defineInRange("chargeCosts.summonVex", 200, 0, Integer.MAX_VALUE);
+        summonVexExists = builder
+                .comment("When set to false the Summon Vex enchantment will not be in the game.\n" +
+                        "[default=true]")
+                .define("exists.summonVex", true);
 
         chargeMaxStarting = builder
                 .comment("Maximum amount of charge you spawn with.\n" +

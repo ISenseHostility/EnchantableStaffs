@@ -15,7 +15,9 @@ public class NecromancyTargetGoal<T extends LivingEntity> extends NearestAttacka
     @Override
     protected void findTarget() {
         this.target = this.mob.level.getNearestEntity(this.mob.level.getEntitiesOfClass(this.targetType, this.getTargetSearchArea(this.getFollowDistance()),
-                entity -> !(entity instanceof LivingEntity livingEntity) || !StaffUtils.getFriendly(livingEntity) && !(entity instanceof Creeper)),
+                (entity) -> {
+                    return (!(entity instanceof LivingEntity livingEntity) || !StaffUtils.getFriendly(livingEntity)) && !(entity instanceof Creeper);
+                }),
                 this.targetConditions, this.mob, this.mob.getX(), this.mob.getEyeY(), this.mob.getZ());
     }
 }
