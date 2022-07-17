@@ -230,8 +230,8 @@ public class StaffConfig {
 
         weatherAlterationChargeCost = builder
                 .comment("Cooldown time in ticks (1 second = 20 ticks) for the Weather Alteration enchantment.\n" +
-                        "[default=200]")
-                .defineInRange("chargeCosts.weatherAlteration", 200, 0, Integer.MAX_VALUE);
+                        "[default=100]")
+                .defineInRange("chargeCosts.weatherAlteration", 100, 0, Integer.MAX_VALUE);
         weatherAlterationExists = builder
                 .comment("When set to false the Weather Alteration enchantment will not be in the game.\n" +
                         "[default=true]")
