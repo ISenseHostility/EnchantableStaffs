@@ -65,7 +65,7 @@ public class Bite extends Enchantment implements IStaffEnchantment {
 
             summonFang(player, level, pos);
 
-            spawnParticleCloud(ParticleTypes.CAMPFIRE_SIGNAL_SMOKE, player.getX(), player.getY() + 1.0D, player.getZ(), level);
+            spawnParticleCloud(ParticleTypes.CAMPFIRE_COSY_SMOKE, player.getX(), player.getY() + 1.0D, player.getZ(), level);
             level.playSound(null, new BlockPos(player.getEyePosition()), SoundEvents.SOUL_ESCAPE, SoundSource.PLAYERS, 100.0F, 1.0F);
 
             return new InteractionResultHolder<>(InteractionResult.SUCCESS, stack);
