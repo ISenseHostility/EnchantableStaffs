@@ -1,6 +1,5 @@
 package isensehostility.enchantable_staffs.enchantment;
 
-import isensehostility.enchantable_staffs.ai.goal.NecromancyTargetGoal;
 import isensehostility.enchantable_staffs.config.StaffConfig;
 import isensehostility.enchantable_staffs.enchantment.category.StaffCategory;
 import isensehostility.enchantable_staffs.enums.EElement;
@@ -13,9 +12,7 @@ import net.minecraft.world.InteractionResult;
 import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.EquipmentSlot;
-import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.monster.Vex;
-import net.minecraft.world.entity.monster.Zombie;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;

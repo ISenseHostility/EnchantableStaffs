@@ -6,9 +6,9 @@ import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
 import net.minecraft.world.entity.monster.Creeper;
 
-public class NecromancyTargetGoal<T extends LivingEntity> extends NearestAttackableTargetGoal {
+public class TargetUnfriendlyGoal<T extends LivingEntity> extends NearestAttackableTargetGoal {
 
-    public NecromancyTargetGoal(Mob attacker, Class<T> target, boolean hasToSee) {
+    public TargetUnfriendlyGoal(Mob attacker, Class<T> target, boolean hasToSee) {
         super(attacker, target, hasToSee);
     }
 
