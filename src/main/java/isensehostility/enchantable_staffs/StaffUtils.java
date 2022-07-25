@@ -17,6 +17,7 @@ import net.minecraft.util.Mth;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.DragonFireball;
+import net.minecraft.world.entity.projectile.EvokerFangs;
 import net.minecraft.world.item.AxeItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.SwordItem;
@@ -31,6 +32,7 @@ import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.Vec3;
 
+import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -53,6 +55,7 @@ public class StaffUtils {
     private static final String TAG_SPECTRAL_WINGS_TIME = "enchantable_staffs:spectral_wings_time";
     private static final String TAG_IS_SPECTRAL_WINGS = "enchantable_staffs:is_spectral_wings";
     private static final String TAG_CHESTPLATE_DATA = "enchantable_staffs:chestplate_data";
+    private static final String TAG_FRIENDLY = "enchantable_staffs:friendly";
 
     public static String getTagElementalEfficiency() {
         return TAG_ELEMENTAL_EFFICIENCY;
@@ -414,5 +417,27 @@ public class StaffUtils {
 
     public static Random getRandom() {
         return random;
+    }
+
+    public static void summonFang(LivingEntity summoner, Level level, Vec3 pos) {
+        EvokerFangs fangs = new EvokerFangs(EntityType.EVOKER_FANGS, level);
+        fangs.setOwner(summoner);
+        fangs.setYRot(summoner.getYRot());
+        fangs.setPos(pos.x(), pos.y(), pos.z());
+        level.addFreshEntity(fangs);
+    }
+
+    public static void summonFang(LivingEntity summoner, Level level, BlockPos pos, @Nullable int offset) {
+        EvokerFangs fangs = new EvokerFangs(level, pos.getX(), pos.getY(), pos.getZ(), 0, offset, summoner);
+        fangs.setYRot(summoner.getYRot());
+        level.addFreshEntity(fangs);
+    }
+
+    public static void setFriendly(LivingEntity entity, boolean isFriendly) {
+        entity.getPersistentData().putBoolean(TAG_FRIENDLY, isFriendly);
+    }
+
+    public static boolean getFriendly(LivingEntity entity) {
+        return entity.getPersistentData().getBoolean(TAG_FRIENDLY);
     }
 }

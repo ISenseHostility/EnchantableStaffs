@@ -4,6 +4,8 @@ import isensehostility.enchantable_staffs.EnchantableStaffs;
 import isensehostility.enchantable_staffs.StaffUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.network.NetworkDirection;
 import net.minecraftforge.network.NetworkEvent;
 import net.minecraftforge.network.NetworkRegistry;
@@ -40,14 +42,17 @@ public class StaffPacketHandler {
                 .add();
     }
 
+    @OnlyIn(Dist.CLIENT)
     public static void handleChargeUpdate(ChargeUpdatePacket msg, Supplier<NetworkEvent.Context> ctx) {
         StaffUtils.setCharge(Minecraft.getInstance().player, msg.charge);
     }
 
+    @OnlyIn(Dist.CLIENT)
     public static void handleMaxChargeUpdate(MaxChargeUpdatePacket msg, Supplier<NetworkEvent.Context> ctx) {
         StaffUtils.setMaxCharge(Minecraft.getInstance().player, msg.maxCharge);
     }
 
+    @OnlyIn(Dist.CLIENT)
     public static void handleElementalEfficiencyUpdate(ElementalEfficiencyUpdatePacket msg, Supplier<NetworkEvent.Context> ctx) {
         StaffUtils.setElementalEfficiencyById(Minecraft.getInstance().player, msg.elementId);
     }
