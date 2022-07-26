@@ -157,5 +157,9 @@
   "enchantment.enchantable_staffs.evoker_fangs.desc": "Evoker Fangs summons the evoker's fang attack on the nearest entity in a 10 block range.",
 
   "_comment": "messages",
-  "message.efficient_element": "Efficient Element: "
+  "message.efficient_element": "Efficient Element: ",
+
+  "_comment": "modifiers",
+  "modifier.staff.cold_affinity": "Cold Affinity",
+  "modifier.staff.heat_affinity": "Heat Affinity"
 }

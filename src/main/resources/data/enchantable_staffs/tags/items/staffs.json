@@ -1,0 +1,11 @@
+{
+  "replace": false,
+  "values": [
+    "enchantable_staffs:iron_staff",
+    "enchantable_staffs:reinforced_iron_staff",
+    "enchantable_staffs:gold_staff",
+    "enchantable_staffs:reinforced_gold_staff",
+    "enchantable_staffs:netherite_staff",
+    "enchantable_staffs:plated_netherite_staff"
+  ]
+}

@@ -1,0 +1,12 @@
+{
+  "type": "enchantable_staffs:modify_staff",
+  "staff": {
+    "tag": "enchantable_staffs:staffs"
+  },
+  "modifier": {
+    "tag": "enchantable_staffs:modifier_materials"
+  },
+  "result": {
+    "item": "enchantable_staffs:iron_staff"
+  }
+}

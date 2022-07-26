@@ -2,6 +2,7 @@ package isensehostility.enchantable_staffs.item;
 
 import isensehostility.enchantable_staffs.EnchantableStaffs;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;

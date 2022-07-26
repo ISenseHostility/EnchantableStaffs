@@ -1,6 +1,7 @@
 package isensehostility.enchantable_staffs;
 
 import isensehostility.enchantable_staffs.config.StaffConfig;
+import isensehostility.enchantable_staffs.recipe.StaffRecipes;
 import isensehostility.enchantable_staffs.effect.StaffEffects;
 import isensehostility.enchantable_staffs.enchantment.StaffEnchantments;
 import isensehostility.enchantable_staffs.item.StaffItems;
@@ -19,5 +20,6 @@ public class EnchantableStaffs {
         StaffEffects.initialize();
         StaffEnchantments.initialize();
         StaffPotions.initialize();
+        StaffRecipes.initialize();
     }
 }
