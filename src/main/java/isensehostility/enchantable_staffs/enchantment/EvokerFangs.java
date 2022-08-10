@@ -26,7 +26,6 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 import java.util.List;
 
 import static isensehostility.enchantable_staffs.StaffUtils.*;
-import static isensehostility.enchantable_staffs.StaffUtils.invokeStaffCosts;
 
 public class EvokerFangs extends Enchantment implements IStaffEnchantment {
     public EvokerFangs() {
