@@ -38,8 +38,12 @@ public abstract class Staff extends Item {
         super(properties);
     }
 
-    public EStaffModifiers getModifier(ItemStack stack) {
+    public static EStaffModifiers getModifier(ItemStack stack) {
         return EStaffModifiers.getFromStack(stack);
+    }
+
+    public static boolean hasModifier(ItemStack stack) {
+        return EStaffModifiers.getFromStack(stack) != null;
     }
 
     @OnlyIn(Dist.CLIENT)
@@ -66,14 +70,19 @@ public abstract class Staff extends Item {
                     tooltip.add(Component.translatable("tooltip.enchantable_staffs.charge_cost").append(": " + cost).withStyle(ChatFormatting.AQUA));
                 }
             }
+
+            EStaffModifiers modifier = getModifier(stack);
+            if (modifier != null) {
+                tooltip.add(Component.translatable("tooltip.enchantable_staffs.modifier").append(": " + modifier.getName().getString()).withStyle(ChatFormatting.WHITE, ChatFormatting.ITALIC));
+            }
         }
 
         if (Screen.hasControlDown()) {
             for (Enchantment enchantment : enchantments) {
                 if (enchantment instanceof Explosion) {
-                    tooltip.add(Component.translatable("tooltip.enchantable_staffs.explosion").withStyle(ChatFormatting.RED, ChatFormatting.ITALIC));
+                    tooltip.add(Component.translatable("tooltip.enchantable_staffs.special.explosion").withStyle(ChatFormatting.RED, ChatFormatting.ITALIC));
                 } else if (enchantment instanceof WeatherAlteration) {
-                    tooltip.add(Component.translatable("tooltip.enchantable_staffs.weather_alteration").withStyle(ChatFormatting.GOLD, ChatFormatting.ITALIC));
+                    tooltip.add(Component.translatable("tooltip.enchantable_staffs.special.weather_alteration").withStyle(ChatFormatting.GOLD, ChatFormatting.ITALIC));
                 }
             }
         }

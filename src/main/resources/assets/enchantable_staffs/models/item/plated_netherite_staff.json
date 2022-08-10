@@ -2,5 +2,19 @@
   "parent": "item/handheld",
   "textures": {
     "layer0": "enchantable_staffs:items/plated_netherite_staff"
-  }
+  },
+  "overrides": [
+    {
+      "predicate": {
+        "enchantable_staffs:modifier": 1
+      },
+      "model": "enchantable_staffs:item/plated_netherite_staff_cold"
+    },
+    {
+      "predicate": {
+        "enchantable_staffs:modifier": 2
+      },
+      "model": "enchantable_staffs:item/plated_netherite_staff_heat"
+    }
+  ]
 }

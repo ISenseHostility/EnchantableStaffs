@@ -8,9 +8,10 @@
   "item.enchantable_staffs.plated_netherite_staff": "Plated Netherite Staff",
 
   "_comment": "Tooltips",
-  "tooltip.enchantable_staffs.explosion": "Megumin!",
-  "tooltip.enchantable_staffs.weather_alteration": "Weather Hacker!",
+  "tooltip.enchantable_staffs.special.explosion": "Megumin!",
+  "tooltip.enchantable_staffs.special.weather_alteration": "Weather Hacker!",
   "tooltip.enchantable_staffs.charge_cost": "Charge Cost",
+  "tooltip.enchantable_staffs.modifier": "Modifier",
 
   "_comment": "Effects",
   "effect.enchantable_staffs.gills": "Gills",
