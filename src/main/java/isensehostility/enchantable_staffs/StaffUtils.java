@@ -4,7 +4,9 @@ import isensehostility.enchantable_staffs.effect.StaffEffects;
 import isensehostility.enchantable_staffs.enchantment.IStaffEnchantment;
 import isensehostility.enchantable_staffs.enums.EChargeTextColors;
 import isensehostility.enchantable_staffs.enums.EElement;
+import isensehostility.enchantable_staffs.enums.EStaffModifiers;
 import isensehostility.enchantable_staffs.enums.EWeather;
+import isensehostility.enchantable_staffs.item.Staff;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleOptions;
@@ -14,6 +16,7 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.Mth;
+import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.DragonFireball;
@@ -37,6 +40,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
+
+import static isensehostility.enchantable_staffs.StaffUtils.getCharge;
+import static isensehostility.enchantable_staffs.StaffUtils.getMaxCharge;
 
 public class StaffUtils {
     private static final Random random = new Random();
@@ -68,7 +74,9 @@ public class StaffUtils {
     }
 
     public static void addCharge(LivingEntity entity) {
-        setCharge(entity, entity.getPersistentData().getInt(TAG_STAFF_CHARGE) + 1);
+        if (getCharge(entity) < getMaxCharge(entity)) {
+            setCharge(entity, entity.getPersistentData().getInt(TAG_STAFF_CHARGE) + 1);
+        }
     }
 
     public static void reduceCharge(LivingEntity entity, int cost) {
@@ -439,5 +447,28 @@ public class StaffUtils {
 
     public static boolean getFriendly(LivingEntity entity) {
         return entity.getPersistentData().getBoolean(TAG_FRIENDLY);
+    }
+
+    public static boolean isHoldingStaff(LivingEntity entity) {
+        return entity.getItemInHand(InteractionHand.MAIN_HAND).getItem() instanceof Staff || entity.getItemInHand(InteractionHand.OFF_HAND).getItem() instanceof Staff;
+    }
+
+    public static boolean isInTemperatureRange(LivingEntity entity, float minTemp, float maxTemp) {
+        float temperature = entity.level.getBiome(entity.getOnPos()).get().getBaseTemperature();
+
+        return temperature >= minTemp && temperature <= maxTemp;
+    }
+
+    public static void runModifierLogic(ItemStack stack, LivingEntity entity) {
+        if (stack.getItem() instanceof Staff && Staff.hasModifier(stack)) {
+            EStaffModifiers modifier = Staff.getModifier(stack);
+
+            if (modifier == EStaffModifiers.COLD_AFFINITY && isInTemperatureRange(player, -10.0F, 0.3F)) {
+                addCharge(entity);
+            }
+            if (modifier == EStaffModifiers.HEAT_AFFINITY && isInTemperatureRange(player, 0.95F, 10.0F)) {
+                addCharge(entity);
+            }
+        }
     }
 }

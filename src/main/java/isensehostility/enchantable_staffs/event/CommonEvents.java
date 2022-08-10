@@ -5,6 +5,7 @@ import isensehostility.enchantable_staffs.ai.goal.TargetUnfriendlyGoal;
 import isensehostility.enchantable_staffs.config.StaffConfig;
 import isensehostility.enchantable_staffs.effect.StaffEffects;
 import isensehostility.enchantable_staffs.enchantment.StaffEnchantments;
+import isensehostility.enchantable_staffs.enums.EStaffModifiers;
 import isensehostility.enchantable_staffs.item.Staff;
 import isensehostility.enchantable_staffs.network.ChargeUpdatePacket;
 import isensehostility.enchantable_staffs.network.ElementalEfficiencyUpdatePacket;
@@ -12,6 +13,7 @@ import isensehostility.enchantable_staffs.network.MaxChargeUpdatePacket;
 import isensehostility.enchantable_staffs.network.StaffPacketHandler;
 import net.minecraft.core.NonNullList;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.Entity;
@@ -77,10 +79,15 @@ public class CommonEvents {
         if (event.phase == TickEvent.Phase.START && event.side.isServer()) {
             Player player = event.player;
 
-            if (getCharge(player) < getMaxCharge(player)) {
-                addCharge(player);
-            }
-            if (player.getItemInHand(InteractionHand.MAIN_HAND).getItem() instanceof Staff || player.getItemInHand(InteractionHand.OFF_HAND).getItem() instanceof Staff) {
+            addCharge(player);
+
+            ItemStack mainHand = player.getItemInHand(InteractionHand.MAIN_HAND);
+            ItemStack offHand = player.getItemInHand(InteractionHand.OFF_HAND);
+
+            runModifierLogic(mainHand, player);
+            runModifierLogic(offHand, player);
+
+            if (isHoldingStaff(player)) {
                 StaffPacketHandler.INSTANCE.send(
                         PacketDistributor.TRACKING_CHUNK
                                 .with(() ->
