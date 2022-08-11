@@ -463,10 +463,10 @@ public class StaffUtils {
         if (stack.getItem() instanceof Staff && Staff.hasModifier(stack)) {
             EStaffModifiers modifier = Staff.getModifier(stack);
 
-            if (modifier == EStaffModifiers.COLD_AFFINITY && isInTemperatureRange(player, -10.0F, 0.3F)) {
+            if (modifier == EStaffModifiers.COLD_AFFINITY && isInTemperatureRange(entity, -10.0F, 0.3F)) {
                 addCharge(entity);
             }
-            if (modifier == EStaffModifiers.HEAT_AFFINITY && isInTemperatureRange(player, 0.95F, 10.0F)) {
+            if (modifier == EStaffModifiers.HEAT_AFFINITY && isInTemperatureRange(entity, 0.95F, 10.0F)) {
                 addCharge(entity);
             }
         }
