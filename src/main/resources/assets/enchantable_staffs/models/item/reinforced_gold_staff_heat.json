@@ -1,0 +1,6 @@
+{
+  "parent": "item/handheld",
+  "textures": {
+    "layer0": "enchantable_staffs:items/reinforced_gold_staff_heat"
+  }
+}

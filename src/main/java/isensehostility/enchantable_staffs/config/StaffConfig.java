@@ -43,6 +43,7 @@ public class StaffConfig {
     public static ForgeConfigSpec.IntValue biteChargeCost;
     public static ForgeConfigSpec.IntValue ringOfFangsChargeCost;
     public static ForgeConfigSpec.IntValue summonVexChargeCost;
+    public static ForgeConfigSpec.IntValue evokerFangsChargeCost;
 
     public static ForgeConfigSpec.BooleanValue teleportExists;
     public static ForgeConfigSpec.BooleanValue createWaterExists;
@@ -78,6 +79,7 @@ public class StaffConfig {
     public static ForgeConfigSpec.BooleanValue biteExists;
     public static ForgeConfigSpec.BooleanValue ringOfFangsExists;
     public static ForgeConfigSpec.BooleanValue summonVexExists;
+    public static ForgeConfigSpec.BooleanValue evokerFangsExists;
 
     public static ForgeConfigSpec.IntValue chargeMaxStarting;
     public static ForgeConfigSpec.BooleanValue chargePotionsExist;
@@ -407,6 +409,15 @@ public class StaffConfig {
                 .comment("When set to false the Summon Vex enchantment will not be in the game.\n" +
                         "[default=true]")
                 .define("exists.summonVex", true);
+
+        evokerFangsChargeCost = builder
+                .comment("Cooldown time in ticks (1 second = 20 ticks) for the Evoker Fangs enchantment.\n" +
+                        "[default=200]")
+                .defineInRange("chargeCosts.evokerFangs", 200, 0, Integer.MAX_VALUE);
+        evokerFangsExists = builder
+                .comment("When set to false the Evoker Fangs enchantment will not be in the game.\n" +
+                        "[default=true]")
+                .define("exists.evokerFangs", true);
 
         chargeMaxStarting = builder
                 .comment("Maximum amount of charge you spawn with.\n" +

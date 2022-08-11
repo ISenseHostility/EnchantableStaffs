@@ -2,5 +2,19 @@
   "parent": "item/handheld",
   "textures": {
     "layer0": "enchantable_staffs:items/reinforced_iron_staff"
-  }
+  },
+  "overrides": [
+    {
+      "predicate": {
+        "enchantable_staffs:modifier": 1
+      },
+      "model": "enchantable_staffs:item/reinforced_iron_staff_cold"
+    },
+    {
+      "predicate": {
+        "enchantable_staffs:modifier": 2
+      },
+      "model": "enchantable_staffs:item/reinforced_iron_staff_heat"
+    }
+  ]
 }

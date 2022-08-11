@@ -8,9 +8,10 @@
   "item.enchantable_staffs.plated_netherite_staff": "Plated Netherite Staff",
 
   "_comment": "Tooltips",
-  "tooltip.enchantable_staffs.explosion": "Megumin!",
-  "tooltip.enchantable_staffs.weather_alteration": "Weather Hacker!",
+  "tooltip.enchantable_staffs.special.explosion": "Megumin!",
+  "tooltip.enchantable_staffs.special.weather_alteration": "Weather Hacker!",
   "tooltip.enchantable_staffs.charge_cost": "Charge Cost",
+  "tooltip.enchantable_staffs.modifier": "Modifier",
 
   "_comment": "Effects",
   "effect.enchantable_staffs.gills": "Gills",
@@ -104,6 +105,7 @@
   "enchantment.enchantable_staffs.bite": "Bite",
   "enchantment.enchantable_staffs.ring_of_fangs": "Ring of Fangs",
   "enchantment.enchantable_staffs.summon_vex": "Summon Vex",
+  "enchantment.enchantable_staffs.evoker_fangs": "Evoker Fangs",
 
   "_comment": "Elements",
   "element.enchantable_staffs.name.nature": "Nature",
@@ -153,7 +155,12 @@
   "enchantment.enchantable_staffs.bite.desc": "Bite summons a single Evoker Fang up to 50 blocks away.",
   "enchantment.enchantable_staffs.ring_of_fangs.desc": "Ring of Fangs summons a ring of Evoker Fangs around the user.",
   "enchantment.enchantable_staffs.summon_vex.desc": "Summon Vex summons a friendly vex that attacks other monsters with the exception of creepers.",
+  "enchantment.enchantable_staffs.evoker_fangs.desc": "Evoker Fangs summons the evoker's fang attack on the nearest entity in a 10 block range.",
 
   "_comment": "messages",
-  "message.efficient_element": "Efficient Element: "
+  "message.efficient_element": "Efficient Element: ",
+
+  "_comment": "modifiers",
+  "modifier.staff.cold_affinity": "Cold Affinity",
+  "modifier.staff.heat_affinity": "Heat Affinity"
 }
