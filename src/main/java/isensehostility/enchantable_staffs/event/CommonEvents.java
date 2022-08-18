@@ -5,15 +5,11 @@ import isensehostility.enchantable_staffs.ai.goal.TargetUnfriendlyGoal;
 import isensehostility.enchantable_staffs.config.StaffConfig;
 import isensehostility.enchantable_staffs.effect.StaffEffects;
 import isensehostility.enchantable_staffs.enchantment.StaffEnchantments;
-import isensehostility.enchantable_staffs.enums.EStaffModifiers;
 import isensehostility.enchantable_staffs.item.Staff;
-import isensehostility.enchantable_staffs.network.ChargeUpdatePacket;
-import isensehostility.enchantable_staffs.network.ElementalEfficiencyUpdatePacket;
-import isensehostility.enchantable_staffs.network.MaxChargeUpdatePacket;
-import isensehostility.enchantable_staffs.network.StaffPacketHandler;
+import isensehostility.enchantable_staffs.network.*;
 import net.minecraft.core.NonNullList;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.network.chat.ClickEvent;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.Entity;
@@ -33,6 +29,8 @@ import net.minecraftforge.event.entity.EntityLeaveLevelEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.event.entity.living.LivingKnockBackEvent;
 import net.minecraftforge.event.entity.living.MobEffectEvent;
+import net.minecraftforge.event.entity.player.PlayerEvent;
+import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.network.PacketDistributor;
@@ -79,13 +77,17 @@ public class CommonEvents {
         if (event.phase == TickEvent.Phase.START && event.side.isServer()) {
             Player player = event.player;
 
+            if (getCharge(player) > getMaxCharge(player)) {
+                setCharge(player, getMaxCharge(player));
+            }
+
             addCharge(player);
 
             ItemStack mainHand = player.getItemInHand(InteractionHand.MAIN_HAND);
             ItemStack offHand = player.getItemInHand(InteractionHand.OFF_HAND);
 
-            runModifierLogic(mainHand, player);
-            runModifierLogic(offHand, player);
+            passiveChargeModifierLogic(mainHand, player);
+            passiveChargeModifierLogic(offHand, player);
 
             if (isHoldingStaff(player)) {
                 StaffPacketHandler.INSTANCE.send(
@@ -181,6 +183,10 @@ public class CommonEvents {
 
             event.setAmount(event.getAmount() + 1.0F + (enchantmentLevel * 1.5F));
         }
+
+        if (source instanceof LivingEntity attacker) {
+            envyLogic(attacker.getMainHandItem(), attacker, event.getEntity());
+        }
     }
 
     @SubscribeEvent
@@ -230,5 +236,15 @@ public class CommonEvents {
                 );
             }
         }
+    }
+
+    @SubscribeEvent
+    public static void onLeftClickBlock(PlayerInteractEvent.LeftClickBlock event) {
+        activeChargeModifierLogic(event.getItemStack(), event.getEntity());
+    }
+
+    @SubscribeEvent
+    public static void onLeftClickEmpty(PlayerInteractEvent.LeftClickEmpty event) {
+        StaffPacketHandler.INSTANCE.sendToServer(new ChargeAddPacket(event.getEntity().getUUID(), event.getItemStack()));
     }
 }

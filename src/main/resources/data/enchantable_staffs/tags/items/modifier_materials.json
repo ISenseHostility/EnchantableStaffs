@@ -2,6 +2,9 @@
   "replace": true,
   "values": [
     "minecraft:blue_ice",
-    "minecraft:shroomlight"
+    "minecraft:shroomlight",
+    "minecraft:cake",
+    "minecraft:emerald_block",
+    "minecraft:ender_eye"
   ]
 }

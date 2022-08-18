@@ -1,5 +1,6 @@
 package isensehostility.enchantable_staffs;
 
+import isensehostility.enchantable_staffs.config.StaffConfig;
 import isensehostility.enchantable_staffs.effect.StaffEffects;
 import isensehostility.enchantable_staffs.enchantment.IStaffEnchantment;
 import isensehostility.enchantable_staffs.enums.EChargeTextColors;
@@ -21,10 +22,7 @@ import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.DragonFireball;
 import net.minecraft.world.entity.projectile.EvokerFangs;
-import net.minecraft.world.item.AxeItem;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.SwordItem;
-import net.minecraft.world.item.TridentItem;
+import net.minecraft.world.item.*;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.item.enchantment.Enchantments;
@@ -76,6 +74,12 @@ public class StaffUtils {
     public static void addCharge(LivingEntity entity) {
         if (getCharge(entity) < getMaxCharge(entity)) {
             setCharge(entity, entity.getPersistentData().getInt(TAG_STAFF_CHARGE) + 1);
+        }
+    }
+
+    public static void addCharge(LivingEntity entity, int amount) {
+        if (getCharge(entity) < getMaxCharge(entity)) {
+            setCharge(entity, entity.getPersistentData().getInt(TAG_STAFF_CHARGE) + amount);
         }
     }
 
@@ -459,7 +463,7 @@ public class StaffUtils {
         return temperature >= minTemp && temperature <= maxTemp;
     }
 
-    public static void runModifierLogic(ItemStack stack, LivingEntity entity) {
+    public static void passiveChargeModifierLogic(ItemStack stack, LivingEntity entity) {
         if (stack.getItem() instanceof Staff && Staff.hasModifier(stack)) {
             EStaffModifiers modifier = Staff.getModifier(stack);
 
@@ -470,5 +474,98 @@ public class StaffUtils {
                 addCharge(entity);
             }
         }
+    }
+
+    public static void activeChargeModifierLogic(ItemStack stack, LivingEntity entity) {
+        if (stack.getItem() instanceof Staff && Staff.hasModifier(stack)) {
+            EStaffModifiers modifier = Staff.getModifier(stack);
+            ItemStack offhand = entity.getOffhandItem();
+
+            if (modifier == EStaffModifiers.GLUTTONY && offhand.isEdible() && getCharge(entity) < getMaxCharge(entity)) {
+                int foodValue = offhand.getFoodProperties(entity).getNutrition();
+                if (foodValue != 0) {
+                    addCharge(entity, (int) Math.ceil(foodValue / 4));
+                    offhand.shrink(1);
+                }
+            }
+            if (modifier == EStaffModifiers.GREED && isGreedCompatible(offhand) && getCharge(entity) < getMaxCharge(entity)) {
+                addCharge(entity, getGreedValue(offhand));
+                offhand.shrink(1);
+            }
+        }
+    }
+
+    public static void envyLogic(ItemStack stack, LivingEntity entity, LivingEntity target) {
+        if (stack.getItem() instanceof Staff && Staff.hasModifier(stack)) {
+            EStaffModifiers modifier = Staff.getModifier(stack);
+
+            if (modifier == EStaffModifiers.ENVY && getCharge(entity) < getMaxCharge(entity)) {
+                addCharge(entity, (int) Math.ceil(target.getMaxHealth()));
+            }
+        }
+    }
+
+    public static boolean isGreedCompatible(ItemStack stack) {
+        Item item = stack.getItem();
+        
+        return item == Items.COAL ||
+                item == Items.CHARCOAL ||
+                item == Items.RAW_COPPER ||
+                item == Items.COPPER_INGOT ||
+                item == Items.RAW_IRON ||
+                item == Items.IRON_INGOT ||
+                item == Items.REDSTONE ||
+                item == Items.LAPIS_LAZULI ||
+                item == Items.RAW_GOLD ||
+                item == Items.GOLD_INGOT ||
+                item == Items.EMERALD ||
+                item == Items.AMETHYST_SHARD ||
+                item == Items.QUARTZ ||
+                item == Items.DIAMOND ||
+                item == Items.NETHERITE_SCRAP ||
+                item == Items.NETHERITE_INGOT;
+    }
+
+    public static int getGreedValue(ItemStack stack) {
+        Item item = stack.getItem();
+
+        if (item == Items.COAL || item == Items.CHARCOAL) {
+            return StaffConfig.greedValueCoal.get();
+        }
+        if (item == Items.RAW_COPPER || item == Items.COPPER_INGOT) {
+            return StaffConfig.greedValueCopper.get();
+        }
+        if (item == Items.RAW_IRON || item == Items.IRON_INGOT ) {
+            return StaffConfig.greedValueIron.get();
+        }
+        if (item == Items.REDSTONE) {
+            return StaffConfig.greedValueRedstone.get();
+        }
+        if (item == Items.LAPIS_LAZULI) {
+            return StaffConfig.greedValueLapis.get();
+        }
+        if (item == Items.RAW_GOLD || item == Items.GOLD_INGOT) {
+            return StaffConfig.greedValueGold.get();
+        }
+        if (item == Items.EMERALD) {
+            return StaffConfig.greedValueEmerald.get();
+        }
+        if (item == Items.AMETHYST_SHARD) {
+            return StaffConfig.greedValueAmethyst.get();
+        }
+        if (item == Items.QUARTZ) {
+            return StaffConfig.greedValueNetherQuartz.get();
+        }
+        if (item == Items.DIAMOND) {
+            return StaffConfig.greedValueDiamond.get();
+        }
+        if (item == Items.NETHERITE_SCRAP) {
+            return StaffConfig.greedValueScrap.get();
+        }
+        if (item == Items.NETHERITE_INGOT) {
+            return StaffConfig.greedValueNetherite.get();
+        }
+
+        return 0;
     }
 }

@@ -1,0 +1,6 @@
+{
+  "parent": "item/handheld",
+  "textures": {
+    "layer0": "enchantable_staffs:items/iron_staff_envy"
+  }
+}

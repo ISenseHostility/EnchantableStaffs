@@ -15,6 +15,24 @@
         "enchantable_staffs:modifier": 2
       },
       "model": "enchantable_staffs:item/gold_staff_heat"
+    },
+    {
+      "predicate": {
+        "enchantable_staffs:modifier": 3
+      },
+      "model": "enchantable_staffs:item/gold_staff_gluttony"
+    },
+    {
+      "predicate": {
+        "enchantable_staffs:modifier": 4
+      },
+      "model": "enchantable_staffs:item/gold_staff_greed"
+    },
+    {
+      "predicate": {
+        "enchantable_staffs:modifier": 5
+      },
+      "model": "enchantable_staffs:item/gold_staff_envy"
     }
   ]
 }

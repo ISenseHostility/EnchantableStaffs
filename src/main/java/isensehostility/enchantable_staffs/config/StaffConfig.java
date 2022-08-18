@@ -87,6 +87,19 @@ public class StaffConfig {
     public static ForgeConfigSpec.DoubleValue staffKnockback;
     public static ForgeConfigSpec.IntValue staffCooldown;
 
+    public static ForgeConfigSpec.IntValue greedValueCoal;
+    public static ForgeConfigSpec.IntValue greedValueCopper;
+    public static ForgeConfigSpec.IntValue greedValueRedstone;
+    public static ForgeConfigSpec.IntValue greedValueIron;
+    public static ForgeConfigSpec.IntValue greedValueLapis;
+    public static ForgeConfigSpec.IntValue greedValueGold;
+    public static ForgeConfigSpec.IntValue greedValueEmerald;
+    public static ForgeConfigSpec.IntValue greedValueAmethyst;
+    public static ForgeConfigSpec.IntValue greedValueNetherQuartz;
+    public static ForgeConfigSpec.IntValue greedValueDiamond;
+    public static ForgeConfigSpec.IntValue greedValueScrap;
+    public static ForgeConfigSpec.IntValue greedValueNetherite;
+
     public static ForgeConfigSpec.ConfigValue<List<EElement>> elementsAllowedEfficiency;
 
     private static final ForgeConfigSpec.Builder builder = new ForgeConfigSpec.Builder();
@@ -439,6 +452,67 @@ public class StaffConfig {
                         Setting this to 0 disables cooldowns.
                         [default=30]""")
                 .defineInRange("staff.cooldown", 30, 0, Integer.MAX_VALUE);
+
+        greedValueCoal = builder
+                .comment("""
+                        Determines how much charge you get from a single coal.
+                        [default=1]""")
+                .defineInRange("modifier.greed.valueCoal", 1, 0, Integer.MAX_VALUE);
+        greedValueCopper = builder
+                .comment("""
+                        Determines how much charge you get from a single copper.
+                        [default=2]""")
+                .defineInRange("modifier.greed.valueCopper", 1, 0, Integer.MAX_VALUE);
+        greedValueRedstone = builder
+                .comment("""
+                        Determines how much charge you get from a single redstone.
+                        [default=2]""")
+                .defineInRange("modifier.greed.valueRedstone", 2, 0, Integer.MAX_VALUE);
+        greedValueIron = builder
+                .comment("""
+                        Determines how much charge you get from a single iron.
+                        [default=2]""")
+                .defineInRange("modifier.greed.valueIron", 2, 0, Integer.MAX_VALUE);
+        greedValueGold = builder
+                .comment("""
+                        Determines how much charge you get from a single gold.
+                        [default=3]""")
+                .defineInRange("modifier.greed.valueGold", 3, 0, Integer.MAX_VALUE);
+        greedValueLapis = builder
+                .comment("""
+                        Determines how much charge you get from a single lapis.
+                        [default=3]""")
+                .defineInRange("modifier.greed.valueLapis", 3, 0, Integer.MAX_VALUE);
+        greedValueEmerald = builder
+                .comment("""
+                        Determines how much charge you get from a single emerald.
+                        [default=3]""")
+                .defineInRange("modifier.greed.valueEmerald", 3, 0, Integer.MAX_VALUE);
+        greedValueAmethyst = builder
+                .comment("""
+                        Determines how much charge you get from a single amethyst.
+                        [default=4]""")
+                .defineInRange("modifier.greed.valueAmethyst", 4, 0, Integer.MAX_VALUE);
+        greedValueNetherQuartz = builder
+                .comment("""
+                        Determines how much charge you get from a single nether quartz.
+                        [default=4]""")
+                .defineInRange("modifier.greed.valueNetherQuartz", 4, 0, Integer.MAX_VALUE);
+        greedValueDiamond = builder
+                .comment("""
+                        Determines how much charge you get from a single diamond.
+                        [default=5]""")
+                .defineInRange("modifier.greed.valueDiamond", 5, 0, Integer.MAX_VALUE);
+        greedValueScrap = builder
+                .comment("""
+                        Determines how much charge you get from a single netherite scrap.
+                        [default=25]""")
+                .defineInRange("modifier.greed.valueScrap", 25, 0, Integer.MAX_VALUE);
+        greedValueNetherite = builder
+                .comment("""
+                        Determines how much charge you get from a single netherite.
+                        [default=100]""")
+                .defineInRange("modifier.greed.valueNetherite", 100, 0, Integer.MAX_VALUE);
 
         elementsAllowedEfficiency = builder
                 .comment("""

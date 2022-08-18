@@ -21,7 +21,10 @@ import java.util.List;
 public enum EStaffModifiers {
     NONE(0, Component.translatable("modifier.staff.none"), Items.BARRIER),
     COLD_AFFINITY(1, Component.translatable("modifier.staff.cold_affinity"), Items.BLUE_ICE),
-    HEAT_AFFINITY(2, Component.translatable("modifier.staff.heat_affinity"), Items.SHROOMLIGHT);
+    HEAT_AFFINITY(2, Component.translatable("modifier.staff.heat_affinity"), Items.SHROOMLIGHT),
+    GLUTTONY(3, Component.translatable("modifier.staff.gluttony"), Items.CAKE),
+    GREED(4, Component.translatable("modifier.staff.greed"), Items.EMERALD_BLOCK),
+    ENVY(5, Component.translatable("modifier.staff.envy"), Items.ENDER_EYE);
 
     private final int id;
     private final MutableComponent name;

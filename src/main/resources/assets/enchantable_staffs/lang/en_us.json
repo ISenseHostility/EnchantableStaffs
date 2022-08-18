@@ -162,5 +162,8 @@
 
   "_comment": "modifiers",
   "modifier.staff.cold_affinity": "Cold Affinity",
-  "modifier.staff.heat_affinity": "Heat Affinity"
+  "modifier.staff.heat_affinity": "Heat Affinity",
+  "modifier.staff.gluttony": "Gluttony",
+  "modifier.staff.greed": "Greed",
+  "modifier.staff.envy": "Envy"
 }

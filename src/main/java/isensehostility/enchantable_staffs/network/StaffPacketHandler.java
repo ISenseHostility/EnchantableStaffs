@@ -3,7 +3,14 @@ package isensehostility.enchantable_staffs.network;
 import isensehostility.enchantable_staffs.EnchantableStaffs;
 import isensehostility.enchantable_staffs.StaffUtils;
 import net.minecraft.client.Minecraft;
+import net.minecraft.core.UUIDUtil;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.server.players.PlayerList;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.level.Level;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.network.NetworkDirection;
@@ -28,17 +35,22 @@ public class StaffPacketHandler {
         INSTANCE.messageBuilder(ChargeUpdatePacket.class, id++, NetworkDirection.PLAY_TO_CLIENT)
                 .encoder(ChargeUpdatePacket::encode)
                 .decoder(ChargeUpdatePacket::new)
-                .consumer(ChargeUpdatePacket::handle)
+                .consumerMainThread(ChargeUpdatePacket::handle)
                 .add();
         INSTANCE.messageBuilder(MaxChargeUpdatePacket.class, id++, NetworkDirection.PLAY_TO_CLIENT)
                 .encoder(MaxChargeUpdatePacket::encode)
                 .decoder(MaxChargeUpdatePacket::new)
-                .consumer(MaxChargeUpdatePacket::handle)
+                .consumerMainThread(MaxChargeUpdatePacket::handle)
                 .add();
         INSTANCE.messageBuilder(ElementalEfficiencyUpdatePacket.class, id++, NetworkDirection.PLAY_TO_CLIENT)
                 .encoder(ElementalEfficiencyUpdatePacket::encode)
                 .decoder(ElementalEfficiencyUpdatePacket::new)
-                .consumer(ElementalEfficiencyUpdatePacket::handle)
+                .consumerMainThread(ElementalEfficiencyUpdatePacket::handle)
+                .add();
+        INSTANCE.messageBuilder(ChargeAddPacket.class, id++, NetworkDirection.PLAY_TO_SERVER)
+                .encoder(ChargeAddPacket::encode)
+                .decoder(ChargeAddPacket::new)
+                .consumerMainThread(ChargeAddPacket::handle)
                 .add();
     }
 
@@ -55,5 +67,11 @@ public class StaffPacketHandler {
     @OnlyIn(Dist.CLIENT)
     public static void handleElementalEfficiencyUpdate(ElementalEfficiencyUpdatePacket msg, Supplier<NetworkEvent.Context> ctx) {
         StaffUtils.setElementalEfficiencyById(Minecraft.getInstance().player, msg.elementId);
+    }
+
+    public static void handleChargeAdd(ChargeAddPacket msg, Supplier<NetworkEvent.Context> ctx) {
+        ServerPlayer sender = ctx.get().getSender();
+        Player player = sender.level.getPlayerByUUID(msg.uuid);
+        StaffUtils.activeChargeModifierLogic(msg.stack, player);
     }
 }
