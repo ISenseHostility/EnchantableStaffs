@@ -4,6 +4,8 @@ import isensehostility.enchantable_staffs.config.StaffConfig;
 import isensehostility.enchantable_staffs.enchantment.category.StaffCategory;
 import isensehostility.enchantable_staffs.enums.EElement;
 import isensehostility.enchantable_staffs.item.Staff;
+import isensehostility.enchantable_staffs.util.EnchantmentUtils;
+import isensehostility.enchantable_staffs.util.StaffUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.sounds.SoundEvents;
@@ -22,9 +24,6 @@ import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.Level;
 
 import java.util.List;
-
-import static isensehostility.enchantable_staffs.StaffUtils.getEntitiesInBreathLine;
-import static isensehostility.enchantable_staffs.StaffUtils.invokeStaffCosts;
 
 public class DragonBreath extends Enchantment implements IStaffEnchantment {
     public DragonBreath() {
@@ -48,11 +47,11 @@ public class DragonBreath extends Enchantment implements IStaffEnchantment {
 
     @Override
     public InteractionResultHolder<ItemStack> onUse(ItemStack stack, Level level, Player player) {
-        if (invokeStaffCosts(player, stack, getChargeCost(), level)) {
+        if (StaffUtils.invokeStaffCosts(player, stack, getChargeCost(), level)) {
             return new InteractionResultHolder<>(InteractionResult.PASS, stack);
         }
 
-        List<LivingEntity> entities = getEntitiesInBreathLine(level, player, 12, ParticleTypes.DRAGON_BREATH);
+        List<LivingEntity> entities = EnchantmentUtils.summonBreath(player, 12, 1.5D, ParticleTypes.DRAGON_BREATH);
 
         for (LivingEntity entity : entities) {
             if (entity != player) {

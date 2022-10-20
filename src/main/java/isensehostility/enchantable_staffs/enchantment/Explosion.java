@@ -4,6 +4,8 @@ import isensehostility.enchantable_staffs.config.StaffConfig;
 import isensehostility.enchantable_staffs.enchantment.category.StaffCategory;
 import isensehostility.enchantable_staffs.enums.EElement;
 import isensehostility.enchantable_staffs.item.Staff;
+import isensehostility.enchantable_staffs.util.ModUtils;
+import isensehostility.enchantable_staffs.util.StaffUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.InteractionResult;
@@ -18,8 +20,6 @@ import net.minecraft.world.level.ClipContext;
 import net.minecraft.world.level.Explosion.BlockInteraction;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.BlockHitResult;
-
-import static isensehostility.enchantable_staffs.StaffUtils.*;
 
 public class Explosion extends Enchantment implements IStaffEnchantment {
     public Explosion() {
@@ -43,15 +43,15 @@ public class Explosion extends Enchantment implements IStaffEnchantment {
 
     @Override
     public InteractionResultHolder<ItemStack> onUse(ItemStack stack, Level level, Player player) {
-        BlockHitResult rayTrace = rayTrace(level, player, ClipContext.Fluid.NONE, 100);
+        BlockHitResult rayTrace = ModUtils.rayTrace(level, player, ClipContext.Fluid.NONE, 100);
         Direction direction = rayTrace.getDirection();
         BlockPos posCollide = rayTrace.getBlockPos();
         BlockPos pos = posCollide.relative(direction);
 
-        if (posIsAir(level, posCollide)) {
+        if (ModUtils.posIsAir(level, posCollide)) {
             return new InteractionResultHolder<>(InteractionResult.PASS, stack);
         }
-        if (invokeStaffCosts(player, stack, getChargeCost(), level)) {
+        if (StaffUtils.invokeStaffCosts(player, stack, getChargeCost(), level)) {
             return new InteractionResultHolder<>(InteractionResult.PASS, stack);
         }
 

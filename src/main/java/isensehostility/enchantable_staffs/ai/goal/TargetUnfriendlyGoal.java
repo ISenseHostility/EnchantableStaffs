@@ -1,6 +1,6 @@
 package isensehostility.enchantable_staffs.ai.goal;
 
-import isensehostility.enchantable_staffs.StaffUtils;
+import isensehostility.enchantable_staffs.util.NBTUtils;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
@@ -16,7 +16,7 @@ public class TargetUnfriendlyGoal<T extends LivingEntity> extends NearestAttacka
     protected void findTarget() {
         this.target = this.mob.level.getNearestEntity(this.mob.level.getEntitiesOfClass(this.targetType, this.getTargetSearchArea(this.getFollowDistance()),
                 (entity) -> {
-                    return (!(entity instanceof LivingEntity livingEntity) || !StaffUtils.getFriendly(livingEntity)) && !(entity instanceof Creeper);
+                    return (!(entity instanceof LivingEntity livingEntity) || !NBTUtils.getFriendly(livingEntity)) && !(entity instanceof Creeper);
                 }),
                 this.targetConditions, this.mob, this.mob.getX(), this.mob.getEyeY(), this.mob.getZ());
     }

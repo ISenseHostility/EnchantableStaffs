@@ -4,6 +4,9 @@ import isensehostility.enchantable_staffs.config.StaffConfig;
 import isensehostility.enchantable_staffs.enchantment.category.StaffCategory;
 import isensehostility.enchantable_staffs.enums.EElement;
 import isensehostility.enchantable_staffs.item.Staff;
+import isensehostility.enchantable_staffs.util.ModUtils;
+import isensehostility.enchantable_staffs.util.NBTUtils;
+import isensehostility.enchantable_staffs.util.StaffUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.sounds.SoundEvents;
@@ -19,8 +22,6 @@ import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.Level;
 
 import java.util.Set;
-
-import static isensehostility.enchantable_staffs.StaffUtils.*;
 
 public class CureIllness extends Enchantment implements IStaffEnchantment {
     public CureIllness() {
@@ -44,7 +45,7 @@ public class CureIllness extends Enchantment implements IStaffEnchantment {
 
     @Override
     public InteractionResultHolder<ItemStack> onUse(ItemStack stack, Level level, Player player) {
-        if (getCharge(player) < getChargeCost()) {
+        if (NBTUtils.getCharge(player) < getChargeCost()) {
             return new InteractionResultHolder<>(InteractionResult.PASS, stack);
         }
 
@@ -59,10 +60,10 @@ public class CureIllness extends Enchantment implements IStaffEnchantment {
         }
 
         if (success) {
-            spawnParticleCloud(ParticleTypes.FIREWORK, player.getX(), player.getEyeY(), player.getZ(), level);
+            ModUtils.spawnParticleCloud(ParticleTypes.FIREWORK, level, new BlockPos(player.getEyePosition()));
             level.playSound(null, new BlockPos(player.getEyePosition()), SoundEvents.CAT_PURREOW, SoundSource.PLAYERS, 100.0F, 1.0F);
 
-            if (invokeStaffCosts(player, stack, getChargeCost(), level)) {
+            if (StaffUtils.invokeStaffCosts(player, stack, getChargeCost(), level)) {
                 return new InteractionResultHolder<>(InteractionResult.PASS, stack);
             }
 

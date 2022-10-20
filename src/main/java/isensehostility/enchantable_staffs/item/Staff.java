@@ -1,12 +1,13 @@
 package isensehostility.enchantable_staffs.item;
 
-import isensehostility.enchantable_staffs.StaffUtils;
 import isensehostility.enchantable_staffs.config.StaffConfig;
 import isensehostility.enchantable_staffs.enchantment.Explosion;
 import isensehostility.enchantable_staffs.enchantment.IStaffEnchantment;
 import isensehostility.enchantable_staffs.enchantment.WeatherAlteration;
 import isensehostility.enchantable_staffs.enums.EElement;
 import isensehostility.enchantable_staffs.enums.EStaffModifiers;
+import isensehostility.enchantable_staffs.util.ChargeUtils;
+import isensehostility.enchantable_staffs.util.NBTUtils;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.Screen;
@@ -65,7 +66,7 @@ public abstract class Staff extends Item {
             }
             for (Enchantment enchantment : enchantments) {
                 if (enchantment instanceof IStaffEnchantment staffEnchantment) {
-                    int cost = StaffUtils.calculateCharge(staffEnchantment, Minecraft.getInstance().player);
+                    int cost = ChargeUtils.calculateCharge(staffEnchantment, Minecraft.getInstance().player);
 
                     tooltip.add(Component.translatable("tooltip.enchantable_staffs.charge_cost").append(": " + cost).withStyle(ChatFormatting.AQUA));
                 }
@@ -104,7 +105,7 @@ public abstract class Staff extends Item {
         ItemStack stack = player.getItemInHand(hand);
         if (stack.getItem() instanceof Staff) {
             for (Enchantment enchantment : EnchantmentHelper.getEnchantments(stack).keySet()) {
-                if (enchantment instanceof IStaffEnchantment staffEnchantment && StaffUtils.calculateCharge(staffEnchantment, player) <= StaffUtils.getCharge(player)) {
+                if (enchantment instanceof IStaffEnchantment staffEnchantment && ChargeUtils.calculateCharge(staffEnchantment, player) <= NBTUtils.getCharge(player)) {
                     InteractionResultHolder resultHolder = staffEnchantment.onUse(stack, level, player);
 
                     if (resultHolder.getResult() == InteractionResult.SUCCESS) {

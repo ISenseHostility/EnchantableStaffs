@@ -4,28 +4,21 @@ import isensehostility.enchantable_staffs.config.StaffConfig;
 import isensehostility.enchantable_staffs.enchantment.category.StaffCategory;
 import isensehostility.enchantable_staffs.enums.EElement;
 import isensehostility.enchantable_staffs.item.Staff;
-import isensehostility.enchantable_staffs.item.StaffBoneMeal;
 import isensehostility.enchantable_staffs.item.StaffItems;
-import net.minecraft.core.BlockPos;
+import isensehostility.enchantable_staffs.util.ModUtils;
+import isensehostility.enchantable_staffs.util.NBTUtils;
+import isensehostility.enchantable_staffs.util.StaffUtils;
 import net.minecraft.core.particles.ParticleTypes;
-import net.minecraft.sounds.SoundEvents;
-import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.InteractionResultHolder;
-import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.ClipContext;
 import net.minecraft.world.level.Level;
-
-import java.util.Set;
-
-import static isensehostility.enchantable_staffs.StaffUtils.*;
 
 public class GardenGrowth extends Enchantment implements IStaffEnchantment {
     public GardenGrowth() {
@@ -49,18 +42,18 @@ public class GardenGrowth extends Enchantment implements IStaffEnchantment {
 
     @Override
     public InteractionResultHolder<ItemStack> onUse(ItemStack stack, Level level, Player player) {
-        if (getCharge(player) < getChargeCost()) {
+        if (NBTUtils.getCharge(player) < getChargeCost()) {
             return new InteractionResultHolder<>(InteractionResult.PASS, stack);
         }
 
-        UseOnContext ctx = new UseOnContext(level, player, player.getUsedItemHand(), stack, rayTrace(level, player, ClipContext.Fluid.NONE, player.getReachDistance()));
+        UseOnContext ctx = new UseOnContext(level, player, player.getUsedItemHand(), stack, ModUtils.rayTrace(level, player, ClipContext.Fluid.NONE, player.getReachDistance()));
 
         if (StaffItems.STAFF_BONEMEAL.get().useOn(ctx) == InteractionResult.CONSUME) {
-            if (invokeStaffCosts(player, stack, getChargeCost(), level)) {
+            if (StaffUtils.invokeStaffCosts(player, stack, getChargeCost(), level)) {
                 return new InteractionResultHolder<>(InteractionResult.PASS, stack);
             }
 
-            spawnParticleCloud(ParticleTypes.HAPPY_VILLAGER, ctx.getClickedPos().getX(), ctx.getClickedPos().getY() + 1.0D, ctx.getClickedPos().getZ(), level);
+            ModUtils.spawnParticleCloud(ParticleTypes.HAPPY_VILLAGER, level, ctx.getClickedPos().getX(), ctx.getClickedPos().getY() + 1.0D, ctx.getClickedPos().getZ());
 
             return new InteractionResultHolder<>(InteractionResult.SUCCESS, stack);
         }

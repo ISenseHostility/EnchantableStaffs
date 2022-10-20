@@ -5,6 +5,9 @@ import isensehostility.enchantable_staffs.enchantment.category.StaffCategory;
 import isensehostility.enchantable_staffs.enums.EElement;
 import isensehostility.enchantable_staffs.enums.EWeather;
 import isensehostility.enchantable_staffs.item.Staff;
+import isensehostility.enchantable_staffs.util.EnchantmentUtils;
+import isensehostility.enchantable_staffs.util.ModUtils;
+import isensehostility.enchantable_staffs.util.StaffUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.InteractionResult;
@@ -15,8 +18,6 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.Level;
-
-import static isensehostility.enchantable_staffs.StaffUtils.*;
 
 public class WeatherAlteration extends Enchantment implements IStaffEnchantment {
     public WeatherAlteration() {
@@ -40,11 +41,11 @@ public class WeatherAlteration extends Enchantment implements IStaffEnchantment 
 
     @Override
     public InteractionResultHolder<ItemStack> onUse(ItemStack stack, Level level, Player player) {
-        if (invokeStaffCosts(player, stack, getChargeCost(), level)) {
+        if (StaffUtils.invokeStaffCosts(player, stack, getChargeCost(), level)) {
             return new InteractionResultHolder<>(InteractionResult.PASS, stack);
         }
 
-        EWeather weather = getWeather(level);
+        EWeather weather = ModUtils.getWeather(level);
 
         if (!level.isClientSide) {
             ServerLevel server = (ServerLevel) level;
@@ -52,29 +53,29 @@ public class WeatherAlteration extends Enchantment implements IStaffEnchantment 
             switch (weather) {
                 case CLEAR:
                     if (player.getRandom().nextBoolean()) {
-                        setWeatherRaining(server);
-                        invokeWeatherVisuals(EWeather.RAINING, new BlockPos(player.getEyePosition()), level);
+                        ModUtils.setWeatherRaining(server);
+                        EnchantmentUtils.invokeWeatherEffects(EWeather.RAINING, new BlockPos(player.getEyePosition()), level);
                     } else {
-                        setWeatherThundering(server);
-                        invokeWeatherVisuals(EWeather.THUNDERING, new BlockPos(player.getEyePosition()), level);
+                        ModUtils.setWeatherThundering(server);
+                        EnchantmentUtils.invokeWeatherEffects(EWeather.THUNDERING, new BlockPos(player.getEyePosition()), level);
                     }
                     break;
                 case RAINING:
                     if (player.getRandom().nextBoolean()) {
-                        setWeatherClear(server);
-                        invokeWeatherVisuals(EWeather.CLEAR, new BlockPos(player.getEyePosition()), level);
+                        ModUtils.setWeatherClear(server);
+                        EnchantmentUtils.invokeWeatherEffects(EWeather.CLEAR, new BlockPos(player.getEyePosition()), level);
                     } else {
-                        setWeatherThundering(server);
-                        invokeWeatherVisuals(EWeather.THUNDERING, new BlockPos(player.getEyePosition()), level);
+                        ModUtils.setWeatherThundering(server);
+                        EnchantmentUtils.invokeWeatherEffects(EWeather.THUNDERING, new BlockPos(player.getEyePosition()), level);
                     }
                     break;
                 case THUNDERING:
                     if (player.getRandom().nextBoolean()) {
-                        setWeatherClear(server);
-                        invokeWeatherVisuals(EWeather.CLEAR, new BlockPos(player.getEyePosition()), level);
+                        ModUtils.setWeatherClear(server);
+                        EnchantmentUtils.invokeWeatherEffects(EWeather.CLEAR, new BlockPos(player.getEyePosition()), level);
                     } else {
-                        setWeatherRaining(server);
-                        invokeWeatherVisuals(EWeather.RAINING, new BlockPos(player.getEyePosition()), level);
+                        ModUtils.setWeatherRaining(server);
+                        EnchantmentUtils.invokeWeatherEffects(EWeather.RAINING, new BlockPos(player.getEyePosition()), level);
                     }
                     break;
             }

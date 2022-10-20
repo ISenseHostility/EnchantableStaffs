@@ -4,6 +4,8 @@ import isensehostility.enchantable_staffs.config.StaffConfig;
 import isensehostility.enchantable_staffs.enchantment.category.StaffCategory;
 import isensehostility.enchantable_staffs.enums.EElement;
 import isensehostility.enchantable_staffs.item.Staff;
+import isensehostility.enchantable_staffs.util.NBTUtils;
+import isensehostility.enchantable_staffs.util.StaffUtils;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.EquipmentSlot;
@@ -13,8 +15,6 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.Level;
-
-import static isensehostility.enchantable_staffs.StaffUtils.*;
 
 public class SpectralWings extends Enchantment implements IStaffEnchantment {
     public SpectralWings() {
@@ -38,19 +38,19 @@ public class SpectralWings extends Enchantment implements IStaffEnchantment {
 
     @Override
     public InteractionResultHolder<ItemStack> onUse(ItemStack stack, Level level, Player player) {
-        if (invokeStaffCosts(player, stack, getChargeCost(), level)) {
+        if (StaffUtils.invokeStaffCosts(player, stack, getChargeCost(), level)) {
             return new InteractionResultHolder<>(InteractionResult.PASS, stack);
         }
 
-        setChestplateData(player);
+        NBTUtils.setChestplateData(player);
 
         ItemStack wings = new ItemStack(Items.ELYTRA);
         wings.enchant(Enchantments.BINDING_CURSE, 1);
         wings.enchant(Enchantments.VANISHING_CURSE, 1);
         wings.enchant(Enchantments.UNBREAKING, 3);
-        setIsSpectralWings(wings, true);
+        NBTUtils.setIsSpectralWings(wings, true);
 
-        setSpectralWingsTime(player, 800);
+        NBTUtils.setSpectralWingsTime(player, 800);
         player.setItemSlot(EquipmentSlot.CHEST, wings);
 
         return new InteractionResultHolder<>(InteractionResult.PASS, stack);

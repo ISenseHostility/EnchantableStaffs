@@ -4,6 +4,9 @@ import isensehostility.enchantable_staffs.config.StaffConfig;
 import isensehostility.enchantable_staffs.enchantment.category.StaffCategory;
 import isensehostility.enchantable_staffs.enums.EElement;
 import isensehostility.enchantable_staffs.item.Staff;
+import isensehostility.enchantable_staffs.util.ModUtils;
+import isensehostility.enchantable_staffs.util.NBTUtils;
+import isensehostility.enchantable_staffs.util.StaffUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.sounds.SoundEvents;
@@ -21,8 +24,6 @@ import net.minecraft.world.level.Level;
 
 import java.util.HashMap;
 import java.util.Map;
-
-import static isensehostility.enchantable_staffs.StaffUtils.*;
 
 public class Cleansing extends Enchantment implements IStaffEnchantment {
     public Cleansing() {
@@ -46,7 +47,7 @@ public class Cleansing extends Enchantment implements IStaffEnchantment {
 
     @Override
     public InteractionResultHolder<ItemStack> onUse(ItemStack stack, Level level, Player player) {
-        if (getCharge(player) < getChargeCost()) {
+        if (NBTUtils.getCharge(player) < getChargeCost()) {
             return new InteractionResultHolder<>(InteractionResult.PASS, stack);
         }
 
@@ -65,10 +66,10 @@ public class Cleansing extends Enchantment implements IStaffEnchantment {
 
         if (success) {
             EnchantmentHelper.setEnchantments(newEnchantments, item);
-            spawnParticleCloud(ParticleTypes.END_ROD, player.getX(), player.getEyeY(), player.getZ(), level);
+            ModUtils.spawnParticleCloud(ParticleTypes.END_ROD, level, new BlockPos(player.getEyePosition()));
             level.playSound(null, new BlockPos(player.getEyePosition()), SoundEvents.CAT_AMBIENT, SoundSource.PLAYERS, 100.0F, 1.0F);
 
-            if (invokeStaffCosts(player, stack, getChargeCost(), level)) {
+            if (StaffUtils.invokeStaffCosts(player, stack, getChargeCost(), level)) {
                 return new InteractionResultHolder<>(InteractionResult.PASS, stack);
             }
 

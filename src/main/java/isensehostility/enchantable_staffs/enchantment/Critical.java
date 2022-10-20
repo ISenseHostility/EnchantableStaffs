@@ -5,6 +5,8 @@ import isensehostility.enchantable_staffs.effect.StaffEffects;
 import isensehostility.enchantable_staffs.enchantment.category.StaffCategory;
 import isensehostility.enchantable_staffs.enums.EElement;
 import isensehostility.enchantable_staffs.item.Staff;
+import isensehostility.enchantable_staffs.util.EnchantmentUtils;
+import isensehostility.enchantable_staffs.util.StaffUtils;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -15,9 +17,6 @@ import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.Level;
-
-import static isensehostility.enchantable_staffs.StaffUtils.invokeCriticalVisuals;
-import static isensehostility.enchantable_staffs.StaffUtils.invokeStaffCosts;
 
 public class Critical extends Enchantment implements IStaffEnchantment {
     public Critical() {
@@ -44,12 +43,12 @@ public class Critical extends Enchantment implements IStaffEnchantment {
         if (player.hasEffect(StaffEffects.CRITICAL.get())) {
             return new InteractionResultHolder<>(InteractionResult.PASS, stack);
         }
-        if (invokeStaffCosts(player, stack, getChargeCost(), level)) {
+        if (StaffUtils.invokeStaffCosts(player, stack, getChargeCost(), level)) {
             return new InteractionResultHolder<>(InteractionResult.PASS, stack);
         }
 
         player.addEffect(new MobEffectInstance(StaffEffects.CRITICAL.get(), 600, EnchantmentHelper.getItemEnchantmentLevel(StaffEnchantments.CRITICAL.get(), stack) - 1));
-        invokeCriticalVisuals(player);
+        EnchantmentUtils.invokeCriticalEffects(player);
 
         return new InteractionResultHolder<>(InteractionResult.SUCCESS, stack);
     }

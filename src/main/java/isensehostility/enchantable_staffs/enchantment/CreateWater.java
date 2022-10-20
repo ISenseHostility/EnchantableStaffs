@@ -4,6 +4,8 @@ import isensehostility.enchantable_staffs.config.StaffConfig;
 import isensehostility.enchantable_staffs.enchantment.category.StaffCategory;
 import isensehostility.enchantable_staffs.enums.EElement;
 import isensehostility.enchantable_staffs.item.Staff;
+import isensehostility.enchantable_staffs.util.ModUtils;
+import isensehostility.enchantable_staffs.util.StaffUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleTypes;
@@ -20,8 +22,6 @@ import net.minecraft.world.level.ClipContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.phys.BlockHitResult;
-
-import static isensehostility.enchantable_staffs.StaffUtils.*;
 
 public class CreateWater extends Enchantment implements IStaffEnchantment {
     public CreateWater() {
@@ -45,22 +45,22 @@ public class CreateWater extends Enchantment implements IStaffEnchantment {
 
     @Override
     public InteractionResultHolder<ItemStack> onUse(ItemStack stack, Level level, Player player) {
-        BlockHitResult rayTrace = rayTrace(level, player, ClipContext.Fluid.SOURCE_ONLY, 100);
+        BlockHitResult rayTrace = ModUtils.rayTrace(level, player, ClipContext.Fluid.SOURCE_ONLY, 100);
         Direction direction = rayTrace.getDirection();
         BlockPos posCollide = rayTrace.getBlockPos();
         BlockPos pos = posCollide.relative(direction);
 
-        if (posIsAir(level, posCollide)) {
+        if (ModUtils.posIsAir(level, posCollide)) {
             return new InteractionResultHolder<>(InteractionResult.PASS, stack);
         }
-        if (invokeStaffCosts(player, stack, getChargeCost(), level)) {
+        if (StaffUtils.invokeStaffCosts(player, stack, getChargeCost(), level)) {
             return new InteractionResultHolder<>(InteractionResult.PASS, stack);
         }
         if (!level.isClientSide) {
             level.setBlock(pos, Blocks.WATER.defaultBlockState(), 3);
         }
 
-        spawnParticleCloud(ParticleTypes.FALLING_WATER, pos.getX() + 0.5D, pos.getY() + 1.0D, pos.getZ() + 0.5D, level);
+        ModUtils.spawnParticleCloud(ParticleTypes.FALLING_WATER, level, pos.getX() + 0.5D, pos.getY() + 1.0D, pos.getZ() + 0.5D);
         level.playSound(null, pos, SoundEvents.BUCKET_EMPTY, SoundSource.PLAYERS, 100.0F, 1.0F);
 
         return new InteractionResultHolder<>(InteractionResult.SUCCESS, stack);

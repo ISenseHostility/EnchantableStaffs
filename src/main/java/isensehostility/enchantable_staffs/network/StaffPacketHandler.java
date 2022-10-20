@@ -1,16 +1,13 @@
 package isensehostility.enchantable_staffs.network;
 
 import isensehostility.enchantable_staffs.EnchantableStaffs;
-import isensehostility.enchantable_staffs.StaffUtils;
+import isensehostility.enchantable_staffs.util.ChargeUtils;
+import isensehostility.enchantable_staffs.util.ModifierUtils;
+import isensehostility.enchantable_staffs.util.NBTUtils;
 import net.minecraft.client.Minecraft;
-import net.minecraft.core.UUIDUtil;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.server.players.PlayerList;
-import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.level.Level;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.network.NetworkDirection;
@@ -56,22 +53,22 @@ public class StaffPacketHandler {
 
     @OnlyIn(Dist.CLIENT)
     public static void handleChargeUpdate(ChargeUpdatePacket msg, Supplier<NetworkEvent.Context> ctx) {
-        StaffUtils.setCharge(Minecraft.getInstance().player, msg.charge);
+        NBTUtils.setCharge(Minecraft.getInstance().player, msg.charge);
     }
 
     @OnlyIn(Dist.CLIENT)
     public static void handleMaxChargeUpdate(MaxChargeUpdatePacket msg, Supplier<NetworkEvent.Context> ctx) {
-        StaffUtils.setMaxCharge(Minecraft.getInstance().player, msg.maxCharge);
+        NBTUtils.setMaxCharge(Minecraft.getInstance().player, msg.maxCharge);
     }
 
     @OnlyIn(Dist.CLIENT)
     public static void handleElementalEfficiencyUpdate(ElementalEfficiencyUpdatePacket msg, Supplier<NetworkEvent.Context> ctx) {
-        StaffUtils.setElementalEfficiencyById(Minecraft.getInstance().player, msg.elementId);
+        NBTUtils.setElementalEfficiencyById(Minecraft.getInstance().player, msg.elementId);
     }
 
     public static void handleChargeAdd(ChargeAddPacket msg, Supplier<NetworkEvent.Context> ctx) {
         ServerPlayer sender = ctx.get().getSender();
         Player player = sender.level.getPlayerByUUID(msg.uuid);
-        StaffUtils.activeChargeModifierLogic(msg.stack, player);
+        ModifierUtils.activeChargeModifierLogic(msg.stack, player);
     }
 }

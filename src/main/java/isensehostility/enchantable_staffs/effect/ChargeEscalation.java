@@ -1,11 +1,10 @@
 package isensehostility.enchantable_staffs.effect;
 
 import isensehostility.enchantable_staffs.config.StaffConfig;
+import isensehostility.enchantable_staffs.util.NBTUtils;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.world.entity.LivingEntity;
-
-import static isensehostility.enchantable_staffs.StaffUtils.setMaxCharge;
 
 public class ChargeEscalation extends MobEffect {
 
@@ -16,7 +15,7 @@ public class ChargeEscalation extends MobEffect {
     @Override
     public void applyEffectTick(LivingEntity entity, int amplifier) {
         if (!entity.hasEffect(StaffEffects.CHARGE_BREAKDOWN.get())) {
-            setMaxCharge(entity, StaffConfig.chargeMaxStarting.get() * (amplifier + 2));
+            NBTUtils.setMaxCharge(entity, StaffConfig.chargeMaxStarting.get() * (amplifier + 2));
         }
     }
 

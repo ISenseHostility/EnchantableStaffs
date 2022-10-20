@@ -4,6 +4,9 @@ import isensehostility.enchantable_staffs.config.StaffConfig;
 import isensehostility.enchantable_staffs.enchantment.category.StaffCategory;
 import isensehostility.enchantable_staffs.enums.EElement;
 import isensehostility.enchantable_staffs.item.Staff;
+import isensehostility.enchantable_staffs.util.EnchantmentUtils;
+import isensehostility.enchantable_staffs.util.ModUtils;
+import isensehostility.enchantable_staffs.util.StaffUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.sounds.SoundEvents;
@@ -16,9 +19,8 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.Blocks;
 
-import static isensehostility.enchantable_staffs.StaffUtils.*;
+import static isensehostility.enchantable_staffs.util.ModUtils.getHighestBlock;
 
 public class RingOfFangs extends Enchantment implements IStaffEnchantment {
     public RingOfFangs() {
@@ -42,7 +44,7 @@ public class RingOfFangs extends Enchantment implements IStaffEnchantment {
 
     @Override
     public InteractionResultHolder<ItemStack> onUse(ItemStack stack, Level level, Player player) {
-        if (invokeStaffCosts(player, stack, getChargeCost(), level)) {
+        if (StaffUtils.invokeStaffCosts(player, stack, getChargeCost(), level)) {
             return new InteractionResultHolder<>(InteractionResult.PASS, stack);
         }
 
@@ -79,10 +81,10 @@ public class RingOfFangs extends Enchantment implements IStaffEnchantment {
         int offset = 0;
         for (BlockPos pos : positions) {
             offset = offset + 1;
-            summonFang(player, level, pos, offset);
+            EnchantmentUtils.summonFang(player, level, pos, offset);
         }
 
-        spawnParticleCloud(ParticleTypes.CAMPFIRE_COSY_SMOKE, player.getX(), player.getY() + 1.0D, player.getZ(), level);
+        ModUtils.spawnParticleCloud(ParticleTypes.CAMPFIRE_COSY_SMOKE, level, player.getX(), player.getY() + 1.0D, player.getZ());
         level.playSound(null, new BlockPos(player.getEyePosition()), SoundEvents.SOUL_ESCAPE, SoundSource.PLAYERS, 100.0F, 1.0F);
 
         return new InteractionResultHolder<>(InteractionResult.SUCCESS, stack);

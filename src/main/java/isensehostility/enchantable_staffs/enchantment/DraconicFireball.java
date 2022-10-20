@@ -4,6 +4,9 @@ import isensehostility.enchantable_staffs.config.StaffConfig;
 import isensehostility.enchantable_staffs.enchantment.category.StaffCategory;
 import isensehostility.enchantable_staffs.enums.EElement;
 import isensehostility.enchantable_staffs.item.Staff;
+import isensehostility.enchantable_staffs.util.ModUtils;
+import isensehostility.enchantable_staffs.util.NBTUtils;
+import isensehostility.enchantable_staffs.util.StaffUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.sounds.SoundEvents;
@@ -19,8 +22,6 @@ import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
-
-import static isensehostility.enchantable_staffs.StaffUtils.*;
 
 public class DraconicFireball extends Enchantment implements IStaffEnchantment {
     public DraconicFireball() {
@@ -44,23 +45,23 @@ public class DraconicFireball extends Enchantment implements IStaffEnchantment {
 
     @Override
     public InteractionResultHolder<ItemStack> onUse(ItemStack stack, Level level, Player player) {
-        if (invokeStaffCosts(player, stack, getChargeCost(), level)) {
+        if (StaffUtils.invokeStaffCosts(player, stack, getChargeCost(), level)) {
             return new InteractionResultHolder<>(InteractionResult.PASS, stack);
         }
      
         int enchantmentLevel = EnchantmentHelper.getItemEnchantmentLevel(StaffEnchantments.DRACONIC_FIREBALL.get(), stack);
-        Vec3 direction = getDirection(player);
-        Vec3 pos = getPosFromDirection(direction, player);
+        Vec3 direction = ModUtils.getDirection(player);
+        Vec3 pos = ModUtils.getPosFromDirection(direction, player);
 
         DragonFireball dragonFireball = new DragonFireball(level, player, direction.x(), direction.y(), direction.z());
         dragonFireball.setPos(pos);
-        setFromStaff(dragonFireball, true);
-        setEnchantmentLevel(dragonFireball, StaffEnchantments.DRACONIC_FIREBALL.get(), enchantmentLevel);
-        setDirection(dragonFireball, new long[]{(long) (pos.x() * 1000000000), (long) (pos.y() * 1000000000), (long) (pos.z() * 1000000000L)});
+        NBTUtils.setFromStaff(dragonFireball, true);
+        NBTUtils.setEnchantmentLevel(dragonFireball, StaffEnchantments.DRACONIC_FIREBALL.get(), enchantmentLevel);
+        NBTUtils.setDirection(dragonFireball, new long[]{(long) (pos.x() * 1000000000), (long) (pos.y() * 1000000000), (long) (pos.z() * 1000000000L)});
         level.addFreshEntity(dragonFireball);
 
         level.playSound(null, new BlockPos(player.getEyePosition()), SoundEvents.FIRECHARGE_USE, SoundSource.PLAYERS, 100.0F, 1.0F);
-        spawnParticleCloud(ParticleTypes.PORTAL, pos.x() + 0.5D, pos.y() + 1.0D, pos.z() + 0.5D, level);
+        ModUtils.spawnParticleCloud(ParticleTypes.PORTAL, level, pos.x() + 0.5D, pos.y() + 1.0D, pos.z() + 0.5D);
 
         return new InteractionResultHolder<>(InteractionResult.SUCCESS, stack);
     }

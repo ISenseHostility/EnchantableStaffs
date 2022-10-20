@@ -4,6 +4,9 @@ import isensehostility.enchantable_staffs.config.StaffConfig;
 import isensehostility.enchantable_staffs.enchantment.category.StaffCategory;
 import isensehostility.enchantable_staffs.enums.EElement;
 import isensehostility.enchantable_staffs.item.Staff;
+import isensehostility.enchantable_staffs.util.ModUtils;
+import isensehostility.enchantable_staffs.util.NBTUtils;
+import isensehostility.enchantable_staffs.util.StaffUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleTypes;
@@ -24,8 +27,6 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
 import java.util.List;
-
-import static isensehostility.enchantable_staffs.StaffUtils.*;
 
 public class EvokerFangs extends Enchantment implements IStaffEnchantment {
     public EvokerFangs() {
@@ -49,13 +50,13 @@ public class EvokerFangs extends Enchantment implements IStaffEnchantment {
 
     @Override
     public InteractionResultHolder<ItemStack> onUse(ItemStack stack, Level level, Player player) {
-        if (getCharge(player) < getChargeCost()) {
+        if (NBTUtils.getCharge(player) < getChargeCost()) {
             return new InteractionResultHolder<>(InteractionResult.PASS, stack);
         }
 
         boolean success = false;
 
-        List<LivingEntity> entities = level.getEntitiesOfClass(LivingEntity.class, createBoundingBox(player.blockPosition(), 10));
+        List<LivingEntity> entities = level.getEntitiesOfClass(LivingEntity.class, ModUtils.createBoundingBox(player.blockPosition(), 10));
         LivingEntity target = level.getNearestEntity(entities, TargetingConditions.forCombat(), player, player.getX(), player.getY(), player.getZ());
 
         if (target != null) {
@@ -64,10 +65,10 @@ public class EvokerFangs extends Enchantment implements IStaffEnchantment {
         }
 
         if (success) {
-            spawnParticleCloud(ParticleTypes.CAMPFIRE_COSY_SMOKE, player.getX(), player.getEyeY(), player.getZ(), level);
+            ModUtils.spawnParticleCloud(ParticleTypes.CAMPFIRE_COSY_SMOKE, level, new BlockPos(player.getEyePosition()));
             level.playSound(null, new BlockPos(player.getEyePosition()), SoundEvents.SOUL_ESCAPE, SoundSource.PLAYERS, 100.0F, 1.0F);
 
-            if (invokeStaffCosts(player, stack, getChargeCost(), level)) {
+            if (StaffUtils.invokeStaffCosts(player, stack, getChargeCost(), level)) {
                 return new InteractionResultHolder<>(InteractionResult.PASS, stack);
             }
 

@@ -1,11 +1,10 @@
 package isensehostility.enchantable_staffs.enchantment;
 
+import isensehostility.enchantable_staffs.util.ModUtils;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.EnchantmentCategory;
-
-import static isensehostility.enchantable_staffs.StaffUtils.isMeleeWeapon;
 
 public class MagicalStrengtheningWeapon extends Enchantment {
     public MagicalStrengtheningWeapon() {
@@ -34,7 +33,7 @@ public class MagicalStrengtheningWeapon extends Enchantment {
 
     @Override
     public boolean canEnchant(ItemStack stack) {
-        return isMeleeWeapon(stack);
+        return ModUtils.isMeleeWeapon(stack);
     }
 
     @Override

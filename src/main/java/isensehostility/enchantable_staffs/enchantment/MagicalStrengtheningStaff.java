@@ -4,6 +4,9 @@ import isensehostility.enchantable_staffs.config.StaffConfig;
 import isensehostility.enchantable_staffs.enchantment.category.StaffCategory;
 import isensehostility.enchantable_staffs.enums.EElement;
 import isensehostility.enchantable_staffs.item.Staff;
+import isensehostility.enchantable_staffs.util.ModUtils;
+import isensehostility.enchantable_staffs.util.NBTUtils;
+import isensehostility.enchantable_staffs.util.StaffUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.sounds.SoundEvents;
@@ -18,8 +21,6 @@ import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.Level;
-
-import static isensehostility.enchantable_staffs.StaffUtils.*;
 
 public class MagicalStrengtheningStaff extends Enchantment implements IStaffEnchantment {
     public MagicalStrengtheningStaff() {
@@ -45,17 +46,17 @@ public class MagicalStrengtheningStaff extends Enchantment implements IStaffEnch
     public InteractionResultHolder<ItemStack> onUse(ItemStack stack, Level level, Player player) {
         ItemStack item = player.getItemInHand(InteractionHand.OFF_HAND);
 
-        if (EnchantmentHelper.getEnchantments(item).containsKey(StaffEnchantments.MAGICAL_STRENGTHENING_WEAPON.get()) || !isMeleeWeapon(item)) {
+        if (EnchantmentHelper.getEnchantments(item).containsKey(StaffEnchantments.MAGICAL_STRENGTHENING_WEAPON.get()) || !ModUtils.isMeleeWeapon(item)) {
             return new InteractionResultHolder<>(InteractionResult.PASS, stack);
         }
-        if (invokeStaffCosts(player, stack, getChargeCost(), level)) {
+        if (StaffUtils.invokeStaffCosts(player, stack, getChargeCost(), level)) {
             return new InteractionResultHolder<>(InteractionResult.PASS, stack);
         }
 
         item.enchant(StaffEnchantments.MAGICAL_STRENGTHENING_WEAPON.get(), EnchantmentHelper.getItemEnchantmentLevel(StaffEnchantments.MAGICAL_STRENGTHENING_STAFF.get(), stack));
-        setMagicalStrengtheningTime(player, 600);
+        NBTUtils.setMagicalStrengtheningTime(player, 600);
 
-        spawnParticleCloud(ParticleTypes.ENCHANT, player.getX(), player.getEyeY(), player.getZ(), level);
+        ModUtils.spawnParticleCloud(ParticleTypes.ENCHANT, level, new BlockPos(player.getEyePosition()));
         level.playSound(null, new BlockPos(player.getEyePosition()), SoundEvents.ENCHANTMENT_TABLE_USE, SoundSource.PLAYERS, 100.0F, 1.0F);
 
         return new InteractionResultHolder<>(InteractionResult.SUCCESS, stack);

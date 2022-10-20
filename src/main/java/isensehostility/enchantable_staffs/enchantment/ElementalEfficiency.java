@@ -1,10 +1,14 @@
 package isensehostility.enchantable_staffs.enchantment;
 
+import isensehostility.enchantable_staffs.EnchantableStaffs;
 import isensehostility.enchantable_staffs.config.StaffConfig;
 import isensehostility.enchantable_staffs.effect.StaffEffects;
 import isensehostility.enchantable_staffs.enchantment.category.StaffCategory;
 import isensehostility.enchantable_staffs.enums.EElement;
 import isensehostility.enchantable_staffs.item.Staff;
+import isensehostility.enchantable_staffs.util.ModUtils;
+import isensehostility.enchantable_staffs.util.NBTUtils;
+import isensehostility.enchantable_staffs.util.StaffUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.network.chat.Component;
@@ -22,8 +26,6 @@ import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.Level;
 
 import java.util.List;
-
-import static isensehostility.enchantable_staffs.StaffUtils.*;
 
 public class ElementalEfficiency extends Enchantment implements IStaffEnchantment {
     public ElementalEfficiency() {
@@ -50,19 +52,19 @@ public class ElementalEfficiency extends Enchantment implements IStaffEnchantmen
         if (player.hasEffect(StaffEffects.ELEMENTAL_EFFICIENCY.get())) {
             return new InteractionResultHolder<>(InteractionResult.PASS, stack);
         }
-        if (invokeStaffCosts(player, stack, getChargeCost(), level)) {
+        if (StaffUtils.invokeStaffCosts(player, stack, getChargeCost(), level)) {
             return new InteractionResultHolder<>(InteractionResult.PASS, stack);
         }
 
         player.addEffect(new MobEffectInstance(StaffEffects.ELEMENTAL_EFFICIENCY.get(), 1200, EnchantmentHelper.getItemEnchantmentLevel(StaffEnchantments.ELEMENTAL_EFFICIENCY.get(), stack) - 1));
 
         List<EElement> elementList = StaffConfig.elementsAllowedEfficiency.get();
-        EElement selectedElement = elementList.get(getRandom().nextInt(elementList.size()));
-        setElementalEfficiency(player, selectedElement);
+        EElement selectedElement = elementList.get(EnchantableStaffs.RANDOM.nextInt(elementList.size()));
+        NBTUtils.setElementalEfficiency(player, selectedElement);
 
         player.sendSystemMessage(Component.translatable("message.efficient_element").append(selectedElement.getName().withStyle(selectedElement.getColor())));
 
-        spawnParticleCloud(ParticleTypes.END_ROD, player.getX(), player.getEyeY(), player.getZ(), level);
+        ModUtils.spawnParticleCloud(ParticleTypes.END_ROD, level, new BlockPos(player.getEyePosition()));
         level.playSound(null, new BlockPos(player.getEyePosition()), SoundEvents.AXE_WAX_OFF, SoundSource.PLAYERS, 100.0F, 1.0F);
 
         return new InteractionResultHolder<>(InteractionResult.SUCCESS, stack);

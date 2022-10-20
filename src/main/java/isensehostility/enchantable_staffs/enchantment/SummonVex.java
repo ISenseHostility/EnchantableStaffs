@@ -4,6 +4,9 @@ import isensehostility.enchantable_staffs.config.StaffConfig;
 import isensehostility.enchantable_staffs.enchantment.category.StaffCategory;
 import isensehostility.enchantable_staffs.enums.EElement;
 import isensehostility.enchantable_staffs.item.Staff;
+import isensehostility.enchantable_staffs.util.ModUtils;
+import isensehostility.enchantable_staffs.util.NBTUtils;
+import isensehostility.enchantable_staffs.util.StaffUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.sounds.SoundEvents;
@@ -21,8 +24,6 @@ import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.items.CapabilityItemHandler;
-
-import static isensehostility.enchantable_staffs.StaffUtils.*;
 
 public class SummonVex extends Enchantment implements IStaffEnchantment {
     public SummonVex() {
@@ -46,13 +47,13 @@ public class SummonVex extends Enchantment implements IStaffEnchantment {
 
     @Override
     public InteractionResultHolder<ItemStack> onUse(ItemStack stack, Level level, Player player) {
-        if (invokeStaffCosts(player, stack, getChargeCost(), level)) {
+        if (StaffUtils.invokeStaffCosts(player, stack, getChargeCost(), level)) {
             return new InteractionResultHolder<>(InteractionResult.PASS, stack);
         }
 
         Vex vex = new Vex(EntityType.VEX, level);
         vex.setPos(Vec3.atCenterOf(player.getOnPos()));
-        setFriendly(vex, true);
+        NBTUtils.setFriendly(vex, true);
 
         if (vex.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY).isPresent()) {
             vex.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY).resolve().get().insertItem(0, new ItemStack(Items.IRON_SWORD), false);
@@ -60,7 +61,7 @@ public class SummonVex extends Enchantment implements IStaffEnchantment {
 
         level.addFreshEntity(vex);
 
-        spawnParticleCloud(ParticleTypes.SOUL, player.getX(), player.getY() + 1.0D, player.getZ(), level);
+        ModUtils.spawnParticleCloud(ParticleTypes.SOUL, level, player.getX(), player.getY() + 1.0D, player.getZ());
         level.playSound(null, new BlockPos(player.getEyePosition()), SoundEvents.SOUL_ESCAPE, SoundSource.PLAYERS, 100.0F, 1.0F);
 
         return new InteractionResultHolder<>(InteractionResult.SUCCESS, stack);

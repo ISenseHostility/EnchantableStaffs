@@ -4,6 +4,8 @@ import isensehostility.enchantable_staffs.config.StaffConfig;
 import isensehostility.enchantable_staffs.enchantment.category.StaffCategory;
 import isensehostility.enchantable_staffs.enums.EElement;
 import isensehostility.enchantable_staffs.item.Staff;
+import isensehostility.enchantable_staffs.util.ModUtils;
+import isensehostility.enchantable_staffs.util.StaffUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.sounds.SoundEvents;
@@ -18,7 +20,7 @@ import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
 
-import static isensehostility.enchantable_staffs.StaffUtils.*;
+import static isensehostility.enchantable_staffs.util.ModUtils.getHighestBlock;
 
 public class RingOfFire extends Enchantment implements IStaffEnchantment {
     public RingOfFire() {
@@ -42,7 +44,7 @@ public class RingOfFire extends Enchantment implements IStaffEnchantment {
 
     @Override
     public InteractionResultHolder<ItemStack> onUse(ItemStack stack, Level level, Player player) {
-        if (invokeStaffCosts(player, stack, getChargeCost(), level)) {
+        if (StaffUtils.invokeStaffCosts(player, stack, getChargeCost(), level)) {
             return new InteractionResultHolder<>(InteractionResult.PASS, stack);
         }
 
@@ -81,7 +83,7 @@ public class RingOfFire extends Enchantment implements IStaffEnchantment {
         }
 
         level.playSound(null, new BlockPos(player.getEyePosition()), SoundEvents.FIRECHARGE_USE, SoundSource.PLAYERS, 100.0F, 1.0F);
-        spawnParticleCloud(ParticleTypes.FLAME, x + 0.5D, player.getEyeY(), z + 0.5D, level);
+        ModUtils.spawnParticleCloud(ParticleTypes.FLAME, level, x + 0.5D, player.getEyeY(), z + 0.5D);
 
         return new InteractionResultHolder<>(InteractionResult.SUCCESS, stack);
     }

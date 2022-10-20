@@ -7,15 +7,18 @@ import isensehostility.enchantable_staffs.effect.StaffEffects;
 import isensehostility.enchantable_staffs.enchantment.StaffEnchantments;
 import isensehostility.enchantable_staffs.item.Staff;
 import isensehostility.enchantable_staffs.network.*;
+import isensehostility.enchantable_staffs.util.EnchantmentUtils;
+import isensehostility.enchantable_staffs.util.ModifierUtils;
+import isensehostility.enchantable_staffs.util.NBTUtils;
+import isensehostility.enchantable_staffs.util.StaffUtils;
 import net.minecraft.core.NonNullList;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.network.chat.ClickEvent;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.monster.*;
+import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.DragonFireball;
 import net.minecraft.world.entity.projectile.Fireball;
@@ -29,7 +32,6 @@ import net.minecraftforge.event.entity.EntityLeaveLevelEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.event.entity.living.LivingKnockBackEvent;
 import net.minecraftforge.event.entity.living.MobEffectEvent;
-import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -38,7 +40,7 @@ import net.minecraftforge.network.PacketDistributor;
 import java.util.HashMap;
 import java.util.Map;
 
-import static isensehostility.enchantable_staffs.StaffUtils.*;
+import static isensehostility.enchantable_staffs.util.NBTUtils.*;
 
 @Mod.EventBusSubscriber(modid = EnchantableStaffs.MODID, bus = Mod.EventBusSubscriber.Bus.FORGE)
 public class CommonEvents {
@@ -47,7 +49,7 @@ public class CommonEvents {
     public static void onJoin(EntityJoinLevelEvent event) {
         Entity entity = event.getEntity();
 
-        if (entity instanceof Player player && !hasChargeData(player)) {
+        if (entity instanceof Player player && !NBTUtils.hasChargeData(player)) {
             generateChargeData(player);
             setMaxCharge(player, StaffConfig.chargeMaxStarting.get());
         }
@@ -86,10 +88,10 @@ public class CommonEvents {
             ItemStack mainHand = player.getItemInHand(InteractionHand.MAIN_HAND);
             ItemStack offHand = player.getItemInHand(InteractionHand.OFF_HAND);
 
-            passiveChargeModifierLogic(mainHand, player);
-            passiveChargeModifierLogic(offHand, player);
+            ModifierUtils.passiveChargeModifierLogic(mainHand, player);
+            ModifierUtils.passiveChargeModifierLogic(offHand, player);
 
-            if (isHoldingStaff(player)) {
+            if (StaffUtils.isHoldingStaff(player)) {
                 StaffPacketHandler.INSTANCE.send(
                         PacketDistributor.TRACKING_CHUNK
                                 .with(() ->
@@ -173,7 +175,7 @@ public class CommonEvents {
             int chance = player.getRandom().nextInt(6) + 1;
 
             if (chance <= enchantmentLevel) {
-                invokeCriticalVisuals(player);
+                EnchantmentUtils.invokeCriticalEffects(player);
                 event.setAmount(event.getAmount() * 1.5F + (enchantmentLevel * 1.2F));
             }
         }
@@ -185,7 +187,7 @@ public class CommonEvents {
         }
 
         if (source instanceof LivingEntity attacker) {
-            envyLogic(attacker.getMainHandItem(), attacker, event.getEntity());
+            ModifierUtils.envyLogic(attacker.getMainHandItem(), attacker, event.getEntity());
         }
     }
 
@@ -240,7 +242,7 @@ public class CommonEvents {
 
     @SubscribeEvent
     public static void onLeftClickBlock(PlayerInteractEvent.LeftClickBlock event) {
-        activeChargeModifierLogic(event.getItemStack(), event.getEntity());
+        ModifierUtils.activeChargeModifierLogic(event.getItemStack(), event.getEntity());
     }
 
     @SubscribeEvent

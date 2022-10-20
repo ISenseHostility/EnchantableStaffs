@@ -4,6 +4,9 @@ import isensehostility.enchantable_staffs.config.StaffConfig;
 import isensehostility.enchantable_staffs.enchantment.category.StaffCategory;
 import isensehostility.enchantable_staffs.enums.EElement;
 import isensehostility.enchantable_staffs.item.Staff;
+import isensehostility.enchantable_staffs.util.ModUtils;
+import isensehostility.enchantable_staffs.util.NBTUtils;
+import isensehostility.enchantable_staffs.util.StaffUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.sounds.SoundEvents;
@@ -19,8 +22,6 @@ import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.Level;
 
 import java.util.List;
-
-import static isensehostility.enchantable_staffs.StaffUtils.*;
 
 public class AreaHeal extends Enchantment implements IStaffEnchantment {
     public AreaHeal() {
@@ -44,24 +45,24 @@ public class AreaHeal extends Enchantment implements IStaffEnchantment {
 
     @Override
     public InteractionResultHolder<ItemStack> onUse(ItemStack stack, Level level, Player player) {
-        if (getCharge(player) < getChargeCost()) {
+        if (NBTUtils.getCharge(player) < getChargeCost()) {
             return new InteractionResultHolder<>(InteractionResult.PASS, stack);
         }
 
-        List<LivingEntity> entities = level.getEntitiesOfClass(LivingEntity.class, createBoundingBox(player.blockPosition(), 15));
+        List<LivingEntity> entities = level.getEntitiesOfClass(LivingEntity.class, ModUtils.createBoundingBox(player.blockPosition(), 15));
         boolean success = false;
 
         for (LivingEntity entity : entities) {
             if (entity.getHealth() < entity.getMaxHealth()) {
                 entity.heal(4.0F);
-                spawnParticleCloud(ParticleTypes.HAPPY_VILLAGER, entity.getX(), entity.getEyeY(), entity.getZ(), level);
+                ModUtils.spawnParticleCloud(ParticleTypes.HAPPY_VILLAGER, level, new BlockPos(entity.getEyePosition()));
                 level.playSound(null, new BlockPos(entity.getEyePosition()), SoundEvents.CAT_AMBIENT, SoundSource.PLAYERS, 100.0F, 1.0F);
                 success = true;
             }
         }
 
         if (success) {
-            if (invokeStaffCosts(player, stack, getChargeCost(), level)) {
+            if (StaffUtils.invokeStaffCosts(player, stack, getChargeCost(), level)) {
                 return new InteractionResultHolder<>(InteractionResult.PASS, stack);
             }
 

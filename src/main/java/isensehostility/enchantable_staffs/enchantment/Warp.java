@@ -4,6 +4,9 @@ import isensehostility.enchantable_staffs.config.StaffConfig;
 import isensehostility.enchantable_staffs.enchantment.category.StaffCategory;
 import isensehostility.enchantable_staffs.enums.EElement;
 import isensehostility.enchantable_staffs.item.Staff;
+import isensehostility.enchantable_staffs.util.ModUtils;
+import isensehostility.enchantable_staffs.util.NBTUtils;
+import isensehostility.enchantable_staffs.util.StaffUtils;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
@@ -18,8 +21,6 @@ import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
-
-import static isensehostility.enchantable_staffs.StaffUtils.*;
 
 public class Warp extends Enchantment implements IStaffEnchantment {
     public Warp() {
@@ -45,33 +46,33 @@ public class Warp extends Enchantment implements IStaffEnchantment {
     public InteractionResultHolder<ItemStack> onUse(ItemStack stack, Level level, Player player) {
 
         if (Screen.hasShiftDown()) {
-            if (invokeStaffCosts(player, stack, getChargeCost(), level)) {
+            if (StaffUtils.invokeStaffCosts(player, stack, getChargeCost(), level)) {
                 return new InteractionResultHolder<>(InteractionResult.PASS, stack);
             }
 
-            setWarpDimension(stack, player);
-            setWarpPosition(stack, player);
-            setWarpOwner(stack, player);
+            NBTUtils.setWarpDimension(stack, player);
+            NBTUtils.setWarpPosition(stack, player);
+            NBTUtils.setWarpOwner(stack, player);
 
-            spawnParticleCloud(ParticleTypes.ENCHANTED_HIT, player.getX(), player.getEyeY(), player.getZ(), level);
+            ModUtils.spawnParticleCloud(ParticleTypes.ENCHANTED_HIT, level, new BlockPos(player.getEyePosition()));
             level.playSound(null, new BlockPos(player.getEyePosition()), SoundEvents.SHULKER_TELEPORT, SoundSource.PLAYERS, 100.0F, 1.0F);
 
             return new InteractionResultHolder<>(InteractionResult.PASS, stack);
         } else if (
-                getWarpDimension(stack).equals(player.level.dimension().location().toString()) &&
-                getWarpOwner(stack).equals(player.getStringUUID())
+                NBTUtils.getWarpDimension(stack).equals(player.level.dimension().location().toString()) &&
+                        NBTUtils.getWarpOwner(stack).equals(player.getStringUUID())
         ) {
-            long[] positionArray = getWarpPosition(stack);
+            long[] positionArray = NBTUtils.getWarpPosition(stack);
             Vec3 position = new Vec3(positionArray[0] / 1000000.0D, positionArray[1] / 1000000.0D, positionArray[2] / 1000000.0D);
 
-            spawnParticleCloud(ParticleTypes.PORTAL, player.getX(), player.getEyeY(), player.getZ(), level);
+            ModUtils.spawnParticleCloud(ParticleTypes.PORTAL, level, new BlockPos(player.getEyePosition()));
 
             player.setPos(position);
 
-            spawnParticleCloud(ParticleTypes.PORTAL, player.getX(), player.getEyeY(), player.getZ(), level);
+            ModUtils.spawnParticleCloud(ParticleTypes.PORTAL, level, new BlockPos(player.getEyePosition()));
             level.playSound(null, new BlockPos(player.getEyePosition()), SoundEvents.ENDERMAN_TELEPORT, SoundSource.PLAYERS, 100.0F, 1.0F);
 
-            if (invokeStaffCosts(player, stack, getChargeCost(), level)) {
+            if (StaffUtils.invokeStaffCosts(player, stack, getChargeCost(), level)) {
                 return new InteractionResultHolder<>(InteractionResult.PASS, stack);
             }
 

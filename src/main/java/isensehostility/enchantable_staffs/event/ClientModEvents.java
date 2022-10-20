@@ -3,8 +3,6 @@ package isensehostility.enchantable_staffs.event;
 import isensehostility.enchantable_staffs.EnchantableStaffs;
 import isensehostility.enchantable_staffs.item.Staff;
 import isensehostility.enchantable_staffs.item.StaffItems;
-import net.minecraft.client.renderer.block.model.ItemOverride;
-import net.minecraft.client.renderer.block.model.ItemOverrides;
 import net.minecraft.client.renderer.item.ItemProperties;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;

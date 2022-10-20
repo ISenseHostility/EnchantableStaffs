@@ -5,6 +5,8 @@ import isensehostility.enchantable_staffs.effect.StaffEffects;
 import isensehostility.enchantable_staffs.enchantment.category.StaffCategory;
 import isensehostility.enchantable_staffs.enums.EElement;
 import isensehostility.enchantable_staffs.item.Staff;
+import isensehostility.enchantable_staffs.util.ModUtils;
+import isensehostility.enchantable_staffs.util.StaffUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.sounds.SoundEvents;
@@ -18,9 +20,6 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.Level;
-
-import static isensehostility.enchantable_staffs.StaffUtils.invokeStaffCosts;
-import static isensehostility.enchantable_staffs.StaffUtils.spawnParticleCloud;
 
 public class Gills extends Enchantment implements IStaffEnchantment {
     public Gills() {
@@ -47,13 +46,13 @@ public class Gills extends Enchantment implements IStaffEnchantment {
         if (player.hasEffect(StaffEffects.GILLS.get())) {
             return new InteractionResultHolder<>(InteractionResult.PASS, stack);
         }
-        if (invokeStaffCosts(player, stack, getChargeCost(), level)) {
+        if (StaffUtils.invokeStaffCosts(player, stack, getChargeCost(), level)) {
             return new InteractionResultHolder<>(InteractionResult.PASS, stack);
         }
 
         player.addEffect(new MobEffectInstance(StaffEffects.GILLS.get(), 600));
 
-        spawnParticleCloud(ParticleTypes.BUBBLE, player.getX(), player.getEyeY(), player.getZ(), level);
+        ModUtils.spawnParticleCloud(ParticleTypes.BUBBLE, level, new BlockPos(player.getEyePosition()));
         level.playSound(null, new BlockPos(player.getEyePosition()), SoundEvents.BUBBLE_COLUMN_UPWARDS_INSIDE, SoundSource.PLAYERS, 100.0F, 1.0F);
 
         return new InteractionResultHolder<>(InteractionResult.SUCCESS, stack);

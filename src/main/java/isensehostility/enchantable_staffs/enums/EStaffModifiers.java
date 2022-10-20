@@ -1,22 +1,14 @@
 package isensehostility.enchantable_staffs.enums;
 
-import isensehostility.enchantable_staffs.EnchantableStaffs;
-import isensehostility.enchantable_staffs.StaffUtils;
 import isensehostility.enchantable_staffs.item.Staff;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.tags.ItemTags;
-import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
-import net.minecraft.world.item.crafting.Ingredient;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
-import java.util.List;
 
 public enum EStaffModifiers {
     NONE(0, Component.translatable("modifier.staff.none"), Items.BARRIER),
