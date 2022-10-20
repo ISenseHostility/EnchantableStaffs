@@ -106,6 +106,7 @@
   "enchantment.enchantable_staffs.ring_of_fangs": "Ring of Fangs",
   "enchantment.enchantable_staffs.summon_vex": "Summon Vex",
   "enchantment.enchantable_staffs.evoker_fangs": "Evoker Fangs",
+  "enchantment.enchantable_staffs.conversion": "Conversion",
 
   "_comment": "Elements",
   "element.enchantable_staffs.name.nature": "Nature",
@@ -156,6 +157,7 @@
   "enchantment.enchantable_staffs.ring_of_fangs.desc": "Ring of Fangs summons a ring of Evoker Fangs around the user.",
   "enchantment.enchantable_staffs.summon_vex.desc": "Summon Vex summons a friendly vex that attacks other monsters with the exception of creepers.",
   "enchantment.enchantable_staffs.evoker_fangs.desc": "Evoker Fangs summons the evoker's fang attack on the nearest entity in a 10 block range.",
+  "enchantment.enchantable_staffs.conversion.desc": "Conversion converts all undead mobs to allies in a 30 block range.",
 
   "_comment": "messages",
   "message.efficient_element": "Efficient Element: ",

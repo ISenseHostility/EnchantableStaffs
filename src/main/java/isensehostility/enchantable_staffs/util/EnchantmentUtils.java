@@ -20,7 +20,7 @@ public class EnchantmentUtils {
     public static <T extends ParticleOptions> List<LivingEntity> summonBreath(Player user, double range, double thickness, T particle) {
         ModUtils.spawnParticlesInLine(user, range, particle);
 
-        return ModUtils.getLivingEntities(user.getLevel(), ModUtils.getAABBLine(user, range), thickness);
+        return ModUtils.getEntitiesAtPositions(user.getLevel(), ModUtils.getPosLine(user, range), thickness);
     }
 
     public static void invokeCriticalEffects(Player player) {

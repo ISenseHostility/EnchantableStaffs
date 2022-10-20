@@ -50,4 +50,5 @@ public class StaffEnchantments {
     public static final RegistryObject<Enchantment> RING_OF_FANGS = ENCHANTMENTS.register("ring_of_fangs", RingOfFangs::new);
     public static final RegistryObject<Enchantment> SUMMON_VEX = ENCHANTMENTS.register("summon_vex", SummonVex::new);
     public static final RegistryObject<Enchantment> EVOKER_FANGS = ENCHANTMENTS.register("evoker_fangs", EvokerFangs::new);
+    public static final RegistryObject<Enchantment> CONVERSION = ENCHANTMENTS.register("conversion", Conversion::new);
 }

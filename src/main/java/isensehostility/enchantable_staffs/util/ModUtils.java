@@ -70,10 +70,10 @@ public class ModUtils {
         return new AABB(pos.getX() - radius, pos.getY() - radius, pos.getZ() + radius, pos.getX() + radius, pos.getY() + radius, pos.getZ() - radius);
     }
 
-    public static List<BlockPos> getAABBLine(Player player, double range) {
+    public static List<BlockPos> getPosLine(Player player, double range) {
         List<BlockPos> line = new ArrayList<>();
 
-        BlockPos lineStartPos = new BlockPos(player.getX(), player.getEyeY(), player.getZ());
+        BlockPos lineStartPos = new BlockPos(player.getEyePosition());
         BlockPos lineEndPos = rayTrace(player.getLevel(), player, ClipContext.Fluid.ANY, range).getBlockPos();
 
         line.add(lineStartPos);
@@ -81,52 +81,58 @@ public class ModUtils {
 
         double interval = 1 / range;
 
-        for (int i = 0; i < range - 1; i++) {
+        for (int i = 1; i < range; i++) {
             double intervalAtRange = interval * i;
 
-            line.add(new BlockPos(
-                    getLineCoordinate(lineStartPos.getX(), lineEndPos.getX(), range, intervalAtRange),
-                    getLineCoordinate(lineStartPos.getY(), lineEndPos.getY(), range, intervalAtRange),
-                    getLineCoordinate(lineStartPos.getZ(), lineEndPos.getZ(), range, intervalAtRange)
-            ));
+            BlockPos linePos = new BlockPos(
+                    getLineCoordinate(lineStartPos.getX(), lineEndPos.getX(), intervalAtRange),
+                    getLineCoordinate(lineStartPos.getY(), lineEndPos.getY(), intervalAtRange),
+                    getLineCoordinate(lineStartPos.getZ(), lineEndPos.getZ(), intervalAtRange)
+            );
+
+            System.out.println("line pos " + i + ": " + linePos);
+
+            line.add(linePos);
         }
 
         return line;
     }
 
     public static <T extends ParticleOptions> void spawnParticlesInLine(Player player, double range, T type) {
-        BlockPos lineStartPos = new BlockPos(player.getX(), player.getEyeY(), player.getZ());
+        BlockPos lineStartPos = new BlockPos(player.getEyePosition());
         BlockPos lineEndPos = rayTrace(player.getLevel(), player, ClipContext.Fluid.ANY, range).getBlockPos();
+        System.out.println("player pos: " + lineStartPos);
+        System.out.println("raytrace pos: " + lineEndPos);
 
         double interval = 1 / range;
 
-        for (int i = 0; i < range - 1; i++) {
+        for (int i = 1; i < range; i++) {
             double intervalAtRange = interval * i;
 
             spawnParticleCloud(type,
                     player.getLevel(),
-                    getLineCoordinate(lineStartPos.getX(), lineEndPos.getX(), range, intervalAtRange),
-                    getLineCoordinate(lineStartPos.getY(), lineEndPos.getY(), range, intervalAtRange),
-                    getLineCoordinate(lineStartPos.getZ(), lineEndPos.getZ(), range, intervalAtRange)
+                    getLineCoordinate(lineStartPos.getX(), lineEndPos.getX(), intervalAtRange),
+                    getLineCoordinate(lineStartPos.getY(), lineEndPos.getY(), intervalAtRange),
+                    getLineCoordinate(lineStartPos.getZ(), lineEndPos.getZ(), intervalAtRange)
             );
         }
     }
 
-    public static double getLineCoordinate(double startPos, double endPos, double range, double intervalAtRange) {
-        return ((startPos + 0.5) * intervalAtRange) + ((endPos + 0.5) * (range - intervalAtRange));
+    public static double getLineCoordinate(double startPos, double endPos, double intervalAtRange) {
+        return ((startPos + 0.5) * intervalAtRange) + ((endPos + 0.5) * (1 - intervalAtRange));
     }
 
-    public static List<LivingEntity> getLivingEntities(Level level, List<BlockPos> positions, double radius) {
+    public static List<LivingEntity> getEntitiesAtPositions(Level level, List<BlockPos> positions, double radius) {
         List<LivingEntity> entities = new ArrayList<>();
 
         for (BlockPos pos : positions) {
-            entities.addAll(getLivingEntities(level, pos, radius));
+            entities.addAll(getEntitiesAtPosition(level, pos, radius));
         }
 
         return entities;
     }
 
-    public static List<LivingEntity> getLivingEntities(Level level, BlockPos pos, double radius) {
+    public static List<LivingEntity> getEntitiesAtPosition(Level level, BlockPos pos, double radius) {
         return level.getEntitiesOfClass(LivingEntity.class, createBoundingBox(pos, radius));
     }
 
