@@ -21,6 +21,7 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.MobType;
+import net.minecraft.world.entity.ai.goal.WrappedGoal;
 import net.minecraft.world.entity.monster.*;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -62,13 +63,16 @@ public class Conversion extends Enchantment implements IStaffEnchantment {
         List<LivingEntity> entities = level.getEntitiesOfClass(LivingEntity.class, ModUtils.createBoundingBox(player.blockPosition(), 30));
         boolean success = false;
 
-        for (LivingEntity entity : entities) {
-            if (entity instanceof Monster monster && monster.getMobType() == MobType.UNDEAD) {
-                // todo if the mob is already targeting you, it doesnt stop until relog / untargeted
-                NBTUtils.setFriendly(monster, true);
-                monster.targetSelector.removeAllGoals();
-                monster.targetSelector.addGoal(0, new TargetUnfriendlyGoal<>(monster, Monster.class, false));
-                success = true;
+        if (!level.isClientSide) {
+            for (LivingEntity entity : entities) {
+                if (entity instanceof Monster monster && monster.getMobType() == MobType.UNDEAD) {
+                    NBTUtils.setFriendly(monster, true);
+                    monster.setTarget(null);
+                    monster.targetSelector.removeAllGoals();
+                    monster.targetSelector.addGoal(0, new TargetUnfriendlyGoal<>(monster, Monster.class, false));
+                    NBTUtils.getFriendly(monster);
+                    success = true;
+                }
             }
         }
 
