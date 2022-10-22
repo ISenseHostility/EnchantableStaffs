@@ -77,14 +77,6 @@ public class NBTUtils {
         return entity.getPersistentData().getInt(Tags.ENCHANTMENT_LEVEL + enchantment.toString());
     }
 
-    public static void setDirection(DragonFireball dragonFireball, long[] direction) {
-        dragonFireball.getPersistentData().putLongArray(Tags.DIRECTION, direction);
-    }
-
-    public static long[] getDirection(DragonFireball dragonFireball) {
-        return dragonFireball.getPersistentData().getLongArray(Tags.DIRECTION);
-    }
-
     public static void setWarpDimension(ItemStack stack, LivingEntity entity) {
         stack.getTag().putString(Tags.WARP_DIMENSION, entity.level.dimension().location().toString());
     }

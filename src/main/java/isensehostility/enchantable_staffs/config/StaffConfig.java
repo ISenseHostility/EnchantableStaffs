@@ -45,6 +45,7 @@ public class StaffConfig {
     public static ForgeConfigSpec.IntValue summonVexChargeCost;
     public static ForgeConfigSpec.IntValue evokerFangsChargeCost;
     public static ForgeConfigSpec.IntValue conversionChargeCost;
+    public static ForgeConfigSpec.IntValue itemBoxChargeCost;
 
     public static ForgeConfigSpec.BooleanValue teleportExists;
     public static ForgeConfigSpec.BooleanValue createWaterExists;
@@ -82,6 +83,7 @@ public class StaffConfig {
     public static ForgeConfigSpec.BooleanValue summonVexExists;
     public static ForgeConfigSpec.BooleanValue evokerFangsExists;
     public static ForgeConfigSpec.BooleanValue conversionExists;
+    public static ForgeConfigSpec.BooleanValue itemBoxExists;
 
     public static ForgeConfigSpec.IntValue chargeMaxStarting;
     public static ForgeConfigSpec.BooleanValue chargePotionsExist;
@@ -442,6 +444,15 @@ public class StaffConfig {
                 .comment("When set to false the Conversion enchantment will not be in the game.\n" +
                         "[default=true]")
                 .define("exists.conversion", true);
+
+        itemBoxChargeCost = builder
+                .comment("Cooldown time in ticks (1 second = 20 ticks) for the Item Box enchantment.\n" +
+                        "[default=150]")
+                .defineInRange("chargeCosts.itemBox", 150, 0, Integer.MAX_VALUE);
+        itemBoxExists = builder
+                .comment("When set to false the Item Box enchantment will not be in the game.\n" +
+                        "[default=true]")
+                .define("exists.itemBox", true);
 
         chargeMaxStarting = builder
                 .comment("Maximum amount of charge you spawn with.\n" +

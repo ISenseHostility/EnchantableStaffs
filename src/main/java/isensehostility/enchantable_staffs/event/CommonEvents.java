@@ -26,6 +26,7 @@ import net.minecraft.world.entity.projectile.LargeFireball;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
+import net.minecraft.world.level.Explosion;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.entity.EntityJoinLevelEvent;
 import net.minecraftforge.event.entity.EntityLeaveLevelEvent;
@@ -64,12 +65,9 @@ public class CommonEvents {
     public static void onLeave(EntityLeaveLevelEvent event) {
         if (event.getEntity() instanceof DragonFireball dragonFireball) {
             if (getFromStaff(dragonFireball)) {
-                long[] direction = getDirection(dragonFireball);
                 int enchantmentLevel = getEnchantmentLevel(dragonFireball, StaffEnchantments.DRACONIC_FIREBALL.get());
 
-                Fireball fireball = new LargeFireball(event.getLevel(), (LivingEntity) dragonFireball.getOwner(), direction[0] / 100000000D, direction[1] / 100000000D, direction[2] / 100000000D, enchantmentLevel);
-                fireball.setPos(dragonFireball.getX(), dragonFireball.getY(), dragonFireball.getZ());
-                event.getLevel().addFreshEntity(fireball);
+                event.getLevel().explode(dragonFireball.getOwner(), dragonFireball.getX(), dragonFireball.getY(), dragonFireball.getZ(), enchantmentLevel, true, Explosion.BlockInteraction.DESTROY);
             }
         }
     }

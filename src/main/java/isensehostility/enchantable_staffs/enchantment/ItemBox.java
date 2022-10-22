@@ -5,9 +5,10 @@ import isensehostility.enchantable_staffs.enchantment.category.StaffCategory;
 import isensehostility.enchantable_staffs.enums.EElement;
 import isensehostility.enchantable_staffs.item.Staff;
 import isensehostility.enchantable_staffs.util.ModUtils;
-import isensehostility.enchantable_staffs.util.NBTUtils;
 import isensehostility.enchantable_staffs.util.StaffUtils;
+import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
@@ -15,53 +16,38 @@ import net.minecraft.world.InteractionResult;
 import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.entity.projectile.DragonFireball;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.enchantment.Enchantment;
-import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.item.enchantment.Enchantments;
+import net.minecraft.world.level.ClipContext;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.phys.Vec3;
+import net.minecraft.world.phys.BlockHitResult;
 
-public class DraconicFireball extends Enchantment implements IStaffEnchantment {
-    public DraconicFireball() {
-        super(Rarity.UNCOMMON, StaffCategory.getInstance(), new EquipmentSlot[]{EquipmentSlot.MAINHAND, EquipmentSlot.OFFHAND});
+public class ItemBox extends Enchantment implements IStaffEnchantment {
+    public ItemBox() {
+        super(Rarity.RARE, StaffCategory.getInstance(), new EquipmentSlot[]{EquipmentSlot.MAINHAND, EquipmentSlot.OFFHAND});
     }
 
     @Override
     public EElement[] getElements() {
-        return new EElement[]{EElement.FIRE, EElement.ENDER};
+        return new EElement[]{EElement.ENDER};
     }
 
     @Override
     public boolean doesExist() {
-        return StaffConfig.draconicFireballExists.get();
+        return StaffConfig.itemBoxExists.get();
     }
 
     @Override
     public int getChargeCost() {
-        return StaffConfig.draconicFireballChargeCost.get();
+        return StaffConfig.itemBoxChargeCost.get();
     }
 
     @Override
     public InteractionResultHolder<ItemStack> onUse(ItemStack stack, Level level, Player player) {
-        if (StaffUtils.invokeStaffCosts(player, stack, getChargeCost(), level)) {
-            return new InteractionResultHolder<>(InteractionResult.PASS, stack);
+        if (player.isShiftKeyDown()) {
+
         }
-     
-        int enchantmentLevel = EnchantmentHelper.getItemEnchantmentLevel(StaffEnchantments.DRACONIC_FIREBALL.get(), stack);
-        Vec3 direction = ModUtils.getDirection(player);
-        Vec3 pos = ModUtils.getPosFromDirection(direction, player);
-
-        DragonFireball dragonFireball = new DragonFireball(level, player, direction.x(), direction.y(), direction.z());
-        dragonFireball.setPos(pos);
-        dragonFireball.setOwner(player);
-        NBTUtils.setFromStaff(dragonFireball, true);
-        NBTUtils.setEnchantmentLevel(dragonFireball, StaffEnchantments.DRACONIC_FIREBALL.get(), enchantmentLevel);
-        level.addFreshEntity(dragonFireball);
-
-        level.playSound(null, new BlockPos(player.getEyePosition()), SoundEvents.FIRECHARGE_USE, SoundSource.PLAYERS, 100.0F, 1.0F);
-        ModUtils.spawnParticleCloud(ParticleTypes.PORTAL, level, pos.x() + 0.5D, pos.y() + 1.0D, pos.z() + 0.5D);
 
         return new InteractionResultHolder<>(InteractionResult.SUCCESS, stack);
     }
@@ -73,17 +59,17 @@ public class DraconicFireball extends Enchantment implements IStaffEnchantment {
 
     @Override
     public int getMaxLevel() {
-        return 2;
+        return 1;
     }
 
     @Override
     public int getMinCost(int level) {
-        return 10 + 10 * (level - 1);
+        return 10;
     }
 
     @Override
     public int getMaxCost(int level) {
-        return this.getMinCost(level) + 50;
+        return 50;
     }
 
     @Override
