@@ -164,7 +164,7 @@ public class NBTUtils {
         NBTUtils.setMagicalStrengtheningTime(player, NBTUtils.getMagicalStrengtheningTime(player) - 1);
     }
 
-    private static class Tags {
+    public static class Tags {
         private static String createTag(String name) {
             return EnchantableStaffs.MODID + ":" + name;
         }
@@ -175,7 +175,6 @@ public class NBTUtils {
         public static final String HURT_BY_STAFF = createTag("hurt_by_staff");
         public static final String FROM_STAFF = createTag("from_staff");
         public static final String ENCHANTMENT_LEVEL = createTag("enchantment_level_");
-        public static final String DIRECTION = createTag("direction");
         public static final String WARP_DIMENSION = createTag("warp_dimension");
         public static final String WARP_POSITION = createTag("warp_position");
         public static final String WARP_OWNER = createTag("warp_owner");
@@ -185,5 +184,6 @@ public class NBTUtils {
         public static final String CHESTPLATE_DATA = createTag("chestplate_data");
         public static final String FRIENDLY = createTag("friendly");
         public static final String ELEMENTAL_EFFICIENCY = createTag("elemental_efficiency");
+        public static final String ITEM_BOX = createTag("item_box");
     }
 }

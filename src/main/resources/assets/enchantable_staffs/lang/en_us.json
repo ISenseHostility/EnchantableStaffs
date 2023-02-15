@@ -6,6 +6,8 @@
   "item.enchantable_staffs.reinforced_iron_staff": "Reinforced Iron Staff",
   "item.enchantable_staffs.netherite_staff": "Netherite Staff",
   "item.enchantable_staffs.plated_netherite_staff": "Plated Netherite Staff",
+  "item.enchantable_staffs.scroll": "Scroll",
+  "item.enchantable_staffs.glowing_quill": "Glowing Quill",
 
   "_comment": "Tooltips",
   "tooltip.enchantable_staffs.special.explosion": "Megumin!",
@@ -107,6 +109,7 @@
   "enchantment.enchantable_staffs.summon_vex": "Summon Vex",
   "enchantment.enchantable_staffs.evoker_fangs": "Evoker Fangs",
   "enchantment.enchantable_staffs.conversion": "Conversion",
+  "enchantment.enchantable_staffs.item_box": "Item Box",
 
   "_comment": "Elements",
   "element.enchantable_staffs.name.nature": "Nature",
@@ -158,6 +161,7 @@
   "enchantment.enchantable_staffs.summon_vex.desc": "Summon Vex summons a friendly vex that attacks other monsters with the exception of creepers.",
   "enchantment.enchantable_staffs.evoker_fangs.desc": "Evoker Fangs summons the evoker's fang attack on the nearest entity in a 10 block range.",
   "enchantment.enchantable_staffs.conversion.desc": "Conversion converts all undead mobs to allies in a 30 block range.",
+  "enchantment.enchantable_staffs.item_box.desc": "Item Box acts as a storage within your staff, holding up to 9 different stacks.",
 
   "_comment": "messages",
   "message.efficient_element": "Efficient Element: ",

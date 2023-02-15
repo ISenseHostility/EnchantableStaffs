@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "yxy",
+    "xzx",
+    "yxy"
+  ],
+  "key": {
+    "x": {
+      "item": "minecraft:paper"
+    },
+    "y": {
+      "item": "minecraft:gold_ingot"
+    },
+    "z": {
+      "item": "enchantable_staffs:glowing_quill"
+    }
+  },
+  "result": {
+    "item": "enchantable_staffs:scroll"
+  }
+}

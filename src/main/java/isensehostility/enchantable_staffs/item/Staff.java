@@ -32,7 +32,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
 
-public abstract class Staff extends Item {
+public abstract class Staff extends Item implements IStaffEnchantmentHolder {
     public static final String TAG_STAFF_MODIFIER = "staff_modifier";
 
     public Staff(Properties properties) {

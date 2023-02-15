@@ -3,6 +3,7 @@ package isensehostility.enchantable_staffs.enchantment;
 import isensehostility.enchantable_staffs.config.StaffConfig;
 import isensehostility.enchantable_staffs.enchantment.category.StaffCategory;
 import isensehostility.enchantable_staffs.enums.EElement;
+import isensehostility.enchantable_staffs.item.IStaffEnchantmentHolder;
 import isensehostility.enchantable_staffs.item.Staff;
 import isensehostility.enchantable_staffs.util.ModUtils;
 import isensehostility.enchantable_staffs.util.NBTUtils;
@@ -48,7 +49,7 @@ public class DraconicFireball extends Enchantment implements IStaffEnchantment {
         if (StaffUtils.invokeStaffCosts(player, stack, getChargeCost(), level)) {
             return new InteractionResultHolder<>(InteractionResult.PASS, stack);
         }
-     
+
         int enchantmentLevel = EnchantmentHelper.getItemEnchantmentLevel(StaffEnchantments.DRACONIC_FIREBALL.get(), stack);
         Vec3 direction = ModUtils.getDirection(player);
         Vec3 pos = ModUtils.getPosFromDirection(direction, player);
@@ -95,7 +96,7 @@ public class DraconicFireball extends Enchantment implements IStaffEnchantment {
 
     @Override
     public boolean canEnchant(ItemStack stack) {
-        return stack.getItem() instanceof Staff && doesExist();
+        return stack.getItem() instanceof IStaffEnchantmentHolder && doesExist();
     }
 
     @Override

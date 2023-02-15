@@ -5,6 +5,7 @@ import isensehostility.enchantable_staffs.ai.goal.TargetUnfriendlyGoal;
 import isensehostility.enchantable_staffs.config.StaffConfig;
 import isensehostility.enchantable_staffs.effect.StaffEffects;
 import isensehostility.enchantable_staffs.enchantment.StaffEnchantments;
+import isensehostility.enchantable_staffs.item.Scroll;
 import isensehostility.enchantable_staffs.item.Staff;
 import isensehostility.enchantable_staffs.network.*;
 import isensehostility.enchantable_staffs.util.EnchantmentUtils;
@@ -21,12 +22,11 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.DragonFireball;
-import net.minecraft.world.entity.projectile.Fireball;
-import net.minecraft.world.entity.projectile.LargeFireball;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.level.Explosion;
+import net.minecraftforge.event.AnvilUpdateEvent;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.entity.EntityJoinLevelEvent;
 import net.minecraftforge.event.entity.EntityLeaveLevelEvent;
@@ -246,5 +246,23 @@ public class CommonEvents {
     @SubscribeEvent
     public static void onLeftClickEmpty(PlayerInteractEvent.LeftClickEmpty event) {
         StaffPacketHandler.INSTANCE.sendToServer(new ChargeAddPacket(event.getEntity().getUUID(), event.getItemStack()));
+    }
+
+    @SubscribeEvent
+    public static void onAnvilUpdate(AnvilUpdateEvent event) {
+        ItemStack staff = event.getLeft();
+        ItemStack scroll = event.getRight();
+        Map<Enchantment, Integer> enchantments = scroll.getAllEnchantments();
+
+        if (staff.getItem() instanceof Staff && scroll.getItem() instanceof Scroll && !enchantments.isEmpty() && staff.getAllEnchantments().isEmpty()) {
+            ItemStack output = staff.copy();
+
+            for (Enchantment enchantment : enchantments.keySet()){
+                output.enchant(enchantment, enchantments.get(enchantment));
+            }
+
+            event.setCost(10);
+            event.setOutput(output);
+        }
     }
 }

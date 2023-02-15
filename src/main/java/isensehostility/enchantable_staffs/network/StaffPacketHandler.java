@@ -1,15 +1,17 @@
 package isensehostility.enchantable_staffs.network;
 
 import isensehostility.enchantable_staffs.EnchantableStaffs;
-import isensehostility.enchantable_staffs.util.ChargeUtils;
+import isensehostility.enchantable_staffs.util.ModUtils;
 import isensehostility.enchantable_staffs.util.ModifierUtils;
 import isensehostility.enchantable_staffs.util.NBTUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
+import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.network.NetworkDirection;
 import net.minecraftforge.network.NetworkEvent;
 import net.minecraftforge.network.NetworkRegistry;

@@ -4,6 +4,7 @@ import isensehostility.enchantable_staffs.config.StaffConfig;
 import isensehostility.enchantable_staffs.effect.StaffEffects;
 import isensehostility.enchantable_staffs.enchantment.category.StaffCategory;
 import isensehostility.enchantable_staffs.enums.EElement;
+import isensehostility.enchantable_staffs.item.IStaffEnchantmentHolder;
 import isensehostility.enchantable_staffs.item.Staff;
 import isensehostility.enchantable_staffs.util.ModUtils;
 import isensehostility.enchantable_staffs.util.StaffUtils;
@@ -87,7 +88,7 @@ public class Gills extends Enchantment implements IStaffEnchantment {
 
     @Override
     public boolean canEnchant(ItemStack stack) {
-        return stack.getItem() instanceof Staff && doesExist();
+        return stack.getItem() instanceof IStaffEnchantmentHolder && doesExist();
     }
 
     @Override

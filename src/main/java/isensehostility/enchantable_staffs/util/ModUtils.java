@@ -9,16 +9,14 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LightningBolt;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.AxeItem;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.SwordItem;
-import net.minecraft.world.item.TridentItem;
+import net.minecraft.world.item.*;
 import net.minecraft.world.level.ClipContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.Vec3;
+import net.minecraftforge.items.IItemHandler;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -178,6 +176,42 @@ public class ModUtils {
         float temperature = entity.level.getBiome(entity.getOnPos()).get().getBaseTemperature();
 
         return temperature >= minTemp && temperature <= maxTemp;
+    }
+
+    public static List<ItemStack> extractInventory(IItemHandler inventory) {
+        List<ItemStack> items = new ArrayList<>();
+
+        for (int i = 0; i < inventory.getSlots(); i++) {
+            ItemStack stack = inventory.extractItem(i, inventory.getSlotLimit(i), false);
+
+            if (stack != ItemStack.EMPTY || stack.getItem() != Items.AIR) {
+                items.add(stack);
+            }
+        }
+
+        return items;
+    }
+
+    public static int getFirstEmptySlot(IItemHandler inventory) {
+        for (int i = 0; i < inventory.getSlots(); i++) {
+            if (inventory.getStackInSlot(i) == ItemStack.EMPTY) {
+                return i;
+            }
+        }
+        return -1;
+    }
+
+    public static boolean addItemToEmptySlot(IItemHandler inventory, ItemStack item) {
+        int slot = getFirstEmptySlot(inventory);
+
+        if (slot != -1) {
+            if (item != ItemStack.EMPTY || item.getItem() != Items.AIR) {
+                inventory.insertItem(slot, item, false);
+                return true;
+            }
+        }
+
+        return false;
     }
 
 }

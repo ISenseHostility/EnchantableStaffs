@@ -4,33 +4,26 @@ import isensehostility.enchantable_staffs.ai.goal.TargetUnfriendlyGoal;
 import isensehostility.enchantable_staffs.config.StaffConfig;
 import isensehostility.enchantable_staffs.enchantment.category.StaffCategory;
 import isensehostility.enchantable_staffs.enums.EElement;
+import isensehostility.enchantable_staffs.item.IStaffEnchantmentHolder;
 import isensehostility.enchantable_staffs.item.Staff;
 import isensehostility.enchantable_staffs.util.ModUtils;
 import isensehostility.enchantable_staffs.util.NBTUtils;
 import isensehostility.enchantable_staffs.util.StaffUtils;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.InteractionResultHolder;
-import net.minecraft.world.effect.MobEffectInstance;
-import net.minecraft.world.effect.MobEffects;
-import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.MobType;
-import net.minecraft.world.entity.ai.goal.WrappedGoal;
 import net.minecraft.world.entity.monster.*;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.Enchantments;
-import net.minecraft.world.level.ClipContext;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.phys.BlockHitResult;
-import net.minecraft.world.phys.Vec3;
 
 import java.util.List;
 
@@ -119,7 +112,7 @@ public class Conversion extends Enchantment implements IStaffEnchantment {
 
     @Override
     public boolean canEnchant(ItemStack stack) {
-        return stack.getItem() instanceof Staff && doesExist();
+        return stack.getItem() instanceof IStaffEnchantmentHolder && doesExist();
     }
 
     @Override

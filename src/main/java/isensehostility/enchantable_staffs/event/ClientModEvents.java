@@ -64,6 +64,14 @@ public class ClientModEvents {
                             return 0;
                         }
                     });
+            ItemProperties.register(StaffItems.SCROLL.get(),
+                    new ResourceLocation(EnchantableStaffs.MODID, "scroll_enchanted"), (stack, level, entity, number) -> {
+                        if (!stack.getAllEnchantments().isEmpty()) {
+                            return 1;
+                        } else {
+                            return 0;
+                        }
+                    });
         });
     }
 }

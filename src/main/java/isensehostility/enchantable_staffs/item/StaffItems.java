@@ -1,7 +1,9 @@
 package isensehostility.enchantable_staffs.item;
 
 import isensehostility.enchantable_staffs.EnchantableStaffs;
+import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.Rarity;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -21,4 +23,6 @@ public class StaffItems {
     public static final RegistryObject<Item> NETHERITE_STAFF = ITEMS.register("netherite_staff", NetheriteStaff::new);
     public static final RegistryObject<Item> PLATED_NETHERITE_STAFF = ITEMS.register("plated_netherite_staff", PlatedNetheriteStaff::new);
     public static final RegistryObject<Item> STAFF_BONEMEAL = ITEMS.register("staff_bonemeal", StaffBoneMeal::new);
+    public static final RegistryObject<Item> SCROLL = ITEMS.register("scroll", Scroll::new);
+    public static final RegistryObject<Item> GLOWING_QUILL = ITEMS.register("glowing_quill", () -> new Item(new Item.Properties().tab(CreativeModeTab.TAB_MATERIALS).rarity(Rarity.UNCOMMON)));
 }

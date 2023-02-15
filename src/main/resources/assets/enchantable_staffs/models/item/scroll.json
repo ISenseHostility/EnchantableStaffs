@@ -1,0 +1,14 @@
+{
+  "parent": "item/generated",
+  "textures": {
+    "layer0": "enchantable_staffs:items/scroll"
+  },
+  "overrides": [
+    {
+      "predicate": {
+        "enchantable_staffs:scroll_enchanted": 1
+      },
+      "model": "enchantable_staffs:item/scroll_enchanted"
+    }
+  ]
+}
