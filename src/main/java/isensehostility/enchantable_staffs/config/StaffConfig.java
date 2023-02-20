@@ -460,7 +460,7 @@ public class StaffConfig {
                 .defineInRange("staff.knockback", 2.0, 1.0, Double.MAX_VALUE);
         staffCooldown = builder
                 .comment("""
-                        Determines how long of a cooldown is needed between firing spells.
+                        Determines how long of a cooldown is needed between firing spells (in ticks).
                         Setting this to 0 disables cooldowns.
                         [default=30]""")
                 .defineInRange("staff.cooldown", 30, 0, Integer.MAX_VALUE);
