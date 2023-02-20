@@ -7,6 +7,7 @@ import isensehostility.enchantable_staffs.network.StaffPacketHandler;
 import isensehostility.enchantable_staffs.potion.StaffPotions;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.item.alchemy.PotionBrewing;
 import net.minecraft.world.item.alchemy.PotionUtils;
 import net.minecraft.world.item.alchemy.Potions;
 import net.minecraft.world.item.crafting.Ingredient;
@@ -23,27 +24,23 @@ public class CommonModEvents {
         event.enqueueWork(StaffPacketHandler::initialize);
         if (StaffConfig.chargePotionsExist.get()) {
             event.enqueueWork(() -> {
-                BrewingRecipeRegistry.addRecipe(new PotionIngredient(Potions.AWKWARD), Ingredient.of(new ItemStack(Items.LAPIS_LAZULI)), PotionUtils.setPotion(new ItemStack(Items.POTION), StaffPotions.CHARGE_ESCALATION_POTION.get()));
-                BrewingRecipeRegistry.addRecipe(new PotionIngredient(StaffPotions.CHARGE_ESCALATION_POTION.get()), Ingredient.of(new ItemStack(Items.REDSTONE)), PotionUtils.setPotion(new ItemStack(Items.POTION), StaffPotions.CHARGE_ESCALATION_POTION_LONG.get()));
-                BrewingRecipeRegistry.addRecipe(new PotionIngredient(StaffPotions.CHARGE_ESCALATION_POTION.get()), Ingredient.of(new ItemStack(Items.GLOWSTONE_DUST)), PotionUtils.setPotion(new ItemStack(Items.POTION), StaffPotions.CHARGE_ESCALATION_POTION_STRONG_1.get()));
-                BrewingRecipeRegistry.addRecipe(new PotionIngredient(StaffPotions.CHARGE_ESCALATION_POTION_STRONG_1.get()), Ingredient.of(new ItemStack(Items.GLOWSTONE_DUST)), PotionUtils.setPotion(new ItemStack(Items.POTION), StaffPotions.CHARGE_ESCALATION_POTION_STRONG_2.get()));
-                BrewingRecipeRegistry.addRecipe(new PotionIngredient(StaffPotions.CHARGE_ESCALATION_POTION_STRONG_2.get()), Ingredient.of(new ItemStack(Items.GLOWSTONE_DUST)), PotionUtils.setPotion(new ItemStack(Items.POTION), StaffPotions.CHARGE_ESCALATION_POTION_STRONG_3.get()));
+                PotionBrewing.addMix(Potions.AWKWARD, Items.LAPIS_LAZULI, StaffPotions.CHARGE_ESCALATION_POTION.get());
+                PotionBrewing.addMix(StaffPotions.CHARGE_ESCALATION_POTION.get(), Items.REDSTONE, StaffPotions.CHARGE_ESCALATION_POTION_LONG.get());
+                PotionBrewing.addMix(StaffPotions.CHARGE_ESCALATION_POTION.get(), Items.GLOWSTONE_DUST, StaffPotions.CHARGE_ESCALATION_POTION_STRONG_1.get());
+                PotionBrewing.addMix(StaffPotions.CHARGE_ESCALATION_POTION_STRONG_1.get(), Items.GLOWSTONE_DUST, StaffPotions.CHARGE_ESCALATION_POTION_STRONG_2.get());
+                PotionBrewing.addMix(StaffPotions.CHARGE_ESCALATION_POTION_STRONG_2.get(), Items.GLOWSTONE_DUST, StaffPotions.CHARGE_ESCALATION_POTION_STRONG_3.get());
 
-                BrewingRecipeRegistry.addRecipe(new PotionIngredient(StaffPotions.CHARGE_ESCALATION_POTION.get()), Ingredient.of(new ItemStack(Items.FERMENTED_SPIDER_EYE)), PotionUtils.setPotion(new ItemStack(Items.POTION), StaffPotions.CHARGE_BREAKDOWN_POTION.get()));
-                BrewingRecipeRegistry.addRecipe(new PotionIngredient(StaffPotions.CHARGE_BREAKDOWN_POTION.get()), Ingredient.of(new ItemStack(Items.REDSTONE)), PotionUtils.setPotion(new ItemStack(Items.POTION), StaffPotions.CHARGE_BREAKDOWN_POTION_LONG.get()));
-                BrewingRecipeRegistry.addRecipe(new PotionIngredient(StaffPotions.CHARGE_BREAKDOWN_POTION.get()), Ingredient.of(new ItemStack(Items.GLOWSTONE_DUST)), PotionUtils.setPotion(new ItemStack(Items.POTION), StaffPotions.CHARGE_BREAKDOWN_POTION_STRONG_1.get()));
-                BrewingRecipeRegistry.addRecipe(new PotionIngredient(StaffPotions.CHARGE_BREAKDOWN_POTION_STRONG_1.get()), Ingredient.of(new ItemStack(Items.GLOWSTONE_DUST)), PotionUtils.setPotion(new ItemStack(Items.POTION), StaffPotions.CHARGE_BREAKDOWN_POTION_STRONG_2.get()));
-                BrewingRecipeRegistry.addRecipe(new PotionIngredient(StaffPotions.CHARGE_BREAKDOWN_POTION_STRONG_2.get()), Ingredient.of(new ItemStack(Items.GLOWSTONE_DUST)), PotionUtils.setPotion(new ItemStack(Items.POTION), StaffPotions.CHARGE_BREAKDOWN_POTION_STRONG_3.get()));
-                BrewingRecipeRegistry.addRecipe(new PotionIngredient(StaffPotions.CHARGE_ESCALATION_POTION_LONG.get()), Ingredient.of(new ItemStack(Items.FERMENTED_SPIDER_EYE)), PotionUtils.setPotion(new ItemStack(Items.POTION), StaffPotions.CHARGE_BREAKDOWN_POTION_LONG.get()));
-                BrewingRecipeRegistry.addRecipe(new PotionIngredient(StaffPotions.CHARGE_ESCALATION_POTION_STRONG_1.get()), Ingredient.of(new ItemStack(Items.FERMENTED_SPIDER_EYE)), PotionUtils.setPotion(new ItemStack(Items.POTION), StaffPotions.CHARGE_BREAKDOWN_POTION_STRONG_1.get()));
-                BrewingRecipeRegistry.addRecipe(new PotionIngredient(StaffPotions.CHARGE_ESCALATION_POTION_STRONG_2.get()), Ingredient.of(new ItemStack(Items.FERMENTED_SPIDER_EYE)), PotionUtils.setPotion(new ItemStack(Items.POTION), StaffPotions.CHARGE_BREAKDOWN_POTION_STRONG_2.get()));
-                BrewingRecipeRegistry.addRecipe(new PotionIngredient(StaffPotions.CHARGE_ESCALATION_POTION_STRONG_3.get()), Ingredient.of(new ItemStack(Items.FERMENTED_SPIDER_EYE)), PotionUtils.setPotion(new ItemStack(Items.POTION), StaffPotions.CHARGE_BREAKDOWN_POTION_STRONG_3.get()));
+                PotionBrewing.addMix(StaffPotions.CHARGE_ESCALATION_POTION.get(), Items.FERMENTED_SPIDER_EYE, StaffPotions.CHARGE_BREAKDOWN_POTION.get());
+                PotionBrewing.addMix(StaffPotions.CHARGE_BREAKDOWN_POTION.get(), Items.REDSTONE, StaffPotions.CHARGE_BREAKDOWN_POTION_LONG.get());
+                PotionBrewing.addMix(StaffPotions.CHARGE_BREAKDOWN_POTION.get(), Items.GLOWSTONE_DUST, StaffPotions.CHARGE_BREAKDOWN_POTION_STRONG_1.get());
+                PotionBrewing.addMix(StaffPotions.CHARGE_BREAKDOWN_POTION_STRONG_1.get(), Items.GLOWSTONE_DUST, StaffPotions.CHARGE_BREAKDOWN_POTION_STRONG_2.get());
+                PotionBrewing.addMix(StaffPotions.CHARGE_BREAKDOWN_POTION_STRONG_2.get(), Items.GLOWSTONE_DUST, StaffPotions.CHARGE_BREAKDOWN_POTION_STRONG_3.get());
 
-                BrewingRecipeRegistry.addRecipe(new PotionIngredient(Potions.AWKWARD), Ingredient.of(new ItemStack(Items.ICE)), PotionUtils.setPotion(new ItemStack(Items.POTION), StaffPotions.CHARGE_INSERTION_POTION.get()));
-                BrewingRecipeRegistry.addRecipe(new PotionIngredient(StaffPotions.CHARGE_INSERTION_POTION.get()), Ingredient.of(new ItemStack(Items.GLOWSTONE_DUST)), PotionUtils.setPotion(new ItemStack(Items.POTION), StaffPotions.CHARGE_INSERTION_POTION_STRONG.get()));
+                PotionBrewing.addMix(Potions.AWKWARD, Items.ICE, StaffPotions.CHARGE_INSERTION_POTION.get());
+                PotionBrewing.addMix(StaffPotions.CHARGE_INSERTION_POTION.get(), Items.GLOWSTONE_DUST, StaffPotions.CHARGE_INSERTION_POTION_STRONG.get());
 
-                BrewingRecipeRegistry.addRecipe(new PotionIngredient(StaffPotions.CHARGE_INSERTION_POTION.get()), Ingredient.of(new ItemStack(Items.FERMENTED_SPIDER_EYE)), PotionUtils.setPotion(new ItemStack(Items.POTION), StaffPotions.CHARGE_SICKNESS_POTION.get()));
-                BrewingRecipeRegistry.addRecipe(new PotionIngredient(StaffPotions.CHARGE_SICKNESS_POTION.get()), Ingredient.of(new ItemStack(Items.REDSTONE)), PotionUtils.setPotion(new ItemStack(Items.POTION), StaffPotions.CHARGE_SICKNESS_POTION_LONG.get()));
+                PotionBrewing.addMix(StaffPotions.CHARGE_INSERTION_POTION.get(), Items.FERMENTED_SPIDER_EYE, StaffPotions.CHARGE_SICKNESS_POTION.get());
+                PotionBrewing.addMix(StaffPotions.CHARGE_SICKNESS_POTION.get(), Items.GLOWSTONE_DUST, StaffPotions.CHARGE_SICKNESS_POTION_LONG.get());
             });
         }
     }
